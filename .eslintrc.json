@@ -1,0 +1,24 @@
+{
+  "env": {
+    "es2020": true,
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-multiple-empty-lines": [
+      "error",
+      { "max": 2, "maxEOF": 1, "maxBOF": 0 }
+    ],
+    "no-shadow": ["error", { "allow": ["err", "resolve", "reject"] }],
+    "no-trailing-spaces": ["error"],
+    "no-empty-function": "error",
+    "no-floating-decimal": "error",
+    "no-console": "off",
+    "semi": ["error", "always"],
+    "no-undef": "off"
+  }
+}
