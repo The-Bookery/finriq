@@ -29,7 +29,6 @@ module.exports.execute = async (client, message, args) => {
             customChannelTable.create({
               roleid: roleid,
               name: name,
-              cleanname: cleanname,
               description: description
             })
             .then(() => {
