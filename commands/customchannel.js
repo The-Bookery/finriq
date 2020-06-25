@@ -22,7 +22,7 @@ module.exports.execute = async (client, message, args) => {
 
         var roleid = clean[0];
         var name = clean[1];
-        var cleanname = name.replace(/\W/g, '');
+        var cleanname = name.replace(/[^0-9a-z]/gi, '');
         var description = clean[2];
 
         try {
@@ -123,7 +123,7 @@ module.exports.execute = async (client, message, args) => {
     case 'join':
       args.shift();
       var channelname = args.join(' ');
-      channelname = channelname.replace(/\W/g, '');
+      channelname = channelname.replace(/[^0-9a-z]/gi, '');
 
       await customChannelTable.sync().then(() => {
         customChannelTable.findAll({
@@ -146,7 +146,7 @@ module.exports.execute = async (client, message, args) => {
     case 'leave':
       args.shift();
       var leavechannelname = args.join(' ');
-      leavechannelname = leavechannelname.replace(/\W/g, '');
+      leavechannelname = leavechannelname.replace(/[^0-9a-z]/gi, '');
 
       await customChannelTable.sync().then(() => {
         customChannelTable.findAll({
