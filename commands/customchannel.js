@@ -56,14 +56,14 @@ module.exports.execute = async (client, message, args) => {
     case 'remove':
       if (message.member.hasPermission('ADMINISTRATOR')) {
         args.shift();
-        var removechannelname = args.join(' ');
+        var removechannelid = args.join(' ');
 
-        if (removechannelname) {
+        if (removechannelid) {
           try {
             customChannelTable.sync().then(() =>
               customChannelTable.destroy({
                 where: {
-                  name: removechannelname
+                  id: removechannelid
                 }
               })
               .then(() => {
@@ -77,7 +77,7 @@ module.exports.execute = async (client, message, args) => {
                 }
               })
               .catch((err) => {
-                if (err.name == 'SequelizeUniqueConstraintError' && args[1] != 'auto') {
+                if (err.name == 'SequelizeUniqueConstraintError') {
                   return message.channel.send("There seems to be no such channel!");
                 }
                 console.error('Sequelize error: ', err);
