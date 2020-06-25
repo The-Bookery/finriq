@@ -22,6 +22,7 @@ module.exports.execute = async (client, message, args) => {
 
         var roleid = clean[0];
         var name = clean[1];
+        var cleanname = name.replace(/\W/g, '');
         var description = clean[2];
 
         try {
@@ -29,6 +30,7 @@ module.exports.execute = async (client, message, args) => {
             customChannelTable.create({
               roleid: roleid,
               name: name,
+              cleanname: cleanname,
               description: description
             })
             .then(() => {
@@ -121,12 +123,12 @@ module.exports.execute = async (client, message, args) => {
     case 'join':
       args.shift();
       var channelname = args.join(' ');
-      console.log(channelname);
+      channelname = channelname.replace(/\W/g, '');
 
       await customChannelTable.sync().then(() => {
         customChannelTable.findAll({
           where: {
-            name: channelname
+            cleanname: channelname
           }
         }).then((result) => {
           if (result.length == 1) {
@@ -144,11 +146,12 @@ module.exports.execute = async (client, message, args) => {
     case 'leave':
       args.shift();
       var leavechannelname = args.join(' ');
+      leavechannelname = leavechannelname.replace(/\W/g, '');
 
       await customChannelTable.sync().then(() => {
         customChannelTable.findAll({
           where: {
-            name: leavechannelname
+            cleanname: leavechannelname
           }
         }).then((result) => {
           if (result.length == 1) {
@@ -173,5 +176,5 @@ module.exports.config = {
   aliases: ['cc'],
   module: "Utility",
   description: 'Join custom channels from people who have bought them from UnbelievaBoat for 1 million red bookmarks!',
-  usage: ['customchannel [ add <role ID>, <name>, <description> | join <name> | leave <name> | list | remove <name> | drop <name>]']
+  usage: ['customchannel [add <role ID>, <name>, <description> | join <name> | leave <name> | list | remove <name> | drop <name>]']
 };

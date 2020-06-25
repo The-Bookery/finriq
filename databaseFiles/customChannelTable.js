@@ -17,6 +17,11 @@ module.exports = sequelize.define('CustomChannels', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true
+  },
+  cleanname: {
+    type: Sequelize.STRING,
+    allowNull: false,
   },
   description: {
     type: Sequelize.STRING,
