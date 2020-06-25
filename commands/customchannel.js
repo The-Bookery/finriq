@@ -133,7 +133,7 @@ module.exports.execute = async (client, message, args) => {
             .then(message.channel.send("You have joined the channel!"))
             .catch(err => console.error("Custom Channel error, " + err));
           } else {
-            return message.channel.send("No such custom channel found in the database. Make sure you typed the name correctly.");
+            return message.channel.send("No such custom channel found in the database. Make sure you typed the ID correctly.");
           }
         });
       });
