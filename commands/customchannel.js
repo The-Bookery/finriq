@@ -40,7 +40,7 @@ module.exports.execute = async (client, message, args) => {
               }
             })
             .catch((err) => {
-              if (err.name == 'SequelizeUniqueConstraintError' && args[1] != 'auto') {
+              if (err.name == 'SequelizeUniqueConstraintError') {
                 return message.channel.send("There seems to already be such a channel added!");
               }
               console.error('Sequelize error: ', err);
