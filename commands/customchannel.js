@@ -22,7 +22,6 @@ module.exports.execute = async (client, message, args) => {
 
         var roleid = clean[0];
         var name = clean[1];
-        var cleanname = name.replace(/[^0-9a-z]/gi, '');
         var description = clean[2];
 
         try {
@@ -98,7 +97,7 @@ module.exports.execute = async (client, message, args) => {
     case 'list':
       await customChannelTable.sync().then(() => {
         customChannelTable.findAll({
-          attributes: ["name", "description"]
+          attributes: ["id", "name", "description"]
         }).then((result) => {
           let helpMessage = new Discord.RichEmbed()
           .setColor('#750384')
@@ -110,7 +109,7 @@ module.exports.execute = async (client, message, args) => {
           if (result.length >= 1) {
             var i;
             for (i = 0; i < result.length; i++) {
-              helpMessage.addField(result[i].name, result[i].description);
+              helpMessage.addField(result[i].id + " " + result[i].name, result[i].description);
             }
           } else {
             helpMessage.addField("None Found", "No custom channels found in the database.");
@@ -122,13 +121,12 @@ module.exports.execute = async (client, message, args) => {
     break;
     case 'join':
       args.shift();
-      var channelname = args.join(' ');
-      channelname = channelname.replace(/[^0-9a-z]/gi, '');
+      var channelid = args.join(' ');
 
       await customChannelTable.sync().then(() => {
         customChannelTable.findAll({
           where: {
-            cleanname: channelname
+            id: channelid
           }
         }).then((result) => {
           if (result.length == 1) {
@@ -145,13 +143,12 @@ module.exports.execute = async (client, message, args) => {
     break;
     case 'leave':
       args.shift();
-      var leavechannelname = args.join(' ');
-      leavechannelname = leavechannelname.replace(/[^0-9a-z]/gi, '');
+      var leavechannelid = args.join(' ');
 
       await customChannelTable.sync().then(() => {
         customChannelTable.findAll({
           where: {
-            cleanname: leavechannelname
+            id: leavechannelid
           }
         }).then((result) => {
           if (result.length == 1) {
