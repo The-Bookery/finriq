@@ -14,11 +14,9 @@ module.exports.execute = async (client, message, args) => {
     case 'add':
       if (message.member.hasPermission('ADMINISTRATOR')) {
         args.shift();
-        console.log("1" + args);
         var clean = args.join(' ');
         clean = clean.split(",");
         clean = clean.map(s => s.trim());
-        console.log("2" + clean);
 
         var roleid = clean[0];
         var name = clean[1];
@@ -108,7 +106,7 @@ module.exports.execute = async (client, message, args) => {
           if (result.length >= 1) {
             var i;
             for (i = 0; i < result.length; i++) {
-              helpMessage.addField(result[i].id + " " + result[i].name, result[i].description);
+              helpMessage.addField(result[i].id + " - " + result[i].name, result[i].description);
             }
           } else {
             helpMessage.addField("None Found", "No custom channels found in the database.");
@@ -172,5 +170,5 @@ module.exports.config = {
   aliases: ['cc'],
   module: "Utility",
   description: 'Join custom channels from people who have bought them from UnbelievaBoat for 1 million red bookmarks!',
-  usage: ['customchannel [add <role ID>, <name>, <description> | join <name> | leave <name> | list | remove <name> | drop <name>]']
+  usage: ['customchannel [add <role ID>, <name>, <description> | join <id> | leave <id> | list | remove <name> | drop <name>]']
 };
