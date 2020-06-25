@@ -172,6 +172,6 @@ module.exports.config = {
   name: 'customchannel',
   aliases: ['cc'],
   module: "Utility",
-  description: 'Blah blah!',
-  usage: ['readathon [start | join <goal> | update <goal> | add <number of books read> | remove <number of books read> | time]']
+  description: 'Join custom channels from people who have bought them from UnbelievaBoat for 1 million red bookmarks!',
+  usage: ['customchannel [ add <role ID>, <name>, <description> | join <name> | leave <name> | list | remove <name> | drop <name>]']
 };
