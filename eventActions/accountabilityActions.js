@@ -92,6 +92,8 @@ class accountabilityActions {
 			const currentChannel = message.channel;
 
 			let hasPinnedMessage = false;
+			
+			currenChannel.startTyping();
 
 			// Get the pinned messages within a channel
 			await currentChannel.fetchPinnedMessages().then(fetchedPins => {
@@ -114,12 +116,18 @@ class accountabilityActions {
 					currentChannel.send('Sorry, ' + user.username + '! I couldn\'t seem to find any pinned messages from you.');
 				}
 			});
+			
+			currentChannel.stopTyping();
 		}
 	}
 
 	// Removes all pinned messages by a user
 	static async userUnpinsAllMessages(message, user) {
 		if(message.channel.id === config.channels.accountability) {
+			const currentChannel = message.channel;
+			
+			currentChannel.startTyping();
+			
 			await message.channel.fetchPinnedMessages().then(fetchedPins => {
 
 				// We're essentially doing the same thing as unpin message, but we don't stop upon finding their most recent pin.
@@ -140,6 +148,8 @@ class accountabilityActions {
 					message.channel.send('Sorry, ' + user.username + '! I couldn\'t seem to find any pinned messages from you.');
 				}
 			});
+			
+			currentChannel.stopTyping();
 		}
 	}
 
