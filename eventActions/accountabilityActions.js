@@ -59,7 +59,7 @@ class accountabilityActions {
 					}
 
 					// Pin the message
-					currentChannel.channel.stopTyping();
+					currentChannel.stopTyping();
 					sentMessage.clearReactions()
 						.then(sentMessage.react(config.emotes.pinMessage))
 						.then(sentMessage.pin())
