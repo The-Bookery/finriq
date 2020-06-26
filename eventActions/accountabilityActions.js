@@ -36,7 +36,7 @@ class accountabilityActions {
 			// Make sure a user is pinning their own message
 			if(user.id != sentMessage.author.id) return;
 
-			message.channel.startTyping();
+			currentChannel.startTyping();
 
 			await currentChannel.fetchPinnedMessages().then(fetchedPins =>{
 
@@ -63,8 +63,8 @@ class accountabilityActions {
 						.then(sentMessage.react(config.emotes.pinMessage))
 						.then(sentMessage.pin())
 						.then(_ => {
-							message.channel.stopTyping();
-							message.channel.send('I have pinned your message! :pushpin:')
+							currentChannel.channel.stopTyping();
+							currentChannel.channel.send('I have pinned your message! :pushpin:')
 										.then((delmessage) => delmessage.delete(5000))
 										.catch('Error sending message.');
 						})
