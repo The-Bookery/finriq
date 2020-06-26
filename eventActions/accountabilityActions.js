@@ -64,7 +64,7 @@ class accountabilityActions {
 						.then(sentMessage.react(config.emotes.pinMessage))
 						.then(sentMessage.pin())
 						.then(
-							currentChannel.channel.send('I have pinned your message! :pushpin:')
+							currentChannel.send('I have pinned your message! :pushpin:')
 										.then((delmessage) => delmessage.delete(5000))
 										.catch(console.error('Error sending message.'))
 						)
