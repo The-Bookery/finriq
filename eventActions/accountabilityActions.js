@@ -59,15 +59,15 @@ class accountabilityActions {
 					}
 
 					// Pin the message
+					currentChannel.stopTyping();
 					sentMessage.clearReactions()
 						.then(sentMessage.react(config.emotes.pinMessage))
 						.then(sentMessage.pin())
-						.then(_ => {
-							currentChannel.channel.stopTyping();
-							currentChannel.channel.send('I have pinned your message! :pushpin:')
+						.then(
+							currentChannel.send('I have pinned your message! :pushpin:')
 										.then((delmessage) => delmessage.delete(5000))
-										.catch('Error sending message.');
-						})
+										.catch(console.error('Error sending message.'))
+						)
 						.catch(() => console.error('Error with pinning message.'));
 					// If they have other pinned messages, give them a good 'ol reminder.
 					if (existingMessageCount >= 1) {
@@ -75,7 +75,8 @@ class accountabilityActions {
 					}
 				} else {
 					// Otherwise, the message has already been pinned, so unpin it
-					workingmsg.edit('I\'ve unpinned your selected message as requested!')
+					currentChannel.stopTyping();
+					currentChannel.send('I\'ve unpinned your selected message as requested!')
 					.then((delmessage) => delmessage.delete(5000))
 					.catch(currentChannel.send('Error editing message. Try slowing down.'));
 					sentMessage.unpin();
