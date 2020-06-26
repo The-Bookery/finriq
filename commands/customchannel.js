@@ -119,27 +119,23 @@ module.exports.execute = async (client, message, args) => {
     case 'join':
       args.shift();
       var channelid = args.join(' ');
-      if (message.member.roles.find(role => role.id === channelid)(channelid)) {
-        await customChannelTable.sync().then(() => {
-          customChannelTable.findAll({
-            where: {
-              id: channelid
-            }
-          }).then((result) => {
-            if (result.length == 1) {
-              // get role by ID
-              let userrole = message.guild.roles.get(result[0].roleid);
-              message.member.addRole(userrole)
-              .then(message.channel.send("You have joined the channel!"))
-              .catch(err => console.error("Custom Channel error, " + err));
-            } else {
-              return message.channel.send("No such custom channel found in the database. Make sure you typed the ID correctly.");
-            }
-          });
+      await customChannelTable.sync().then(() => {
+        customChannelTable.findAll({
+          where: {
+            id: channelid
+          }
+        }).then((result) => {
+          if (result.length == 1) {
+            // get role by ID
+            let userrole = message.guild.roles.get(result[0].roleid);
+            message.member.addRole(userrole)
+            .then(message.channel.send("You have joined the channel!"))
+            .catch(err => console.error("Custom Channel error, " + err));
+          } else {
+            return message.channel.send("No such custom channel found in the database. Make sure you typed the ID correctly.");
+          }
         });
-      } else {
-        return message.channel.send("You already have that channel!");
-      }
+      });
     break;
     case 'leave':
       args.shift();
