@@ -58,7 +58,7 @@ class accountabilityActions {
 						}
 					}
 
-					// Pin the message and stop typing
+					// Pin the message
 					currentChannel.channel.stopTyping();
 					sentMessage.clearReactions()
 						.then(sentMessage.react(config.emotes.pinMessage))
@@ -66,7 +66,7 @@ class accountabilityActions {
 						.then(
 							currentChannel.channel.send('I have pinned your message! :pushpin:')
 										.then((delmessage) => delmessage.delete(5000))
-										.catch('Error sending message.')
+										.catch(console.error('Error sending message.'))
 						)
 						.catch(() => console.error('Error with pinning message.'));
 					// If they have other pinned messages, give them a good 'ol reminder.
