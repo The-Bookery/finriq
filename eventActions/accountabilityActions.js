@@ -40,13 +40,11 @@ class accountabilityActions {
 
 				// If the pushpin reaction from the bot does not exist, pin the message
 				if(!isMessagePinnedAtAll(sentMessage, fetchedPins)){
-					currentChannel.startTyping();
-
 					// Pin the message
 					let existingMessageCount = 0;
 
 					// Get the pinned messages within a channel
-					if(isMessagePinnedAtAll(sentMessage, fetchedPins) == true) return currentChannel.stopTyping();
+					if(isMessagePinnedAtAll(sentMessage, fetchedPins) == true) return;
 					// Check to see if they already have pinned messages
 					const pinMsgIterator = fetchedPins.values();
 
@@ -58,7 +56,6 @@ class accountabilityActions {
 					}
 
 					// Pin the message
-					currentChannel.stopTyping();
 					sentMessage.clearReactions()
 						.then(sentMessage.react(config.emotes.pinMessage))
 						.then(sentMessage.pin())
@@ -120,8 +117,6 @@ class accountabilityActions {
 		if(message.channel.id === config.channels.accountability) {
 			const currentChannel = message.channel;
 			
-			currentChannel.startTyping();
-			
 			await message.channel.fetchPinnedMessages().then(fetchedPins => {
 
 				// We're essentially doing the same thing as unpin message, but we don't stop upon finding their most recent pin.
@@ -142,8 +137,6 @@ class accountabilityActions {
 					message.channel.send('Sorry, ' + user.username + '! I couldn\'t seem to find any pinned messages from you.');
 				}
 			});
-			
-			currentChannel.stopTyping();
 		}
 	}
 
