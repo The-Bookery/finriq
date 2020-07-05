@@ -91,9 +91,6 @@ class accountabilityActions {
 			const currentChannel = message.channel;
 
 			let hasPinnedMessage = false;
-
-			currentChannel.startTyping();
-
 			// Get the pinned messages within a channel
 			await currentChannel.fetchPinnedMessages().then(fetchedPins => {
 
@@ -115,8 +112,6 @@ class accountabilityActions {
 					currentChannel.send('Sorry, ' + user.username + '! I couldn\'t seem to find any pinned messages from you.');
 				}
 			});
-			
-			currentChannel.stopTyping();
 		}
 	}
 
