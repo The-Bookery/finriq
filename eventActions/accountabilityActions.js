@@ -92,7 +92,7 @@ class accountabilityActions {
 
 			let hasPinnedMessage = false;
 
-			currenChannel.startTyping();
+			currentChannel.startTyping();
 
 			// Get the pinned messages within a channel
 			await currentChannel.fetchPinnedMessages().then(fetchedPins => {
