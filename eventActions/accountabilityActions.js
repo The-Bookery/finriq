@@ -36,18 +36,17 @@ class accountabilityActions {
 			// Make sure a user is pinning their own message
 			if(user.id != sentMessage.author.id) return;
 
-			currentChannel.startTyping();
-
 			await currentChannel.fetchPinnedMessages().then(fetchedPins =>{
 
 				// If the pushpin reaction from the bot does not exist, pin the message
 				if(!isMessagePinnedAtAll(sentMessage, fetchedPins)){
+					currentChannel.startTyping();
 
 					// Pin the message
 					let existingMessageCount = 0;
 
 					// Get the pinned messages within a channel
-					if(isMessagePinnedAtAll(sentMessage, fetchedPins) == true) return;
+					if(isMessagePinnedAtAll(sentMessage, fetchedPins) == true) return currentChannel.stopTyping();
 					// Check to see if they already have pinned messages
 					const pinMsgIterator = fetchedPins.values();
 
@@ -92,7 +91,7 @@ class accountabilityActions {
 			const currentChannel = message.channel;
 
 			let hasPinnedMessage = false;
-			
+
 			currenChannel.startTyping();
 
 			// Get the pinned messages within a channel
