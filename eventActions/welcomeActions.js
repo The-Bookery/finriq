@@ -42,6 +42,10 @@ class tosActions {
           .addField(
             'About Me',
             `I'm Finriq, a custom bot made for The Bookery! I am always growing. Use \`.help\` in <#693561975887888444> for more on what I can do.`
+          )
+          .addField(
+            'Help Us Out',
+            `If you like The Bookery, `
           );
         user.send(welcomeDM);
       });
