@@ -31,5 +31,5 @@ module.exports = async (client, message) => {
   accountabilityActions.addReaction(client, message);
   afkAction.checkIfUserIsAFK(message);
   afkAction.checkForMention(message);
-	oneWordStory.oneWordMessage(message);
+  oneWordStory.oneWordMessage(message);
 };

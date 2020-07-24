@@ -36,13 +36,10 @@ class accountabilityActions {
 			// Make sure a user is pinning their own message
 			if(user.id != sentMessage.author.id) return;
 
-			currentChannel.startTyping();
-
 			await currentChannel.fetchPinnedMessages().then(fetchedPins =>{
 
 				// If the pushpin reaction from the bot does not exist, pin the message
 				if(!isMessagePinnedAtAll(sentMessage, fetchedPins)){
-
 					// Pin the message
 					let existingMessageCount = 0;
 
@@ -93,7 +90,6 @@ class accountabilityActions {
 			const currentChannel = message.channel;
 
 			let hasPinnedMessage = false;
-
 			// Get the pinned messages within a channel
 			await currentChannel.fetchPinnedMessages().then(fetchedPins => {
 
@@ -121,6 +117,8 @@ class accountabilityActions {
 	// Removes all pinned messages by a user
 	static async userUnpinsAllMessages(message, user) {
 		if(message.channel.id === config.channels.accountability) {
+			const currentChannel = message.channel;
+			
 			await message.channel.fetchPinnedMessages().then(fetchedPins => {
 
 				// We're essentially doing the same thing as unpin message, but we don't stop upon finding their most recent pin.
