@@ -56,6 +56,7 @@ class accountabilityActions {
 					}
 
 					// Pin the message
+					currentChannel.stopTyping();
 					sentMessage.clearReactions()
 						.then(sentMessage.react(config.emotes.pinMessage))
 						.then(sentMessage.pin())
@@ -71,7 +72,8 @@ class accountabilityActions {
 					}
 				} else {
 					// Otherwise, the message has already been pinned, so unpin it
-					workingmsg.edit('I\'ve unpinned your selected message as requested!')
+					currentChannel.stopTyping();
+					currentChannel.send('I\'ve unpinned your selected message as requested!')
 					.then((delmessage) => delmessage.delete(5000))
 					.catch(currentChannel.send('Error editing message. Try slowing down.'));
 					sentMessage.unpin();
