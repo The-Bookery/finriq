@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 
 class bookmarkActions {
   static async bookmarkMessage(user, reaction) {
-		if (reaction._emoji.id === config.emotes.bookmark) {
+		if (reaction._emoji && reaction._emoji.id === config.emotes.bookmark) {
 			const workingMessage = reaction.message;
 			const booksEmote = "📚";
 			const bookmarkEmbed = new Discord.RichEmbed()
