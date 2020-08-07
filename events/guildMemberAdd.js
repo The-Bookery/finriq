@@ -41,7 +41,7 @@ module.exports = async (member) => {
         `If you like The Bookery and want to share us with your friends, here's a permanent invite link: https://discord.gg/2cEWaym.`
       );
     member.send(welcomeDM).catch((err) => {
-      if (err.name == "DiscordAPIError" && timedifference(result[0].cooldown, Date.now()) >= 3) {
+      if (err.name == "DiscordAPIError") {
         welcomeDM.addField(
           'Note',
           'This was sent in this channel, likely because you have disabled DMs from servers. This will be automatically deleted after thirty seconds.'
