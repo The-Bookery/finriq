@@ -1,7 +1,7 @@
 const config = require('../config.json');
 const Discord = require('discord.js');
 
-module.exports = async (member) => {
+module.exports = async (client, member) => {
   try {
     console.log(member.user);
     if(member.user.bot) return;
