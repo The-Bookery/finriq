@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 
 module.exports = async (member) => {
   console.log("Yes");
+  console.log(member.guild);
   member.guild.members.fetch(member.id).then((user) => {
     if(user.author.bot) return console.log("bot");
     // Add roles and send welcome message to the welcome channel
