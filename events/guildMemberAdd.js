@@ -2,9 +2,8 @@ const config = require('../config.json');
 const Discord = require('discord.js');
 
 module.exports = async (client, member) => {
-  console.log(member.bot);
-  if(message.author.bot) return;
-  reaction.message.guild.fetchMember(member.id).then(() => {
+  member.guild.fetchMember(member.id).then((user) => {
+    if(user.author.bot) return;
     // Add roles and send welcome message to the welcome channel
     client.channels
       .get(config.channels.welcome)
@@ -47,7 +46,8 @@ module.exports = async (client, member) => {
           'This was sent in this channel, likely because you have disabled DMs from servers. This will be automatically deleted after thirty seconds.'
         );
 
-        return message.channel.send(welcomeDM).then(msg => msg.delete(30000).catch());
+        return client.channels.get(config.channels.welcome)
+        .send(welcomeDM).then(msg => msg.delete(30000).catch());
       }
 
       console.log(err);
