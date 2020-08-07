@@ -7,7 +7,7 @@ const cafeActions = require('../eventActions/cafeActions');
 const oneWordStory = require('../eventActions/oneWordStory');
 
 module.exports = async (client, message) => {
-  if (!message.guild.cache || message.author.bot) return;
+  if (!message.guild || message.author.bot) return;
   const args = message.content.split(/\s+/g); // Return the message content and split the prefix.
   const command =
     message.content.startsWith(config.prefix) &&
