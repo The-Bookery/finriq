@@ -49,11 +49,11 @@ class afkMessageCheckAction {
     }
     const sender = message.author;
     const reactionFilter = (reaction, user) => {
-      console.log(reaction.emoji);
       if (
         (reaction.emoji.name === '✅' || reaction.emoji.name === '❌') &&
         user.id == sender.id
       ) {
+        console.log("Hello world");
         if (reaction.emoji.name === '✅') {
           Afks.destroy({
             where: {
