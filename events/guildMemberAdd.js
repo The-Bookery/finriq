@@ -3,8 +3,8 @@ const Discord = require('discord.js');
 
 module.exports = async (member) => {
   try {
+    console.log(member.user);
     if(member.user.bot) return;
-    console.log("No bots!");
     // Add roles and send welcome message to the welcome channel
     member.guild.channels
       .get(config.channels.welcome)
