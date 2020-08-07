@@ -47,7 +47,6 @@ module.exports.execute = async (client, message, args) => {
         }
       })
       .catch((err) => {
-        console.log(err.name);
         if (err.name == 'SequelizeUniqueConstraintError' && args[1] != 'auto') {
           Afks.destroy({
             where: {
@@ -56,7 +55,7 @@ module.exports.execute = async (client, message, args) => {
           }).then((result) => {
             // User successfully removed from table
             if (result == 1) {
-              message.channel
+              return message.channel
                 .send(
                   `Welcome back, ${
                     message.member.nickname
@@ -66,11 +65,11 @@ module.exports.execute = async (client, message, args) => {
                 )
                 .then((delmessage) => delmessage.delete({ timeout: 5000 }))
                 .catch('Error sending message.');
-              return;
             }
           });
+        } else {
+          console.error('Afk sequelize error: ', err);
         }
-        console.error('Afk sequelize error: ', err);
       })
   );
 };
