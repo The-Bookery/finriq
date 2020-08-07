@@ -66,13 +66,6 @@ module.exports.execute = async (client, message, args) => {
                 )
                 .then((delmessage) => delmessage.delete({ timeout: 5000 }))
                 .catch('Error sending message.');
-              reaction.message
-                .delete()
-                .catch(() =>
-                  console.log(
-                    'Tried deleting afk message that was already deleted'
-                  )
-                );
               return;
             }
           });
