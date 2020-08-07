@@ -7,7 +7,7 @@ class tosActions {
       reaction.message.channel.id === config.channels.tos &&
       reaction._emoji.name === config.emotes.acceptTOS
     ) {
-      reaction.message.guild.fetchMember(user.id).then(() => {
+      reaction.message.guild.cache.fetchMember(user.id).then(() => {
         // Add roles and send welcome message to the welcome channel
         client.channels.cache
           .get(config.channels.welcome)

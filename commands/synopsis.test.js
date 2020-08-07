@@ -39,7 +39,7 @@ module.exports.execute = async (client, message, args) => {
           game.acceptingSummaries = true;
           setTimeout(function () {
             game.acceptingSummaries = false;
-            message.guild.roles.forEach(role => {
+            message.guild.cache.roles.forEach(role => {
               if (role.id == "693502791788003401") {
                 message.channel.overwritePermissions(role, {'SEND_MESSAGES': false});
               }
@@ -59,7 +59,7 @@ module.exports.execute = async (client, message, args) => {
             setTimeout(function () {
               message.channel.send("Thank you.");
               message.channel.send("Now, vote for the synopsis you think is the real one by ticking the ✅. You have forty-five seconds. If you guess correctly, you get 2 points! You can vote for your own, but it's worth less points than guessing the right one and it might give you away.\nIf you haven't been playing up till now, you can join in here! The title of the book is _" + game.book.title + "_. Can you guess which synopsis is the correct one?");
-              message.guild.roles.forEach(role => {
+              message.guild.cache.roles.forEach(role => {
                 if (role.id == "693502791788003401") {
                   message.channel.overwritePermissions(role, {'SEND_MESSAGES': true});
                 }
