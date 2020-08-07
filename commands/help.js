@@ -16,7 +16,7 @@ module.exports.execute = async (client, message, args) => {
   if (!args || args.length === 0) {
     var modulelist = '';
 
-    let helpMessage = new Discord.RichEmbed()
+    let helpMessage = new Discord.MessageEmbed()
       .setColor('#750384')
       .setTitle('List of available modules')
       .setDescription(
@@ -41,7 +41,7 @@ module.exports.execute = async (client, message, args) => {
     );
 
     if (command) {
-      let helpMessage = new Discord.RichEmbed()
+      let helpMessage = new Discord.MessageEmbed()
         .setColor('#750384')
         .setTitle(`${prefix}${command.config.name}`)
         .setDescription(
@@ -60,7 +60,7 @@ module.exports.execute = async (client, message, args) => {
       if (cleanmodules.includes(args[0].toLowerCase())) {
         var modCmd = args[0].toLowerCase(); // User input
 
-        let helpMessage = new Discord.RichEmbed()
+        let helpMessage = new Discord.MessageEmbed()
           .setColor('#750384')
           .setTitle(`${capitalizeFLetter(modCmd)}`)
           .setDescription(`You asked for commands under the ${modCmd} module`);
@@ -84,7 +84,7 @@ module.exports.execute = async (client, message, args) => {
       } else if (args[0].toLowerCase() == 'all') {
         modCmd = args[0].toLowerCase();
 
-        let helpMessage = new Discord.RichEmbed()
+        let helpMessage = new Discord.MessageEmbed()
           .setColor('#750384')
           .setTitle(`${capitalizeFLetter(modCmd)}`)
           .setDescription(`You asked for all commands`);

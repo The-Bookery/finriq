@@ -9,7 +9,7 @@ class tosActions {
     ) {
       reaction.message.guild.fetchMember(user.id).then(() => {
         // Add roles and send welcome message to the welcome channel
-        client.channels
+        client.channels.cache
           .get(config.channels.welcome)
           .send(
             `🎉 **A new member has arrived!** 🎉\nPlease welcome <@${user.id}> to The Bookery <@&693517619457818634>!`
@@ -18,7 +18,7 @@ class tosActions {
             message.react(config.emotes.wave);
           });
 
-        let welcomeDM = new Discord.RichEmbed()
+        let welcomeDM = new Discord.MessageEmbed()
           .setColor('#750384')
           .setTitle(':books: __**Welcome to The Bookery!**__ :books:')
           .addField(

@@ -96,7 +96,7 @@ module.exports.execute = async (client, message, args) => {
         customChannelTable.findAll({
           attributes: ["id", "name", "description"]
         }).then((result) => {
-          let helpMessage = new Discord.RichEmbed()
+          let helpMessage = new Discord.MessageEmbed()
           .setColor('#750384')
           .setTitle(`Custom Channels`)
           .setDescription(

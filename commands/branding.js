@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 module.exports.execute = async (client, message, args) => {
   if (args.length) {
     if (args[0] == 'colors') {
-      const brandEmbed = new Discord.RichEmbed()
+      const brandEmbed = new Discord.MessageEmbed()
         .setTitle('The Bookery Color Scheme')
         .setDescription(
           'Color light: #e100e2\nColor medium: #750384\nColor dark: #090526'
@@ -15,7 +15,7 @@ module.exports.execute = async (client, message, args) => {
         .setColor('#750384');
       return await message.channel.send(brandEmbed);
     } else if (args[0] == 'logo' || args[0] == 'icon') {
-      const brandEmbed = new Discord.RichEmbed()
+      const brandEmbed = new Discord.MessageEmbed()
         .setTitle('The Bookery Logo')
         .attachFiles([
           'https://bookery.codingprojects.org/images/bookery-logo.png',
@@ -24,7 +24,7 @@ module.exports.execute = async (client, message, args) => {
         .setColor('#750384');
       return await message.channel.send(brandEmbed);
     } else {
-      const brandEmbed = new Discord.RichEmbed()
+      const brandEmbed = new Discord.MessageEmbed()
         .setTitle('The Bookery Branding')
         .setDescription(
           'Color light: #e100e2\nColor medium: #750384\nColor dark: #090526'
@@ -40,7 +40,7 @@ module.exports.execute = async (client, message, args) => {
       return await message.channel.send(brandEmbed);
     }
   } else {
-    const brandEmbed = new Discord.RichEmbed()
+    const brandEmbed = new Discord.MessageEmbed()
       .setTitle('The Bookery Branding')
       .setDescription(
         'Color light: #e100e2\nColor medium: #750384\nColor dark: #090526'

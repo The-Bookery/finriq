@@ -6,7 +6,7 @@ class bookmarkActions {
 		if (reaction._emoji && reaction._emoji.id === config.emotes.bookmark) {
 			const workingMessage = reaction.message;
 			const booksEmote = "📚";
-			const bookmarkEmbed = new Discord.RichEmbed()
+			const bookmarkEmbed = new Discord.MessageEmbed()
 				.setColor('#0F9BF1')
 				.setTitle(`${booksEmote} The Bookery Bookmark ${booksEmote}`)
 				.setDescription('You asked to bookmark this post from The Bookery server.')

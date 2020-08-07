@@ -78,7 +78,7 @@ class afkMessageCheckAction {
         }
       }
     };
-    const noLongerAFKMessage = new Discord.RichEmbed()
+    const noLongerAFKMessage = new Discord.MessageEmbed()
       .setTitle(
         `You are currently AFK, ${
           message.member.nickname
@@ -185,7 +185,7 @@ class afkMessageCheckAction {
           if (result.length == 1 && message.author.id != id) {
             message.guild.fetchMember(result[0].user).then((user) => {
               let name = user.nickname ? user.nickname : user.user.username;
-              const embed = new Discord.RichEmbed()
+              const embed = new Discord.MessageEmbed()
                 .setTitle(`${name} is not here`)
                 .addField('AFK Message:', result[0].message)
                 .addField('Went AFK:', timeSince(result[0].date) + ' ago')

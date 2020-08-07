@@ -10,7 +10,7 @@ class oneWordStory {
             message.channel.fetchMessages({limit: 2}).then(res => {
                 let lm = res.last();
                 if (lm.author == message.author) {
-                    let deleteMessage = new Discord.RichEmbed()
+                    let deleteMessage = new Discord.MessageEmbed()
                     .setColor('#750384')
                     .setTitle('Message Deleted')
                     .addField(
@@ -30,7 +30,7 @@ class oneWordStory {
             .catch(err => console.error(err));
 
             if (words.length > 1) {
-                let deleteMessage = new Discord.RichEmbed()
+                let deleteMessage = new Discord.MessageEmbed()
                 .setColor('#750384')
                 .setTitle('Message Deleted')
                 .addField(

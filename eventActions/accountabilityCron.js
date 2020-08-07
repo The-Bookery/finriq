@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 
 class accountabilityCronJob {
   static async check(client) {
-    let accountabilityCheck = new Discord.RichEmbed()
+    let accountabilityCheck = new Discord.MessageEmbed()
     .setColor('#750384')
     .setTitle(':books: __**Daily Accountability Check**__ :books:')
     .addField(
@@ -16,7 +16,7 @@ class accountabilityCronJob {
     );
 
     const accountabilityChannel = config.channels.accountability;
-    client.channels.get(accountabilityChannel).send(accountabilityCheck);
+    client.channels.cache.get(accountabilityChannel).send(accountabilityCheck);
   }
 }
 

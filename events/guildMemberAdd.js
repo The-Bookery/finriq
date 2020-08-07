@@ -1,11 +1,12 @@
 const config = require('../config.json');
 const Discord = require('discord.js');
 
-module.exports = async (client, member) => {
+module.exports = async (member) => {
+  console.log("Yes");
   member.guild.fetchMember(member.id).then((user) => {
-    if(user.author.bot) return;
+    if(user.author.bot) return console.log("bot");
     // Add roles and send welcome message to the welcome channel
-    client.channels
+    member.guild.channels
       .get(config.channels.welcome)
       .send(
         `🎉 **A new member has arrived!** 🎉\nPlease welcome <@${member.id}> to The Bookery <@&693517619457818634>!`
@@ -14,7 +15,7 @@ module.exports = async (client, member) => {
         message.react(config.emotes.wave);
       });
 
-    let welcomeDM = new Discord.RichEmbed()
+    let welcomeDM = new Discord.MessageEmbed()
       .setColor('#750384')
       .setTitle(':books: __**Welcome to The Bookery!**__ :books:')
       .addField(
@@ -46,7 +47,7 @@ module.exports = async (client, member) => {
           'This was sent in this channel, likely because you have disabled DMs from servers. This will be automatically deleted after thirty seconds.'
         );
 
-        return client.channels.get(config.channels.welcome)
+        return member.guild.channels.get(config.channels.welcome)
         .send(welcomeDM).then(msg => msg.delete(30000).catch());
       }
 

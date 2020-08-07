@@ -4,7 +4,7 @@ const version = fields.version;
 const versioninfo = fields.versioninfo;
 
 module.exports.execute = async (client, message) => {
-  let infoMessage = new Discord.RichEmbed()
+  let infoMessage = new Discord.MessageEmbed()
     .setColor('#750384')
     .setTitle('Finriq')
     .setThumbnail(
