@@ -37,7 +37,7 @@ module.exports.execute = async (client, message, args) => {
               .send(
                 `A Read-a-Thon event has been scheduled!`
               )
-              .then((msg) => msg.delete(5000).catch());
+              .then((msg) => msg.delete({ timeout: 5000 }).catch());
           } catch (err) {
             console.log(err);
           }

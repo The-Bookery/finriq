@@ -23,7 +23,7 @@ class oneWordStory {
                     );
 
                     message.delete()
-                    .then(() => message.channel.send(deleteMessage)).then(msg => msg.delete(5000).catch());
+                    .then(() => message.channel.send(deleteMessage)).then(msg => msg.delete({ timeout: 5000 }).catch());
                     console.log(`Message from ${user} deleted in ${message.channel}.`);
                 }
             })
@@ -44,7 +44,7 @@ class oneWordStory {
 
                 message.delete()
                 .then(() => message.channel.send(deleteMessage))
-                .then(msg => msg.delete(5000).catch(err => console.error(err)))
+                .then(msg => msg.delete({ timeout: 5000 }).catch(err => console.error(err)))
                 .catch(err => console.error(err));
                 console.log(`Message from ${user} deleted in ${message.channel}.`);
             }

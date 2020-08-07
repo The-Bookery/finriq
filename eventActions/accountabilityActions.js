@@ -62,7 +62,7 @@ class accountabilityActions {
 						.then(sentMessage.pin())
 						.then(
 							currentChannel.send('I have pinned your message! :pushpin:')
-										.then((delmessage) => delmessage.delete(5000))
+										.then((delmessage) => delmessage.delete({ timeout: 5000 }))
 										.catch(console.error('Error sending message.'))
 						)
 						.catch(() => console.error('Error with pinning message.'));
@@ -74,7 +74,7 @@ class accountabilityActions {
 					// Otherwise, the message has already been pinned, so unpin it
 					currentChannel.stopTyping();
 					currentChannel.send('I\'ve unpinned your selected message as requested!')
-					.then((delmessage) => delmessage.delete(5000))
+					.then((delmessage) => delmessage.delete({ timeout: 5000 }))
 					.catch(currentChannel.send('Error editing message. Try slowing down.'));
 					sentMessage.unpin();
 				}

@@ -41,7 +41,7 @@ module.exports.execute = async (client, message, args) => {
             .send(
               `I have marked you as AFK, <@${sender.id}>. Anyone who pings you will be notified you are away.\n\`\`\`AFK Message: ${afkMessage}\`\`\``
             )
-            .then((msg) => msg.delete(5000).catch());
+            .then((msg) => msg.delete({ timeout: 10000 }).catch());
         } catch (err) {
           console.log(err);
         }
@@ -63,7 +63,7 @@ module.exports.execute = async (client, message, args) => {
                       : message.author.username
                   }!`
                 )
-                .then((delmessage) => delmessage.delete(5000))
+                .then((delmessage) => delmessage.delete({ timeout: 5000 }))
                 .catch('Error sending message.');
               reaction.message
                 .delete()

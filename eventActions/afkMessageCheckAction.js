@@ -125,7 +125,7 @@ class afkMessageCheckAction {
             });
           }).catch((err) => {
             if (err.name == "DiscordAPIError" && timedifference(result[0].cooldown, Date.now()) >= 3) {
-              return message.channel.send('Looks like you\'ve disabled private messages! You\'re currently marked as AFK. If you want to turn off AFK, just use `.afk` again!').then(msg => msg.delete(5000).catch());
+              return message.channel.send('Looks like you\'ve disabled private messages! You\'re currently marked as AFK. If you want to turn off AFK, just use `.afk` again!').then(msg => msg.delete({ timeout: 5000 }).catch());
             }
 
             console.log("Message error: " + err);
