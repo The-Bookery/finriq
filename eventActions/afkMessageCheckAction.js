@@ -124,7 +124,11 @@ class afkMessageCheckAction {
                 );
             });
           }).catch((err) => {
-            console.log(err.name);
+            if (err.name == "DiscordAPIError") {
+              return message.channel.send('Looks like you\'ve disabled private messages! If you want to turn off AFK, just use `.afk` again!').then(msg => msg.delete(5000).catch());
+            }
+
+            console.log("Message error: " + err);
           });
         }
       });
