@@ -2,6 +2,7 @@ const config = require('../config.json');
 const Discord = require('discord.js');
 
 module.exports = async (client, member) => {
+  console.log(member);
   if(message.author.bot) return;
   reaction.message.guild.fetchMember(member.id).then(() => {
     // Add roles and send welcome message to the welcome channel
