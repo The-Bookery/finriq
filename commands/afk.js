@@ -47,6 +47,7 @@ module.exports.execute = async (client, message, args) => {
         }
       })
       .catch((err) => {
+        console.log(err.name);
         if (err.name == 'SequelizeUniqueConstraintError' && args[1] != 'auto') {
           Afks.destroy({
             where: {
