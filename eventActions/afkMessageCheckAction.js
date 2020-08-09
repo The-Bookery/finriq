@@ -47,7 +47,6 @@ class afkMessageCheckAction {
         }
       });
     }
-    const sender = message.author;
 
 		const noLongerAFKMessage = new Discord.MessageEmbed()
 			.setTitle(`You are currently AFK, ${message.member.nickname ? message.member.nickname : message.author.username}`)
@@ -62,7 +61,7 @@ class afkMessageCheckAction {
 					user: user.id
 				}
 			}).then(result => {
-				if (result.length == 1) {
+				if (result.length == 1 && timedifference(result.cooldown, Date.now()) >= 3) {
 					message.author.send(noLongerAFKMessage)
           .catch((err) => {
             if (err.name == "DiscordAPIError" && timedifference(result[0].cooldown, Date.now()) >= 3) {
