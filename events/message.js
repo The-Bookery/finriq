@@ -18,10 +18,6 @@ module.exports = async (client, message) => {
       client.commands.get(command) ||
       client.commands.get(client.aliases.get(command));
 
-    if (message.author.id === "468387529704341534" && commandfile) {
-      return message.channel.send('W̷̳̞̌ä̷̙͜ṯ̵̈́ć̴̹̳h̵͖̭̐ ̴̛̳̭o̵͖͊ͅų̵̛̱t̶͙̏́');
-    }
-
     if (commandfile) {
       commandfile.execute(client, message, args); // Execute found command
     }
