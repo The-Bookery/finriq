@@ -20,7 +20,7 @@ module.exports.execute = async (client, message, args) => {
       .setColor('#750384')
       .setTitle('List of available modules')
       .setDescription(
-        `Modules available in ${message.guild.cache.name}. Use \`.help [module]\` for more about a specific module, or \`.help all\` for all commands.`
+        `Modules available in ${message.guild.name}. Use \`.help [module]\` for more about a specific module, or \`.help all\` for all commands.`
       );
     modules.forEach((module) => {
       modulelist = modulelist.concat(`${module}\n`);
