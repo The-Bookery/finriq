@@ -123,7 +123,7 @@ class afkMessageCheckAction {
           },
         }).then((result) => {
           if (result.length == 1 && message.author.id != id) {
-            message.guild.cache.fetchMember(result[0].user).then((user) => {
+            message.guild.cache.members.fetch(result[0].user).then((user) => {
               let name = user.nickname ? user.nickname : user.user.username;
               const embed = new Discord.MessageEmbed()
                 .setTitle(`${name} is not here`)
