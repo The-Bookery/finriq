@@ -50,7 +50,7 @@ class afkMessageCheckAction {
 
 		const noLongerAFKMessage = new Discord.MessageEmbed()
 			.setTitle(`You are currently AFK, ${message.member.nickname ? message.member.nickname : message.author.username}`)
-			.addField('Are you back?', 'Then use `.afk` again in the server!')
+			.addField('Are you back?', 'Then use `.afk` again in the server! Unfortunately, as there is an error, you cannot react to this message to turn off AFK for the time being.')
 			.setFooter('This message will delete itself after 15 seconds')
 			.setColor('#750384');
 		const user = message.author;
