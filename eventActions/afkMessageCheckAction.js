@@ -70,6 +70,14 @@ class afkMessageCheckAction {
 
             console.log("Message error: " + err);
           });
+
+          // Reset cooldown
+          Afks.update(
+            { cooldown: Date.now() },
+            { where: { user: user.id } }
+          ).catch((error) => {
+            'Update error: ' + error;
+          });
         }
       });
     });
