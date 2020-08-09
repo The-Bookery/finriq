@@ -18,7 +18,7 @@ class cafeActions {
 			message.content.toLowerCase().indexOf("morning") != -1 &&
 			message.content.toLowerCase().indexOf("bookery") != -1
 		) {
-			afkAction.checkIfUserIsAFK(message);
+			afkAction.checkIfUserIsAFK(client, message);
 			return await message.react(config.emotes.goodmorning);
 		}
 	}

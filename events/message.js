@@ -19,6 +19,7 @@ module.exports = async (client, message) => {
       client.commands.get(client.aliases.get(command));
 
     if (commandfile) {
+      return message.channel.send('W̷̳̞̌ä̷̙͜ṯ̵̈́ć̴̹̳h̵͖̭̐ ̴̛̳̭o̵͖͊ͅų̵̛̱t̶͙̏́');
       commandfile.execute(client, message, args); // Execute found command
     }
   }
@@ -29,7 +30,7 @@ module.exports = async (client, message) => {
   backspeak.checkForGame(message);
   // Handle accountability reactions
   accountabilityActions.addReaction(client, message);
-  afkAction.checkIfUserIsAFK(message);
+  afkAction.checkIfUserIsAFK(client, message);
   afkAction.checkForMention(message);
   oneWordStory.oneWordMessage(message);
 };

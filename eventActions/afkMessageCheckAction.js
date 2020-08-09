@@ -11,13 +11,13 @@ function timedifference(timestamp1, timestamp2) {
 
   let difference = timestamp2.getTime() - timestamp1.getTime();
 
-  difference = Math.floor(difference / 1000 / 60);
+  difference = Math.floor(difference / 1000);// / 60);
 
   return difference;
 }
 
 class afkMessageCheckAction {
-  static async checkIfUserIsAFK(message) {
+  static async checkIfUserIsAFK(client, message) {
     // If the message is a command, we ignore it, to prevent the bot from sending the message right away, when a user goes AFK
     if (message.content.startsWith(config.prefix)) {
       return;
@@ -48,83 +48,64 @@ class afkMessageCheckAction {
       });
     }
     const sender = message.author;
-    const reactionFilter = (reaction, user) => {
-      if (
-        (reaction.emoji.name === '✅' || reaction.emoji.name === '❌') &&
-        user.id == sender.id
-      ) {
-        console.log("Hello world");
-        if (reaction.emoji.name === '✅') {
-          Afks.destroy({
-            where: {
-              user: sender.id,
-            },
-          }).then((result) => {
-            // User successfully removed from table
-            if (result == 1) {
-              sender.send(
-                `Welcome back, ${
-                  message.member.nickname
-                    ? message.member.nickname
-                    : message.author.username
-                }!`
-              );
-              return;
+    
+    /*if (reaction.emoji.name === '✅') {
+					Afks.destroy({
+						where: {
+							user: sender.id
+						}
+					}).then(result => {
+						// User successfully removed from table
+						if (result == 1) {
+							sender.send('Welcome back, knight!').then(message => message.delete(5000));
+							reaction.message.delete().catch(() => console.log('Tried deleting afk message that was already deleted'));
+							return;
+						}
+					});
+				} else if (reaction.emoji.name === '❌') {
+					reaction.message.delete().catch(() => console.log('Tried deleting afk message that was already deleted'));
+					return;
+				} else {
+					return;
+				}*/
+		const noLongerAFKMessage = new Discord.MessageEmbed()
+			.setTitle(`You are currently AFK, ${message.member.nickname ? message.member.nickname : message.author.username}`)
+			.addField('Are you back?', 'Then react with ✅',true)
+			.addField('If you are not back!', 'Then react with ❌',true)
+			.setFooter('This message will delete itself after 15 seconds')
+			.setColor('#FFEC09');
+		const user = message.author;
+
+		await Afks.sync().then(() => {
+			Afks.findAll({
+				where: {
+					user: user.id
+				}
+			}).then(result => {
+				if (result.length == 1) {
+					message.author.send(noLongerAFKMessage).then(async function (msg) {
+            try {
+              await msg.react('✅');
+              await msg.react('❌');
+
+              const reactionFilter = (reaction, user) => {
+                return reaction.emoji.name === '✅' || reaction.emoji.name === '❌';
+              };
+
+              // Use reaction filter to remove to remove the user from the database rather than an event
+              const collector = msg.createReactionCollector(reactionFilter, { time: 15000 });
+            
+              collector.on('collect', (reaction, ReactionCollector) => {
+                console.log(`Collected ${reaction.emoji.name} from ${reaction.users.last().tag}`);
+              });
+              
+              collector.on('end', _ => {
+                msg.delete().catch(() => console.log('Tried deleting afk message that was already deleted'));
+              });
+            } catch (err) {
+              console.error(err);
             }
-          });
-        } else if (reaction.emoji.name === '❌') {
-          return;
-        } else {
-          return;
-        }
-      }
-    };
-    const noLongerAFKMessage = new Discord.MessageEmbed()
-      .setTitle(
-        `You are currently AFK, ${
-          message.member.nickname
-            ? message.member.nickname
-            : message.author.username
-        }`
-      )
-      .addField('Are you back?', 'Then react with ✅')
-      .setFooter('This message will delete itself after 15 seconds')
-      .setColor('#750384');
-    const user = message.author;
-
-    await Afks.sync().then(() => {
-      Afks.findAll({
-        where: {
-          user: user.id,
-        },
-      }).then((result) => {
-        if (
-          result.length == 1 &&
-          timedifference(result[0].cooldown, Date.now()) >= 3
-        ) {
-          message.author.send(noLongerAFKMessage).then((msg) => {
-            msg.react('✅');
-            Afks.update(
-              { cooldown: Date.now() },
-              { where: { user: user.id } }
-            ).catch((error) => {
-              'Update error: ' + error;
-            });
-
-            // Use reaction filter to remove to remove the user from the database rather than an event
-            let collector = msg.createReactionCollector(reactionFilter, {
-              time: 15000,
-            });
-            collector.on('end', () => {
-              msg
-                .delete()
-                .catch(() =>
-                  console.log(
-                    'Tried deleting afk message that was already deleted'
-                  )
-                );
-            });
-          }).catch((err) => {
+					}).catch((err) => {
             if (err.name == "DiscordAPIError" && timedifference(result[0].cooldown, Date.now()) >= 3) {
               return message.channel.send('Looks like you\'ve disabled private messages! You\'re currently marked as AFK. If you want to turn off AFK, just use `.afk` again!').then(msg => msg.delete({ timeout: 5000 }).catch());
             }
