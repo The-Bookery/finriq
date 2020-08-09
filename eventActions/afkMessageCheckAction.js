@@ -11,7 +11,7 @@ function timedifference(timestamp1, timestamp2) {
 
   let difference = timestamp2.getTime() - timestamp1.getTime();
 
-  difference = Math.floor(difference / 1000);// / 60);
+  difference = Math.floor(difference / 1000 / 60);
 
   return difference;
 }
@@ -61,7 +61,7 @@ class afkMessageCheckAction {
 					user: user.id
 				}
 			}).then(result => {
-				if (result.length == 1 && timedifference(result.cooldown, Date.now()) >= 3) {
+				if (result.length == 1 && timedifference(result[0].cooldown, Date.now()) >= 3) {
 					message.author.send(noLongerAFKMessage)
           .catch((err) => {
             if (err.name == "DiscordAPIError" && timedifference(result[0].cooldown, Date.now()) >= 3) {
