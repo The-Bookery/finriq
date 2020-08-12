@@ -27,13 +27,11 @@ module.exports = async (client, member) => {
       )
       .addField(
         'About The Bookery',
-        `The Bookery is a community dedicated to the creation, consumption, admiration, and discussion of literature. We strive to create an environment where readers can find a community of people who have their same interests and talk or read together.`,
-        true
+        `The Bookery is a community dedicated to the creation, consumption, admiration, and discussion of literature. We strive to create an environment where readers can find a community of people who have their same interests and talk or read together.`
       )
       .addField(
         'Safe Space',
-        `The Bookery is a safe space. We do not allow prejudice or hatred for anyone, explicit discussions, or offensive speech. We understand that some books may contain content that is more adult or offensive, and we ask you refrain from discussing them here.`,
-        true
+        `The Bookery is a safe space. We do not allow prejudice or hatred for anyone, explicit discussions, or offensive speech. We understand that some books may contain content that is more adult or offensive, and we ask you refrain from discussing them here.`
       )
       .addField(
         'About Me',
@@ -41,24 +39,22 @@ module.exports = async (client, member) => {
       )
       .addField(
         'Spread the Word',
-        `If you like The Bookery and want to share us with your friends, here's a permanent invite link: https://discord.gg/2cEWaym.`,
-        true
+        `If you like The Bookery and want to share us with your friends, here's a permanent invite link: https://discord.gg/2cEWaym.`
       )
       .addField(
         'Our Website',
         `We have an official website! We post articles on our blog, list some of our favorite partners (along with a partner application), and a ban appeal form if you end up getting banned and you want to appeal it.
-https://bookery.codingprojects.org/`,
-        true
+https://bookery.codingprojects.org/`
       );
     member.send(welcomeDM).catch((err) => {
       if (err.name == "DiscordAPIError") {
         welcomeDM.addField(
           'Note',
-          'This was sent in this channel, likely because you have disabled DMs from servers. This will be automatically deleted after thirty seconds.'
+          'This was sent in this channel, likely because you have disabled DMs from servers. This will be automatically deleted after one minute.'
         );
 
         return member.guild.channels.get(config.channels.welcome)
-        .send(welcomeDM).then(msg => msg.delete(30000).catch());
+        .send(welcomeDM).then(msg => msg.delete(600000).catch());
       }
 
       console.log(err);
