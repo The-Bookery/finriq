@@ -43,7 +43,7 @@ module.exports = async (client, member) => {
       )
       .addField(
         'Our Website',
-        `We have an official website! We post articles on our blog, list some of our favorite partners (along with a partner application), and a ban appeal form if you end up getting banned and you want to appeal it.
+        `We have an official website! We post articles on our blog, list some of our favorite partners (along with a partner application), and a ban appeal form if you end up getting banned and you want to appeal it. Check us out!
 https://bookery.codingprojects.org/`
       );
     member.send(welcomeDM).catch((err) => {
