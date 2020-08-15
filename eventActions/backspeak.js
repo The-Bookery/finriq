@@ -13,7 +13,7 @@ class backspeakCheckAction {
           var validResp = result[0].content;
           if (message.content == validResp) {
             message.channel.send(
-              `And the winner is... <@${message.author}>!`
+              `And the winner is... ${message.author}!`
             );
             Backspeak.destroy({
               where: {
