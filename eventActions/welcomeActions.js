@@ -50,7 +50,7 @@ class tosActions {
           .addField(
             'Our Website',
             `We have an official website! We post articles on our blog, list some of our favorite partners (along with a partner application), and a ban appeal form if you end up getting banned and you want to appeal it.
-https://bookery.codingprojects.org/`,
+https://bookerycommunity.com/`,
             true
           );
         user.send(welcomeDM);

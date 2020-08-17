@@ -8,19 +8,15 @@ module.exports.execute = async (client, message, args) => {
         .setDescription(
           'Color light: #e100e2\nColor medium: #750384\nColor dark: #090526'
         )
-        .attachFiles([
-          'https://bookery.codingprojects.org/images/color_scheme.png',
-        ])
-        .setImage('attachment://color_scheme.png')
         .setColor('#750384');
       return await message.channel.send(brandEmbed);
     } else if (args[0] == 'logo' || args[0] == 'icon') {
       const brandEmbed = new Discord.MessageEmbed()
         .setTitle('The Bookery Logo')
         .attachFiles([
-          'https://bookery.codingprojects.org/images/bookery-logo.png',
+          'https://bookerycommunity.com/assets/logo.png',
         ])
-        .setImage('attachment://bookery-logo.png')
+        .setImage('attachment://logo.png')
         .setColor('#750384');
       return await message.channel.send(brandEmbed);
     } else {
@@ -30,12 +26,8 @@ module.exports.execute = async (client, message, args) => {
           'Color light: #e100e2\nColor medium: #750384\nColor dark: #090526'
         )
         .setThumbnail(
-          'https://bookery.codingprojects.org/images/bookery-logo.png'
+          'https://bookerycommunity.com/assets/logo.png'
         )
-        .attachFiles([
-          'https://bookery.codingprojects.org/images/color_scheme.png',
-        ])
-        .setImage('attachment://color_scheme.png')
         .setColor('#750384');
       return await message.channel.send(brandEmbed);
     }
@@ -46,12 +38,8 @@ module.exports.execute = async (client, message, args) => {
         'Color light: #e100e2\nColor medium: #750384\nColor dark: #090526'
       )
       .setThumbnail(
-        'https://bookery.codingprojects.org/images/bookery-logo.png'
+        'https://bookerycommunity.com/assets/logo.png'
       )
-      .attachFiles([
-        'https://bookery.codingprojects.org/images/color_scheme.png',
-      ])
-      .setImage('attachment://color_scheme.png')
       .setColor('#750384');
     return await message.channel.send(brandEmbed);
   }
