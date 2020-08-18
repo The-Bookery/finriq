@@ -20,7 +20,7 @@ class cafeActions {
 			client.commands
 				.get("afk")
 				.execute(client, message, ["They didn't tell us where they went...", "auto"]);
-			return await message.react(config.emotes.goodnight);
+			return await message.react(config.emotes.wave);
 		} else if (
 			message.content.toLowerCase().indexOf("good") != -1 &&
 			message.content.toLowerCase().indexOf("morning") != -1 &&
