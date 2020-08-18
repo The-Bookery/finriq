@@ -14,7 +14,7 @@ class cafeActions {
 				.execute(client, message, ["Went to sleep.", "auto"]);
 			return await message.react(config.emotes.goodnight);
 		} else if (
-			message.content.toLowerCase().indexOf("hello") != -1 &&
+			message.content.toLowerCase().indexOf("goodbye") != -1 &&
 			message.content.toLowerCase().indexOf("bookery") != -1
 		) {
 			client.commands
