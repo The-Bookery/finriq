@@ -2,8 +2,8 @@
   "prefix": ".",
   "botToken": "000",
   "modules": ["Utility", "Fun", "Games", "Writing"],
-  "version": "2.2.3",
-  "versioninfo": "Added accountability commands, one word story autmoderation, added cron jobs. Cleaned up a bit behind the scenes.",
+  "version": "2.2.5",
+  "versioninfo": "Cleaned up a bit behind the scenes, updated version info.",
   "playing": "prove I'm a robot.",
   "channelReacts": [
     {
@@ -19,7 +19,6 @@
     "tos": "693628747659608064",
     "welcome": "693500714223272007",
     "logs": "693512715016208445",
-    "accountability": "721119033788727447",
     "cafe": "693498873083330654",
     "oneWord": "701927915893424179",
     "teamOne": "736275224022221002",
@@ -27,10 +26,7 @@
     "teamThree": "736275252597751840"
   },
   "emotes": {
-    "acceptTOS": "📕",
     "bookmark": "695723866990968972",
-    "pinMessage": "📌",
-    "accountability_emotes_array": ["💯", "👍", "🔥", "🙌", "👏", "👌", "💪"],
     "wave": "👋",
     "goodmorning": "🌄",
     "goodnight": "🌛"

@@ -2,7 +2,6 @@ const config = require('../config.json');
 const afkAction = require('../eventActions/afkMessageCheckAction');
 const reactions = require('../eventActions/reactions');
 const backspeak = require('../eventActions/backspeak');
-const accountabilityActions = require('../eventActions/accountabilityActions');
 const cafeActions = require('../eventActions/cafeActions');
 const oneWordStory = require('../eventActions/oneWordStory');
 
@@ -27,8 +26,6 @@ module.exports = async (client, message) => {
 	cafeActions.greetMorningOrNight(client, message);
   reactions.checkIfCorrect(message);
   backspeak.checkForGame(message);
-  // Handle accountability reactions
-  accountabilityActions.addReaction(client, message);
   afkAction.checkIfUserIsAFK(client, message);
   afkAction.checkForMention(message);
   oneWordStory.oneWordMessage(message);
