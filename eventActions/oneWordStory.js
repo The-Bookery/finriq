@@ -7,7 +7,7 @@ class oneWordStory {
             var user = message.author;
             let words = message.content.split(/[^A-Za-z'-]/).length;
 
-            message.channel.fetchMessages({limit: 2}).then(res => {
+            message.channel.messages.fetch({limit: 2}).then(res => {
                 let lm = res.last();
                 if (lm.author == message.author) {
                     let deleteMessage = new Discord.MessageEmbed()
