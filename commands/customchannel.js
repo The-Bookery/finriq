@@ -127,7 +127,7 @@ module.exports.execute = async (client, message, args) => {
         }).then((result) => {
           if (result.length == 1) {
             // get role by ID
-            let userrole = message.guild.cache.roles.get(result[0].roleid);
+            let userrole = message.guild.roles.cache.get(result[0].roleid);
             message.member.addRole(userrole)
             .then(message.channel.send("You have joined the channel!"))
             .catch(err => console.error("Custom Channel error, " + err));
