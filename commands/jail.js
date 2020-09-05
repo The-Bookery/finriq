@@ -25,7 +25,7 @@ module.exports.execute = async (client, message, args) => {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  if (getRandomInt(100) == 99 ||  message.author.id === "694904851691208724") {
+  if (getRandomInt(100) == 99) {
     var name;
 
     if (parseInt(args[0])) {
