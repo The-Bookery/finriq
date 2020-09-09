@@ -39,7 +39,7 @@ module.exports = async (client, member) => {
       )
       .addField(
         'Spread the Word',
-        `If you like The Bookery and want to share us with your friends, here's a permanent invite link: https://discord.gg/2cEWaym.`
+        `If you like The Bookery and want to share us with your friends, here's a permanent invite link: https://discord.gg/tfhg7TW.`
       )
       .addField(
         'Our Website',
