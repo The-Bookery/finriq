@@ -21,7 +21,7 @@ class profanityActions {
 					i += 1;
 				}
 				var re = new RegExp(bannedWord.word,"g");
-				cleanmessage = cleanmessage.replaceAll(re, underscores);
+				cleanmessage = cleanmessage.replace(re, underscores);
 				replacedwords += 1;
 			}
 		});
