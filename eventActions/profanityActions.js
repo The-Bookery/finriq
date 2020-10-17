@@ -9,7 +9,7 @@ class profanityActions {
 		const bannedWords = await profanityTable.findAll();
 
 		var cleanmessage = message.content;
-
+		var logchannel = message.guild.cache.channels.get(logschannel);
 		var replacedwords = 0;
 
 		await bannedWords.forEach(bannedWord => {
@@ -47,7 +47,7 @@ class profanityActions {
 					message.author.username + '#' + message.author.discriminator,
 					message.author.avatarURL
 				);
-			return await message.guild.cache.channels.get(logschannel).send(logMessage);
+			return await logchannel.send(logMessage);
 		} else return;
 	}
 }
