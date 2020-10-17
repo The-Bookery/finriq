@@ -3,29 +3,38 @@ const Discord = require('discord.js');
 const profanityTable = require('../databaseFiles/profanityTable.js');
 class profanityActions {
 	static async checkForProfanity(client, message) {
+		if(message.member.roles.cache.some(r => r.id === config.roles.admin) || message.member.roles.cache.some(r => r.id === config.roles.officer)) return;
+		await profanityTable.sync();
+
 		const bannedWords = await profanityTable.findAll();
-		if (bannedWords.some((word) => message.content.includes(word))) {
-			var cleanmessage = message.content;
 
-			bannedWords.forEach(bannedWord => {
+		var cleanmessage = message.content;
+
+		var replacedwords = 0;
+
+		await bannedWords.forEach(bannedWord => {
+			if (message.content.toLowerCase().indexOf(bannedWord.word) != -1) {
 				var underscores = "";
-				i = 0;
-				while (i < bannedWord.length) {
+				var i = 0;
+				while (i < bannedWord.word.length) {
 					underscores = underscores + "_";
+					i += 1;
 				}
-				cleanmessage.replace(bannedWord, underscores);
-			});
+				cleanmessage = cleanmessage.replace(bannedWord.word, underscores);
+				replacedwords += 1;
+			}
+		});
 
-			const embedMessage = new Discord.RichEmbed()
+		if (replacedwords > 0) {
+			message.delete();
+			const embedMessage = new Discord.MessageEmbed()
 				.setColor('#750384')
 				.setTitle(message.member.nickname
 					? message.member.nickname
 					: message.author.username)
 				.setDescription(cleanmessage);
-			return client.channels
-				.get(config.channels.moderation)
-				.send(embedMessage);
-		}
+			return message.channel.send(embedMessage);
+		} else return;
 	}
 }
 

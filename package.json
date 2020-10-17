@@ -8,16 +8,16 @@
   },
   "author": "Benjamin Hollon",
   "dependencies": {
+    "cron": "^1.8.2",
     "data-store": "^4.0.3",
     "discord.js": "^12.2.0",
     "eslint-plugin-jest": "^22.17.0",
+    "moment": "^2.26.0",
     "mysql2": "^2.0.2",
+    "prettier": "^2.0.5",
     "rss-parser": "^3.7.2",
     "sequelize": "^5.21.3",
-    "sqlite3": "^4.1.1",
-    "prettier": "^2.0.5",
-    "cron": "^1.8.2",
-    "moment": "^2.26.0"
+    "sqlite3": "^4.2.0"
   },
   "devDependencies": {
     "eslint": "^7.2.0",
