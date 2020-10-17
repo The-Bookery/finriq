@@ -9,7 +9,7 @@ class profanityActions {
 		const bannedWords = await profanityTable.findAll();
 
 		var cleanmessage = message.content;
-		var logchannel = message.guild.cache.channels.get(logschannel);
+		var logchannel = message.guild.cache.channels.get(config.channels.logs);
 		var replacedwords = 0;
 
 		await bannedWords.forEach(bannedWord => {
