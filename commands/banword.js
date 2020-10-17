@@ -2,7 +2,7 @@ const profanityTable = require('../databaseFiles/profanityTable.js');
 const config = require('../config.json');
 
 module.exports.execute = async (client, message, args) => {
-	if(message.member.roles.has(config.roles.guardian) | message.member.roles.has(config.roles.helper)) {
+	if(message.member.roles.has(config.roles.officer) | message.member.roles.has(config.roles.admin)) {
 		if(!args[0]) {
 			return message.channel.send('Please enter a word to ban!');
     }

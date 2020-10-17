@@ -1,6 +1,6 @@
 const profanityTable = require('../databaseFiles/profanityTable.js');
 module.exports.execute = async (client, message, args) => {
-	if(message.member.roles.has(config.roles.guardian) | message.member.roles.has(config.roles.helper)) {
+	if(message.member.roles.has(config.roles.admin) | message.member.roles.has(config.roles.officer)) {
 		if(!args[0]) {
 			return message.channel.send('Please enter a word to unban!');
     }
@@ -14,7 +14,7 @@ module.exports.execute = async (client, message, args) => {
         return message.channel.send('That word was not banned.');
       }
     });
-    
+
 		return message.channel.send(`Success! Unbanned ${args[0]} from the list!`);	
 	}
 	else {
