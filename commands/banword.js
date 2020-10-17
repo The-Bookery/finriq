@@ -6,7 +6,7 @@ module.exports.execute = async (client, message, args) => {
 		if(!args[0]) {
 			return message.channel.send('Please enter a word to ban!');
     }
-		
+
 		await profanityTable.sync();
 
 		await profanityTable.create({

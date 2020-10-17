@@ -18,7 +18,7 @@ module.exports.execute = async (client, message, args) => {
       }
     });
 
-		return message.channel.send(`Success! Unbanned ${args[0]} from the list!`);	
+		return message.channel.send(`Success! Unbanned ${args[0]} from the list!`);
 	}
 	else {
 		message.reply('Only moderators can run this command!');
