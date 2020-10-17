@@ -34,7 +34,20 @@ class profanityActions {
 					? message.member.nickname
 					: message.author.username)
 				.setDescription(cleanmessage);
-			return message.channel.send(embedMessage);
+			await message.channel.send(embedMessage);
+
+			const logMessage = new Discord.MessageEmbed()
+				.setColor('#750384')
+				.setTitle("Profanity Replaced")
+				.setDescription(`Profanity detected and replaced in ${message.channel}.`)
+				.addField('User', message.author, true)
+				.addField('Link', `[Go to message](${message.url})`, true)
+				.addField('Message', `**${message.content}**`, true)
+				.setFooter(
+					message.author.username + '#' + message.author.discriminator,
+					message.author.avatarURL
+				);
+			return await message.guild.cache.channels.get(logschannel).send(logMessage);
 		} else return;
 	}
 }
