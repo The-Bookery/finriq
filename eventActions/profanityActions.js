@@ -17,7 +17,7 @@ class profanityActions {
 				var underscores = "";
 				var i = 0;
 				while (i < bannedWord.word.length) {
-					underscores = underscores + "_";
+					underscores = underscores + "\\_\\_";
 					i += 1;
 				}
 				var re = new RegExp(bannedWord.word,"g");
