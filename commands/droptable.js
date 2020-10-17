@@ -1,7 +1,8 @@
 const profanityTable = require('../databaseFiles/profanityTable.js');
 
 module.exports.execute = async (client, message, args) => {
-	profanityTable.drop();
+  profanityTable.drop();
+  return message.channel.send("Dropped");
 };
 
 module.exports.config = {
