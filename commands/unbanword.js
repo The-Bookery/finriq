@@ -1,4 +1,4 @@
-const db = require('../databaseFiles/profanityTable.js');
+const db = require('quick.db');
 module.exports.execute = async (client, message, args) => {
 	if(message.member.roles.has(config.roles.guardian) | message.member.roles.has(config.roles.helper)) {
 		if(!args[0]) {
