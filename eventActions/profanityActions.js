@@ -20,7 +20,7 @@ class profanityActions {
 					underscores = underscores + "_";
 					i += 1;
 				}
-				cleanmessage = cleanmessage.replace(new Regex(bannedWord.word, "g"), underscores);
+				cleanmessage = cleanmessage.replaceAll(bannedWord.word, underscores);
 				replacedwords += 1;
 			}
 		});
