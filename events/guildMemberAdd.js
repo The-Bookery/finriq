@@ -53,7 +53,7 @@ https://bookerycommunity.com/`
           'This was sent in this channel, likely because you have disabled DMs from servers. This will be automatically deleted after one minute.'
         );
 
-        return member.guild.channels.get(config.channels.welcome)
+        return member.guild.channels.cache.get(config.channels.welcome)
         .send(welcomeDM).then(msg => msg.delete(600000).catch());
       }
 

@@ -20,7 +20,7 @@ class profanityActions {
 					underscores = underscores + "\\_";
 					i += 1;
 				}
-				var re = new RegExp(bannedWord.word,"g");
+				var re = new RegExp(bannedWord.word,"gi");
 				cleanmessage = cleanmessage.replace(re, underscores);
 				replacedwords += 1;
 			}
