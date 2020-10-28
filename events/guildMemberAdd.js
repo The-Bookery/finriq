@@ -54,7 +54,7 @@ https://bookerycommunity.com/`
         );
 
         return member.guild.channels.cache.get(config.channels.welcome)
-        .send(welcomeDM).then(msg => msg.delete(600000).catch());
+        .send(welcomeDM).then(msg => msg.delete(600000).catch(err => {console.log("Error! " + err);}));
       }
 
       console.log(err);
