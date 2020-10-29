@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const connect = require('./databaseFiles/connect.js');
 
-const client = new Discord.Client({ disableMentions: 'everyone' });
+const client = new Discord.Client({ disableMentions: 'everyone', ws: { intents: 'GUILD_PRESENCES' }});
 
 fs.readdir('./events/', (err, files) => {
   if (err) return console.error(err);
