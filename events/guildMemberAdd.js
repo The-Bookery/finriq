@@ -6,6 +6,7 @@ module.exports = async (client, member) => {
     console.log(member.user);
     if(member.user.bot) return;
     // Add roles and send welcome message to the welcome channel
+    console.log(config.channels.welcome);
     member.guild.channels.cache
       .get(config.channels.welcome)
       .send(
