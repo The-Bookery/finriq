@@ -4,17 +4,15 @@ const Discord = require('discord.js');
 module.exports = async (client, member) => {
   try {
     if(member.user.bot) return;
-    console.log(member.guild.channels.cache)
     // Add roles and send welcome message to the welcome channel
-    var welcomechannel = await member.guild.channels.cache.find(channel => channel.id === config.channels.welcome);
-
-    console.log(welcomechannel);
-    welcomechannel.send(
-      `🎉 **A new member has arrived!** 🎉\nPlease welcome <@${member.id}> to The Bookery <@&693517619457818634>!`
-    )
-    .then((message) => {
-      message.react(config.emotes.wave);
-    });
+    member.guild.channels.cache
+      .get(config.channels.welcome)
+      .send(
+        `🎉 **A new member has arrived!** 🎉\nPlease welcome <@${member.id}> to The Bookery <@&693517619457818634>!`
+      )
+      .then((message) => {
+        message.react(config.emotes.wave);
+      });
 
     let welcomeDM = new Discord.MessageEmbed()
       .setColor('#750384')
