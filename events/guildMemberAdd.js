@@ -3,11 +3,9 @@ const Discord = require('discord.js');
 
 module.exports = async (client, member) => {
   try {
-    console.log(member.user);
     if(member.user.bot) return;
     // Add roles and send welcome message to the welcome channel
-    var welcomechannel = member.guild.channels.cache
-      .get(config.channels.welcome);
+    var welcomechannel = member.guild.channels.cache.get(config.channels.welcome);
       
     console.log(welcomechannel);
     welcomechannel.send(
