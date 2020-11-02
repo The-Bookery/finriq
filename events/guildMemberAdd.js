@@ -6,15 +6,16 @@ module.exports = async (client, member) => {
     console.log(member.user);
     if(member.user.bot) return;
     // Add roles and send welcome message to the welcome channel
-    console.log(config.channels.welcome);
-    member.guild.channels.cache
-      .get(config.channels.welcome)
-      .send(
-        `🎉 **A new member has arrived!** 🎉\nPlease welcome <@${member.id}> to The Bookery <@&693517619457818634>!`
-      )
-      .then((message) => {
-        message.react(config.emotes.wave);
-      });
+    var welcomechannel = member.guild.channels.cache
+      .get(config.channels.welcome);
+      
+    console.log(welcomechannel);
+    welcomechannel.send(
+      `🎉 **A new member has arrived!** 🎉\nPlease welcome <@${member.id}> to The Bookery <@&693517619457818634>!`
+    )
+    .then((message) => {
+      message.react(config.emotes.wave);
+    });
 
     let welcomeDM = new Discord.MessageEmbed()
       .setColor('#750384')
