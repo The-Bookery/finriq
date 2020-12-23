@@ -39,6 +39,10 @@ fs.readdir('./commands/', (err, files) => {
   });
 });
 
+client.on('messageReactionAdd', function(reaction, user) {
+  console.log('HI');
+});
+
 // Connect to given database
 connect.instantiateConnection();
 
