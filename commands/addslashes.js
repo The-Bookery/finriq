@@ -1,5 +1,5 @@
 module.exports.execute = async (client, message) => {
-  client.api.applications(client.user.id).guilds('791366170611679272').commands.post({data: {
+  client.api.applications('788555662602010644').guilds('791366170611679272').commands.post({data: {
     name: 'AFK',
     description: 'Put you in AFK mode to let others know you\'re away if they ping you!'
   }});
