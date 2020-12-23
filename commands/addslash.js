@@ -1,5 +1,5 @@
 module.exports.execute = async (client, message) => {
-  client.api.applications(client.user.id).guilds('guild id').commands.post({data: {
+  client.api.applications(client.user.id).guilds('791366170611679272').commands.post({data: {
     "name": 'afk',
     "description": 'Lets other members know you\'ve gone away when they ping you.',
     "options": [
