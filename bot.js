@@ -39,16 +39,6 @@ fs.readdir('./commands/', (err, files) => {
   });
 });
 
-client.ws.on('INTERACTION_CREATE', async interaction => {
-  const command = interaction.data.name.toLowerCase();
-  const args = interaction.data.options;
-
-  console.log(command);
-  console.log(args);
-
-  client.emit('message', command + " " + args);
-});
-
 // Connect to given database
 connect.instantiateConnection();
 
