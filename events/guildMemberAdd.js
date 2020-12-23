@@ -8,7 +8,7 @@ module.exports = async (client, member) => {
     member.guild.channels.cache
       .get(config.channels.welcome)
       .send(
-        `🎉 **A new member has arrived!** 🎉\nPlease welcome <@${member.id}> to The Black Cat Reading Corner <@&738420217847218295> team!`
+        `🎉 **A new member has arrived!** 🎉\nPlease welcome <@${member.id}> to the **Black Cat Reading Corner** <@&738420217847218295> team!  Black Cat Reading Corner! We're so glad you've joined. :blush: **Introduce yourself here!** Please include what you'd like to be called, your preferred pronouns, your age (or whether you're below 18 years old or not), and a little about yourself.`
       )
       .then((message) => {
         message.react(config.emotes.wave);
