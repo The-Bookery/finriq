@@ -3,8 +3,6 @@ const afkAction = require('../eventActions/afkMessageCheckAction');
 const reactions = require('../eventActions/reactions');
 const backspeak = require('../eventActions/backspeak');
 const cafeActions = require('../eventActions/cafeActions');
-const oneWordStory = require('../eventActions/oneWordStory');
-const profanityActions = require('../eventActions/profanityActions');
 
 module.exports = async (client, message) => {
   if (!message.guild || message.author.bot) return;
@@ -23,12 +21,10 @@ module.exports = async (client, message) => {
     }
   }
 
-	profanityActions.checkForProfanity(client, message);
   // Handle greetings
 	cafeActions.greetMorningOrNight(client, message);
   reactions.checkIfCorrect(message);
   backspeak.checkForGame(message);
   afkAction.checkIfUserIsAFK(client, message);
   afkAction.checkForMention(message);
-  oneWordStory.oneWordMessage(message);
 };

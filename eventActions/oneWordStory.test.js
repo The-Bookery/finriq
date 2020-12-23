@@ -11,7 +11,7 @@ class oneWordStory {
                 let lm = res.last();
                 if (lm.author == message.author) {
                     let deleteMessage = new Discord.MessageEmbed()
-                    .setColor('#750384')
+                    .setColor('#ffb980')
                     .setTitle('Message Deleted')
                     .addField(
                         'Message',
@@ -31,7 +31,7 @@ class oneWordStory {
 
             if (words.length > 1) {
                 let deleteMessage = new Discord.MessageEmbed()
-                .setColor('#750384')
+                .setColor('#ffb980')
                 .setTitle('Message Deleted')
                 .addField(
                     'Message',

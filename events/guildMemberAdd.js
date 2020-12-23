@@ -14,36 +14,34 @@ module.exports = async (client, member) => {
         message.react(config.emotes.wave);
       });
 
-    let welcomeDM = new Discord.MessageEmbed()
-      .setColor('#750384')
-      .setTitle(':books: __**Welcome to The Bookery!**__ :books:')
+      let welcomeDM = new Discord.MessageEmbed()
+      .setColor('#ffb980')
+      .setTitle(':books: __**Welcome to The Black Cat Reading Corner!**__ :books:')
       .setDescription('**This has some important information, and we suggest reading through it. It should take less than a minute.**')
       .addField(
         'Handy Dandy Channels',
-        `• You can grab some roles in <#693563108077076490>.
-• Introduce yourself with the template pinned in <#711269048591056916>.
-• To learn more about the server, check out <#693500724704837653>.`
+        `• You can grab some roles in <#719674992618504353>.
+• Say hey in <#719657894718472225>.
+• To learn more about the server, check out <#719661839843197000>.`
       )
       .addField(
-        'About The Bookery',
-        `The Bookery is a community dedicated to the creation, consumption, admiration, and discussion of literature. We strive to create an environment where readers can find a community of people who have their same interests and talk or read together.`
+        'About The Black Cat Reading Corner',
+        `The Black Cat Reading Corner is a a book club that caters to busy lifestyles as well as is a place for readers to enjoy community.`,
+        true
       )
       .addField(
         'Safe Space',
-        `The Bookery is a safe space. We do not allow prejudice or hatred for anyone, explicit discussions, or offensive speech. We understand that some books may contain content that is more adult or offensive, and we ask you refrain from discussing them here.`
+        `The Black Cat Reading Corner is a safe space. We do not allow prejudice or hatred for anyone, explicit discussions, or offensive speech. We understand that some books may contain content that is more adult or offensive, and we ask you refrain from discussing them here.`,
+        true
       )
       .addField(
         'About Me',
-        `I'm Finriq, a custom bot made for The Bookery! I am always growing. Use \`.help\` in <#693561975887888444> for more on what I can do.`
+        `I'm Finriq, a custom bot made for The Black Cat Reading Corner! I am always growing. Use \`.help\` in <#791373058615148584> for more on what I can do.`
       )
       .addField(
         'Spread the Word',
-        `If you like The Bookery and want to share us with your friends, here's a permanent invite link: https://discord.gg/tfhg7TW.`
-      )
-      .addField(
-        'Our Website',
-        `We have an official website! We post articles on our blog, list some of our favorite partners (along with a partner application), and a ban appeal form if you end up getting banned and you want to appeal it. Check us out!
-https://bookerycommunity.com/`
+        `If you like The Black Cat Reading Corner and want to share us with your friends, here's a permanent invite link: https://discord.gg/b64HukvTVR.`,
+        true
       );
     member.send(welcomeDM).catch((err) => {
       if (err.name == "DiscordAPIError") {

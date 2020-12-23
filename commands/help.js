@@ -17,7 +17,7 @@ module.exports.execute = async (client, message, args) => {
     var modulelist = '';
 
     let helpMessage = new Discord.MessageEmbed()
-      .setColor('#750384')
+      .setColor('#ffb980')
       .setTitle('List of available modules')
       .setDescription(
         `Modules available in ${message.guild.name}. Use \`.help [module]\` for more about a specific module, or \`.help all\` for all commands.`
@@ -42,7 +42,7 @@ module.exports.execute = async (client, message, args) => {
 
     if (command) {
       let helpMessage = new Discord.MessageEmbed()
-        .setColor('#750384')
+        .setColor('#ffb980')
         .setTitle(`${prefix}${command.config.name}`)
         .setDescription(
           `You asked for information on \`${prefix}${command.config.name}\``
@@ -61,7 +61,7 @@ module.exports.execute = async (client, message, args) => {
         var modCmd = args[0].toLowerCase(); // User input
 
         let helpMessage = new Discord.MessageEmbed()
-          .setColor('#750384')
+          .setColor('#ffb980')
           .setTitle(`${capitalizeFLetter(modCmd)}`)
           .setDescription(`You asked for commands under the ${modCmd} module`);
 
@@ -85,7 +85,7 @@ module.exports.execute = async (client, message, args) => {
         modCmd = args[0].toLowerCase();
 
         let helpMessage = new Discord.MessageEmbed()
-          .setColor('#750384')
+          .setColor('#ffb980')
           .setTitle(`${capitalizeFLetter(modCmd)}`)
           .setDescription(`You asked for all commands`);
 

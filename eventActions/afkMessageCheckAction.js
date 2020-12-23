@@ -52,7 +52,7 @@ class afkMessageCheckAction {
 			.setTitle(`You are currently AFK, ${message.member.nickname ? message.member.nickname : message.author.username}`)
 			.addField('Are you back?', 'Then use `.afk` again in the server! Unfortunately, as there is an error, you cannot react to this message to turn off AFK for the time being.')
 			.setFooter('This message will delete itself after 15 seconds')
-			.setColor('#750384');
+			.setColor('#ffb980');
 		const user = message.author;
 
 		await Afks.sync().then(() => {
@@ -137,7 +137,7 @@ class afkMessageCheckAction {
                 .setTitle(`${name} is not here`)
                 .addField('AFK Message:', result[0].message)
                 .addField('Went AFK:', timeSince(result[0].date) + ' ago')
-                .setColor('#750384');
+                .setColor('#ffb980');
               message.channel.send(embed);
             });
           }
