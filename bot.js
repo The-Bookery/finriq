@@ -13,6 +13,7 @@ fs.readdir('./events/', (err, files) => {
     return console.log('No errors have been loaded!');
   }
   jsfile.forEach((file) => {
+    console.log('Loaded ' + file);
     const event = require(`./events/${file}`);
     const eventName = file.split('.')[0];
     client.on(eventName, event.bind(null, client));
