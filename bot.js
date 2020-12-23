@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const connect = require('./databaseFiles/connect.js');
 
-const client = new Discord.Client({ disableMentions: 'everyone', ws: { intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS'] }});
+const client = new Discord.Client({ disableMentions: 'everyone', ws: { intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_PRESENCES'] }});
 
 fs.readdir('./events/', (err, files) => {
   if (err) return console.error(err);
@@ -13,7 +13,6 @@ fs.readdir('./events/', (err, files) => {
     return console.log('No errors have been loaded!');
   }
   jsfile.forEach((file) => {
-    console.log('Loaded ' + file);
     const event = require(`./events/${file}`);
     const eventName = file.split('.')[0];
     client.on(eventName, event.bind(null, client));
