@@ -52,10 +52,10 @@ class cafeActions {
 		}
 
 		// Handle happy new year
-		if (
-			(message.content.toLowerCase().indexOf("happy") != -1 &&
-			message.content.toLowerCase().indexOf("new") != -1) &&
-			message.content.toLowerCase().indexOf("year") != -1)
+		else if (
+			message.content.toLowerCase().indexOf("happy") != -1 &&
+			message.content.toLowerCase().indexOf("new") != -1 &&
+			message.content.toLowerCase().indexOf("year") != -1
 		) {
 			var reactions = ['🎉', '🎊'];
 			var choice = reactions[Math.floor(Math.random() * reactions.length)];
