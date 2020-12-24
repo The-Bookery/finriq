@@ -44,7 +44,7 @@ class cafeActions {
 			message.content.toLowerCase().indexOf("christmas") != -1
 		) {
 			var reactions = ['🎄', '☃️', '❄️'];
-			var choice = reactions[Math.floor(Math.random() * (reactions.length - 1))];
+			var choice = reactions[Math.floor(Math.random() * reactions.length)];
 			console.log(choice);
 			return await message.react(choice);
 		}
