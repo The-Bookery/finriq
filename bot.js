@@ -7,7 +7,7 @@ const connect = require('./databaseFiles/connect.js');
 const client = new Discord.Client({
   disableMentions: 'everyone',
   ws: {
-    intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS']
+    intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_MESSAGE_REACTIONS']
   },
   partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 });
