@@ -36,6 +36,17 @@ class cafeActions {
 			return await message.react(config.emotes.wave);
 		}
 	}
+	static async holidayReacts(client, message) {
+		// Handle merry Christmas
+		if (
+			message.content.toLowerCase().indexOf("merry") != -1 &&
+			message.content.toLowerCase().indexOf("christmas") != -1
+		) {
+			reactions = ['🎄', '☃️', '❄️'];
+			choice = reactions[Math.floor(Math.random() * (reactions.length - 1))];
+			return await message.react(choice);
+		}
+	}
 }
 
 module.exports = cafeActions;
