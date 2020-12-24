@@ -4,7 +4,13 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const connect = require('./databaseFiles/connect.js');
 
-const client = new Discord.Client({ disableMentions: 'everyone', ws: { intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_MESSAGE_REACTIONS'] }});
+const client = new Discord.Client({
+  disableMentions: 'everyone',
+  ws: {
+    intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_MESSAGE_REACTIONS']
+  },
+  partials: ['MESSAGE', 'CHANNEL', 'REACTION']
+});
 
 fs.readdir('./events/', (err, files) => {
   if (err) return console.error(err);
