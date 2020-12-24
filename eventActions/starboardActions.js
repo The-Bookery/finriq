@@ -1,6 +1,5 @@
 class starboardActions {
   static async checkStar(user, reaction) {
-    console.log('Reacted!');
     console.log(reaction);
 		if (reaction._emoji && reaction._emoji.name === config.emotes.star) {
       var stars = reaction.count;

@@ -3,8 +3,6 @@ const starboardActions = require('../eventActions/starboardActions');
 
 module.exports = async (client, reaction, user) => {
   console.log('----------ONE------------');
-  console.log(reaction);
-  console.log(user);
   if (reaction.message.partial) await reaction.message.fetch();
   // Bookmark messages in DMs
   bookmarkActions.bookmarkMessage(client, user, reaction);
