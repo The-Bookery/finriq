@@ -6,7 +6,7 @@ module.exports = async (client, message, channel) => {
   const embed = new Discord.MessageEmbed()
     .setAuthor(message.author.username, message.author.displayAvatarURL())
     .setTitle(`${message.author.username} deleted a message`)
-    .setDescription(`Message deleted in <#${channel.id}>.`)
+    .setDescription(`Message deleted in <#${message.channel.id}>.`)
     .addField(
       'Content',
       message.content
