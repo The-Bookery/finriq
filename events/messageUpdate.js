@@ -8,11 +8,11 @@ module.exports = async (client, oldMessage, newMessage) => {
     .setDescription(`Message edited in <#${newMessage.channel.id}>.`)
     .addField(
       'Previous Content',
-      `\`\`\`${oldMessage.content}\`\`\``
+      oldMessage.content
     )
     .addField(
       'Current Content',
-      `\`\`\`${newMessage.content}\`\`\``
+      newMessage.content
     )
     .setColor('#ffb980');
   client.channels.cache.get(config.channels.logs).send(embed);

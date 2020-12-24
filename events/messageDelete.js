@@ -9,7 +9,7 @@ module.exports = async (client, message, channel) => {
     .setDescription(`Message deleted in <#${message.channel.id}>.`)
     .addField(
       'Content',
-      `\`\`\`${message.content}\`\`\``
+      message.content
     )
     .setColor('#ffb980');
   client.channels.cache.get(config.channels.logs).send(embed);
