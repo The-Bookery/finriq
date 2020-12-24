@@ -45,12 +45,6 @@ fs.readdir('./commands/', (err, files) => {
   });
 });
 
-console.log('What\'s wrong');
-
-client.on('messageReactionAdd', function(reaction, user) {
-  console.log('HI');
-});
-
 // Connect to given database
 connect.instantiateConnection();
 
