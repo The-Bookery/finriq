@@ -1,4 +1,3 @@
-const bookmarkActions = require('../eventActions/bookmarkActions');
 const starboardActions = require('../eventActions/starboardActions');
 
 module.exports = async (client, reaction, user) => {
@@ -13,9 +12,6 @@ module.exports = async (client, reaction, user) => {
 			return;
 		}
   }
-  
-  // Bookmark messages in DMs
-  bookmarkActions.bookmarkMessage(user, reaction);
-  // Check if message should be added to starboard or if starboard message should be updated
-  starboardActions.addStar(client, user, reaction);
+
+  starboardActions.removeStar(client, user, reaction);
 };
