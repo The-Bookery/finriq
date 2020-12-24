@@ -22,7 +22,8 @@ module.exports = async (client, message) => {
   }
 
   // Handle greetings
-	cafeActions.greetMorningOrNight(client, message);
+  cafeActions.greetMorningOrNight(client, message);
+  cafeActions.holidayReacts(client, message);
   reactions.checkIfCorrect(message);
   backspeak.checkForGame(message);
   afkAction.checkIfUserIsAFK(client, message);
