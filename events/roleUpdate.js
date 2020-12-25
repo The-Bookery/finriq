@@ -26,11 +26,11 @@ module.exports = async (client, oldRole, newRole) => {
   const oldcolor = oldRole.color;
   const newcolor = newRole.color;
 
-  const oldhoisted = oldRole.hoisted;
-  const newhoisted = newRole.hoisted;
+  const oldhoisted = oldRole.hoist;
+  const newhoisted = newRole.hoist;
 
   const oldmention = oldRole.mentionable;
-  const newmention = oldRole.mentionable;
+  const newmention = newRole.mentionable;
 
   if (oldname === newname && oldperms === newperms && oldcolor === newcolor && oldhoisted === newhoisted && oldmention === newmention) return;
 
@@ -39,11 +39,11 @@ module.exports = async (client, oldRole, newRole) => {
     .setDescription(`The role \`${oldname}\` has been updated.`)
     .setColor('#ffb980');
 
-  if (oldname !== newname) embed.addField('Name', `\`\`\`${oldname}\`\`\` -> \`\`\`${newname}\`\`\``);
-  if (oldcolor !== newcolor) embed.addField('Color', `\`\`\`#${oldcolor}\`\`\` -> \`\`\`#${newcolor}\`\`\``);
+  if (oldname !== newname) embed.addField('Name', `\`${oldname}\` -> \`${newname}\``);
+  if (oldcolor !== newcolor) embed.addField('Color', `\`#${oldcolor}\` -> \`#${newcolor}\``);
   if (oldperms !== newperms) embed.addField('Permissions', `\`\`\`${getDifference(oldperms, newperms)}\`\`\``);
-  if (oldhoisted !== newhoisted) embed.addField('Hoisted', `\`\`\`${oldhoisted == true ? 'Yes' : 'No'}\`\`\` -> \`\`\`${newhoisted == true ? 'Yes' : 'No'}\`\`\``);
-  if (oldmention !== newmention) embed.addField('Mentionable', `\`\`\`${oldmention == true ? 'Yes' : 'No'}\`\`\` -> \`\`\`${newmention == true ? 'Yes' : 'No'}\`\`\``);
+  if (oldhoisted !== newhoisted) embed.addField('Hoisted', `\`${oldhoisted == true ? 'Yes' : 'No'}\` -> \`${newhoisted == true ? 'Yes' : 'No'}\``);
+  if (oldmention !== newmention) embed.addField('Mentionable', `\`${oldmention == true ? 'Yes' : 'No'}\` -> \`${newmention == true ? 'Yes' : 'No'}\``);
 
   client.channels.cache.get(config.channels.logs).send(embed);
 };
