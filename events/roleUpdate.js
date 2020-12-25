@@ -50,7 +50,7 @@ module.exports = async (client, oldRole, newRole) => {
 
     if (oldperms > newperms) {
       //Permission lost
-      console.log('R: ' + permUpdated.join(', '));
+      console.log('R: ' + permUpdated.join('').toArray().join(', '));
       //embed.addField('Permissions Removed', `\`\`\`${permUpdated.join("\n")}\`\`\``);
     } else if (oldperms < newperms) {
       //Permission given
