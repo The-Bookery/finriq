@@ -42,13 +42,10 @@ module.exports = async (client, oldRole, newRole) => {
   if (oldname !== newname) embed.addField('Name', `\`${oldname}\` -> \`${newname}\``);
   if (oldcolor !== newcolor) embed.addField('Color', `\`#${oldcolor}\` -> \`#${newcolor}\``);
   if (oldperms !== newperms) {
-    const oldPermsS = oldRole.serialize();
-    const newPermsS = newRole.serialize();
-
     const permUpdated = [];
 
-    for (const [key, element] of Object.entries(oldPermsS)) {
-      if (newPermsS[key] !== element) permUpdated.push(key);
+    for (const [key, element] of Object.entries(oldperms)) {
+      if (newperms[key] !== element) permUpdated.push(key);
     }
 
     if (oldperms > newperms) {
