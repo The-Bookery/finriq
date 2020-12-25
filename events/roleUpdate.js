@@ -17,8 +17,8 @@ function getDifference(a, b) {
 }
 
 module.exports = async (client, oldRole, newRole) => {
-  const oldperms = oldRole.permissions.toArray().join("\n");
-  const newperms = newRole.permissions.toArray().join("\n");
+  const oldperms = oldRole.permissions;
+  const newperms = newRole.permissions;
 
   const oldname = oldRole.name;
   const newname = newRole.name;
