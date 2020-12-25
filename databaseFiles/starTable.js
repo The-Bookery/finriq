@@ -7,6 +7,7 @@ module.exports = sequelize.define('Stars', {
   messageID: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true
   },
   embedID: {
     type: Sequelize.STRING,
