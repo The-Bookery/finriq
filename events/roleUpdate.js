@@ -43,7 +43,7 @@ module.exports = async (client, oldRole, newRole) => {
   if (oldcolor !== newcolor) embed.addField('Color', `\`\`\`#${oldcolor}\`\`\` -> \`\`\`#${newcolor}\`\`\``);
   if (oldperms !== newperms) embed.addField('Permissions', `\`\`\`${getDifference(oldperms, newperms)}\`\`\``);
   if (oldhoisted !== newhoisted) embed.addField('Hoisted', `\`\`\`${oldhoisted == true ? 'Yes' : 'No'}\`\`\` -> \`\`\`${newhoisted == true ? 'Yes' : 'No'}\`\`\``);
-  if (oldmention !== newmention) embed.addField('Mentionable', `\`\`\`${oldmention == true ? 'Yes' : 'No'}\`\`\` -> \`\`\`${newmention == true ? 'Yes' : 'No'}\`\`\`);
+  if (oldmention !== newmention) embed.addField('Mentionable', `\`\`\`${oldmention == true ? 'Yes' : 'No'}\`\`\` -> \`\`\`${newmention == true ? 'Yes' : 'No'}\`\`\``);
 
   client.channels.cache.get(config.channels.logs).send(embed);
 };
