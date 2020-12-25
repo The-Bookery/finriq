@@ -48,6 +48,7 @@ class starboardActions {
             client.channels.cache.get(config.channels.starboard).messages.fetch(result[0].embedID).then((starmessage) => {
               var starmessageEmbed = starmessage.embeds[0];
               var times = starmessageEmbed.footer.text.substring(16, starmessageEmbed.footer.text.length);
+              console.log(reaction.count);
               times = reaction.count;
               starmessageEmbed.setFooter('⭐ Times starred: ' + times.toString());
               return starmessage.edit(starmessageEmbed);
@@ -71,7 +72,7 @@ class starboardActions {
               if (reaction.count > 0) {
                   var starmessageEmbed = starmessage.embeds[0];
                   var times = starmessageEmbed.footer.text.substring(16, starmessageEmbed.footer.text.length);
-                  times = reaction;
+                  times = reaction.count;
                   starmessageEmbed.setFooter('⭐ Times starred: ' + times.toString());
                   return starmessage.edit(starmessageEmbed);
               } else {
