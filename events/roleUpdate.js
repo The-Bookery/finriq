@@ -45,7 +45,7 @@ module.exports = async (client, oldRole, newRole) => {
     const permUpdated = [];
 
     for (const [key, element] of Object.entries(oldperms)) {
-      if (newperms[key] !== element) permUpdated.push(element);
+      if (newperms[key] !== element) permUpdated.push(key);
     }
 
     if (oldperms > newperms) {
