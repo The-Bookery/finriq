@@ -80,7 +80,7 @@ class starboardActions {
                   where: {
                     messageID: reaction.message.id,
                   },
-                }).then(_ => {return starmessage.delete();});
+                }).then(() => {return starmessage.delete();});
               }
             });
           }
