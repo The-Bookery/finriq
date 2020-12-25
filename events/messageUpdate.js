@@ -2,8 +2,8 @@ const Discord = require('discord.js');
 const config = require('../config.json');
 
 module.exports = async (client, oldMessage, newMessage) => {
-  try {
-    if (oldMessage.channel.id != config.channels.logs) {
+  if (oldMessage.channel.id != config.channels.logs) {
+    try {
       const embed = new Discord.MessageEmbed()
         .setAuthor(`${newMessage.author.username}#${newMessage.author.discriminator}`, newMessage.author.displayAvatarURL())
         .setTitle(`Message Edited`)
