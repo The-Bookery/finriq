@@ -41,7 +41,24 @@ module.exports = async (client, oldRole, newRole) => {
 
   if (oldname !== newname) embed.addField('Name', `\`${oldname}\` -> \`${newname}\``);
   if (oldcolor !== newcolor) embed.addField('Color', `\`#${oldcolor}\` -> \`#${newcolor}\``);
-  if (oldperms !== newperms) embed.addField('Permissions', `\`\`\`${getDifference(oldperms, newperms)}\`\`\``);
+  if (oldperms !== newperms) {
+    const oldPermsS = oldRole.serialize();
+    const newPermsS = newRole.serialize();
+
+    const permUpdated = [];
+
+    for (const [key, element] of Object.entries(oldPermsS)) {
+      if (newPermsS[key] !== element) permUpdated.push(key);
+    }
+
+    if (oldperms > newperms) {
+      //Permission lost
+      if (oldperms !== newperms) embed.addField('Permissions Removed', `\`\`\`${permUpdated.join("\n")}\`\`\``);
+    } else if (oldperms < newperms) {
+      //Permission given
+      if (oldperms !== newperms) embed.addField('Permissions Given', `\`\`\`${permUpdated.join("\n")}\`\`\``);
+    }
+  }
   if (oldhoisted !== newhoisted) embed.addField('Hoisted', `\`${oldhoisted == true ? 'Yes' : 'No'}\` -> \`${newhoisted == true ? 'Yes' : 'No'}\``);
   if (oldmention !== newmention) embed.addField('Mentionable', `\`${oldmention == true ? 'Yes' : 'No'}\` -> \`${newmention == true ? 'Yes' : 'No'}\``);
 
