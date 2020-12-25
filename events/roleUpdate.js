@@ -45,15 +45,17 @@ module.exports = async (client, oldRole, newRole) => {
     const permUpdated = [];
 
     for (const [key, element] of Object.entries(oldperms)) {
-      if (newperms[key] !== element) permUpdated.push(key);
+      if (newperms[key] !== element) permUpdated.push(element);
     }
 
     if (oldperms > newperms) {
       //Permission lost
-      if (oldperms !== newperms) embed.addField('Permissions Removed', `\`\`\`${permUpdated.join("\n")}\`\`\``);
+      console.log('R: ' + permUpdated.join(', '));
+      //embed.addField('Permissions Removed', `\`\`\`${permUpdated.join("\n")}\`\`\``);
     } else if (oldperms < newperms) {
       //Permission given
-      if (oldperms !== newperms) embed.addField('Permissions Given', `\`\`\`${permUpdated.join("\n")}\`\`\``);
+      console.log('G: ' + permUpdated.join(', '));
+      //embed.addField('Permissions Given', `\`\`\`${permUpdated.join("\n")}\`\`\``);
     }
   }
   if (oldhoisted !== newhoisted) embed.addField('Hoisted', `\`${oldhoisted == true ? 'Yes' : 'No'}\` -> \`${newhoisted == true ? 'Yes' : 'No'}\``);
