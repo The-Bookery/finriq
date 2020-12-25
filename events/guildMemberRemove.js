@@ -5,9 +5,11 @@ module.exports = async (client, member) => {
   if(member.user.bot) return;
 
   const embed = new Discord.MessageEmbed()
-    .setAuthor(`${message.author.username}#${message.author.discriminator}`, message.author.displayAvatarURL())
+    .setAuthor(`${member.user.username}#${member.user.discriminator}`, member.user.displayAvatarURL())
     .setTitle(`Member Left`)
-    .setDescription(`${message.author.username}#${message.author.discriminator} left the server.`)
+    .setDescription(`${member.user.username}#${member.user.discriminator} left
+    
+    the server.`)
     .setColor('#ffb980');
   client.channels.cache.get(config.channels.logs).send(embed);
 };
