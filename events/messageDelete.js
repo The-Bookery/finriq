@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const config = require('../config.json');
 
 module.exports = async (client, message, channel) => {
-  if (oldMessage.channel.id != config.channels.logs) {
+  if (message.channel.id != config.channels.logs) {
     try {
       const embed = new Discord.MessageEmbed()
         .setAuthor(`${message.author.username}#${message.author.discriminator}`, message.author.displayAvatarURL())
