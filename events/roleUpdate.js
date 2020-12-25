@@ -2,6 +2,8 @@ const config = require('../config.json');
 const Discord = require('discord.js');
 
 module.exports = async (client, oldRole, newRole) => {
+  console.log(oldRole);
+  /*
   const oldperms = oldRole.permissions.toArray().join("\n");
   const newperms = newRole.permissions.toArray().join("\n");
 
@@ -12,7 +14,7 @@ module.exports = async (client, oldRole, newRole) => {
   const newcolor = newRole.color;
 
   const embed = new Discord.MessageEmbed()
-    .setTitle(`Role Created`)
+    .setTitle(`Role Updated`)
     .setDescription(`The role \`${oldname}\` has been updated.`)
     .setColor('#ffb980');
 
@@ -21,4 +23,5 @@ module.exports = async (client, oldRole, newRole) => {
   if (oldperms != newperms) embed.addField('New Permissions', newperms);
 
   client.channels.cache.get(config.channels.logs).send(embed);
+  */
 };
