@@ -5,9 +5,9 @@ module.exports = async (client, member) => {
   if(member.user.bot) return;
 
   const embed = new Discord.MessageEmbed()
-    .setAuthor(`${member.username}#${member.discriminator}`, member.displayAvatarURL())
+    .setAuthor(`${member.user.username}#${member.user.discriminator}`, member.user.displayAvatarURL())
     .setTitle(`Member Joined`)
-    .setDescription(`${member.username}#${member.discriminator} joined the server.`)
+    .setDescription(`${member.user.username}#${member.user.discriminator} joined the server.`)
     .setColor('#ffb980');
   client.channels.cache.get(config.channels.logs).send(embed);
 
