@@ -18,6 +18,6 @@ module.exports = async (client, oldMessage, newMessage) => {
       .setColor('#ffb980');
     client.channels.cache.get(config.channels.logs).send(embed);
   } catch {
-    // This will trigger if the message was empty (should be impossible) or if it was an embed.
+    // This will trigger if the message was empty (should be impossible) or if it was an embed, which is possible.
   }
 };
