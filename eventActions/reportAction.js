@@ -9,7 +9,7 @@ class backspeakCheckAction {
       var channel = client.channels.cache.get(message.channel.id);
       let starBoardMessage = new Discord.MessageEmbed()
         .setColor('#ffb980')
-        .setAuthor(message.author.username, message.author.displayAvatarURL())
+        .setAuthor(`${message.author.username}#${message.author.discriminator}`, message.author.displayAvatarURL())
         .setDescription(message.content)
         .setFooter(`Reported in #${channel.name}`)
         .setTimestamp(message.createdAt);
