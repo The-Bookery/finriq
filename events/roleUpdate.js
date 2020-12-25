@@ -45,16 +45,16 @@ module.exports = async (client, oldRole, newRole) => {
     const permUpdated = [];
 
     for (const [key, element] of Object.entries(oldperms)) {
-      if (newperms[key] !== element) permUpdated.push(key);
+      if (newperms[key] !== element) permUpdated.push(element);
     }
 
     if (oldperms > newperms) {
       //Permission lost
-      console.log('R: ' + permUpdated.join('').split(' ').join(', '));
+      console.log('R: ' + permUpdated);
       //embed.addField('Permissions Removed', `\`\`\`${permUpdated.join("\n")}\`\`\``);
     } else if (oldperms < newperms) {
       //Permission given
-      console.log('G: ' + permUpdated.join(', '));
+      console.log('G: ' + permUpdated);
       //embed.addField('Permissions Given', `\`\`\`${permUpdated.join("\n")}\`\`\``);
     }
   }
