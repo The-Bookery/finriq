@@ -25,9 +25,8 @@ class starboardActions {
               let starBoardMessage = new Discord.MessageEmbed()
               .setColor('#ffb980')
               .setAuthor(username, avatar)
-              .setDescription(message)
-              .addField("[**Click to jump to message.**](" + link + ")",
-              '⭐ Times starred: ' + stars);
+              .setDescription(message + "\n\n**[Click to jump to message.](" + link + ")**")
+              .setFooter('⭐ Times starred: ' + stars);
       
               if (att.array()[0]) {
                 att = att.array()[0].url;
