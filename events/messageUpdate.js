@@ -3,6 +3,7 @@ const config = require('../config.json');
 
 module.exports = async (client, oldMessage, newMessage) => {
   if (oldMessage.channel.id != config.channels.logs) {
+    if (oldMessage.embeds.length == 0 && newMessage.embeds.length > 0) return; // Client likely had to fetch an embed from a link
     try {
       const embed = new Discord.MessageEmbed()
         .setAuthor(`${newMessage.author.username}#${newMessage.author.discriminator}`, newMessage.author.displayAvatarURL())
