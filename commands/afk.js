@@ -6,7 +6,7 @@ module.exports.execute = async (client, message, args) => {
     if (
       message.content.toLowerCase().indexOf('good') != -1 &&
       !message.content.toLowerCase().indexOf('night') != -1 &&
-      !message.content.toLowerCase().indexOf('bookery') != -1
+      !message.content.toLowerCase().indexOf('readers') != -1
     ) {
       //pass
     } else {

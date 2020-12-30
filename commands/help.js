@@ -1,7 +1,12 @@
 const Discord = require('discord.js');
 const config = require('../config.json');
-
-var prefix = config.prefix;
+const fs = require('fs');
+let prefix;
+if (fs.existsSync('../config.json')) {
+	prefix = require('../config.json');
+} else {
+	prefix = '!';
+}
 
 function capitalizeFLetter(input) {
   return input[0].toUpperCase() + input.slice(1);

@@ -25,8 +25,7 @@ class afkMessageCheckAction {
 
     if (
       message.content.toLowerCase().indexOf('good') != -1 &&
-      message.content.toLowerCase().indexOf('morning') != -1 &&
-      message.content.toLowerCase().indexOf('bookery') != -1
+      message.content.toLowerCase().indexOf('morning') != -1
     ) {
       const sender = message.author;
       Afks.destroy({
