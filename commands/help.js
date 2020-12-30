@@ -3,9 +3,9 @@ const config = require('../config.json');
 const fs = require('fs');
 let prefix;
 if (fs.existsSync('../config.json')) {
-	prefix = require('../config.json');
+	prefix = require('../config.json').prefix;
 } else {
-	prefix = '!';
+	prefix = '.';
 }
 
 function capitalizeFLetter(input) {
