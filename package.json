@@ -6,7 +6,16 @@
   "engines": {
     "node": "14.15.3"
   },
-  "author": "Benjamin Hollon",
+  "author": {
+    "name" : "Benjamin Hollon",
+    "url" : "https://seewitheyesclosed.com/"
+  },
+  "contributors": [
+    {
+      "name" : "Zachary Montgomery",
+      "url" : "https://codingprojects.org/"
+    }
+  ]
   "dependencies": {
     "cron": "^1.8.2",
     "data-store": "^4.0.3",
