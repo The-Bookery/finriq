@@ -29,48 +29,53 @@ module.exports.execute = async (client, message, args) => {
   }
 
   Afks.sync().then(() =>
-    Afks.create({
-      message: afkMessage,
-      user: sender.id,
-      cooldown: Date.now(),
-      date: Date.now(),
-    })
-      .then(() => {
-        try {
-          message.channel
-            .send(
-              `I have marked you as AFK, <@${sender.id}>. Anyone who pings you will be notified you are away.\n\`\`\`AFK Message: ${afkMessage}\`\`\``
-            )
-            .then((msg) => msg.delete({ timeout: 10000 }).catch());
-        } catch (err) {
-          console.log(err);
-        }
-      })
-      .catch((err) => {
-        if (err.name == 'SequelizeUniqueConstraintError' && args[1] != 'auto') {
-          Afks.destroy({
-            where: {
-              user: sender.id,
-            },
-          }).then((result) => {
-            // User successfully removed from table
-            if (result == 1) {
-              return message.channel
-                .send(
-                  `Welcome back, ${
-                    message.member.nickname
-                      ? message.member.nickname
-                      : message.author.username
-                  }!`
-                )
-                .then((delmessage) => delmessage.delete({ timeout: 5000 }))
-                .catch('Error sending message.');
-            }
-          });
-        } else {
+    Afks.findAll({
+      where: {
+        user: sender.id,
+      },
+    }).then(findresult => {
+      if (findresult.length == 0) {
+        Afks.create({
+          message: afkMessage,
+          user: sender.id,
+          cooldown: Date.now(),
+          date: Date.now(),
+        }).then(() => {
+          try {
+            message.channel
+              .send(
+                `I have marked you as AFK, <@${sender.id}>. Anyone who pings you will be notified you are away.\n\`\`\`AFK Message: ${afkMessage}\`\`\``
+              )
+              .then((msg) => msg.delete({ timeout: 10000 }).catch());
+          } catch (err) {
+            console.log(err);
+          }
+        })
+        .catch((err) => {
           console.error('Afk sequelize error: ', err);
-        }
-      })
+        });
+      } else {
+        Afks.destroy({
+          where: {
+            user: sender.id,
+          },
+        }).then((result) => {
+          // User successfully removed from table
+          if (result == 1) {
+            return message.channel
+              .send(
+                `Welcome back, ${
+                  message.member.nickname
+                    ? message.member.nickname
+                    : message.author.username
+                }!`
+              )
+              .then((delmessage) => delmessage.delete({ timeout: 5000 }))
+              .catch('Error sending message.');
+          }
+        });
+      }
+    })
   );
 };
 
