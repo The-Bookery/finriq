@@ -7,13 +7,13 @@
     "node": "14.15.3"
   },
   "author": {
-    "name" : "Benjamin Hollon",
-    "url" : "https://seewitheyesclosed.com/"
+    "name": "Benjamin Hollon",
+    "url": "https://seewitheyesclosed.com/"
   },
   "contributors": [
     {
-      "name" : "Zachary Montgomery",
-      "url" : "https://codingprojects.org/"
+      "name": "Zachary Montgomery",
+      "url": "https://codingprojects.org/"
     }
   ],
   "dependencies": {
