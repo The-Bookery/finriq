@@ -59,7 +59,11 @@ module.exports = async (client, member) => {
         );
 
         return member.guild.channels.cache.get(config.channels.welcome)
-        .send(welcomeDM).then(msg => msg.delete(600000).catch(err => {console.log("Error! " + err);}));
+        .send(welcomeDM).then(msg => {
+          msg.delete({timeout: 600000});
+        }).catch(err => {
+          console.log(err);
+        });
       }
 
       console.log(err);
