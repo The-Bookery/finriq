@@ -1,3 +1,6 @@
+const Discord = require('discord.js');
+const config = require('../config.json');
+
 module.exports = async (client, oldMember, newMember) => {
   if (oldMember.pending && !newMember.pending) {
     const memberrole = newMember.guild.roles.cache.find(role => role.id === '719660584806776884');
