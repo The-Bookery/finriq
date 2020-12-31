@@ -4,7 +4,7 @@
   "description": "Bot designed for the Black Cat Reading Corner.",
   "main": "node bot.js",
   "engines": {
-    "node": "8.4.0"
+    "node": "14.15.3"
   },
   "author": "Benjamin Hollon",
   "dependencies": {
