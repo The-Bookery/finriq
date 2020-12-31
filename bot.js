@@ -4,6 +4,23 @@ const Discord = require('discord.js');
 const config = require('./config.json');
 const connect = require('./databaseFiles/connect.js');
 
+Discord.Structures.extend('GuildMember', GuildMember => {
+  class GuildMemberWithPending extends GuildMember {
+    pending = false;
+
+    constructor(client, data, guild) {
+      super(client, data, guild);
+      this.pending = data.pending ?? false;
+    }
+
+    _patch(data) {
+      super._patch(data);
+      this.pending = data.pending ?? false;
+    }
+  }
+  return GuildMemberWithPending;
+});
+
 const client = new Discord.Client({
   disableMentions: 'everyone',
   ws: {
