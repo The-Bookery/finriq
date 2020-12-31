@@ -7,6 +7,10 @@ module.exports = async (client, member) => {
     .setTitle(':books: __**Welcome to The Black Cat Reading Corner!**__ :books:')
     .setDescription('**This has some important information, and we suggest reading through it. It should take less than a minute.**')
     .addField(
+      'Gain Access',
+      'If you haven\'t already, be sure to verify your email and read the rules. You can find the rules popup by clicking the `Complete` button to the right of the message bar on the bottom.'
+    )
+    .addField(
       'Handy Dandy Channels',
       `• You can grab some roles in <#719674992618504353>.
   • Say hey in <#719657894718472225>.
