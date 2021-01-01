@@ -1,26 +1,18 @@
-const Discord = require('discord.js');
-const config = require('../config.json');
+const messageUpdateActions = require('../eventActions/messageUpdateActions');
 
 module.exports = async (client, oldMessage, newMessage) => {
-  if (oldMessage.channel.id != config.channels.logs) {
-    if (oldMessage.embeds.length == 0 && newMessage.embeds.length > 0) return; // Client likely had to fetch an embed from a link
-    try {
-      const embed = new Discord.MessageEmbed()
-        .setAuthor(`${newMessage.author.username}#${newMessage.author.discriminator}`, newMessage.author.displayAvatarURL())
-        .setTitle(`Message Edited`)
-        .setDescription(`Message edited in <#${newMessage.channel.id}>.`)
-        .addField(
-          'Previous Content',
-          oldMessage.content
-        )
-        .addField(
-          'Current Content',
-          newMessage.content
-        )
-        .setColor('#ffb980');
-      client.channels.cache.get(config.channels.logs).send(embed);
-    } catch {
-      // This will trigger if the message was empty (should be impossible) or if it was an embed, which is possible.
-    }
+	try {
+    // When we receive a message we check if the reaction is partial or not
+		if (oldMessage.partial || newMessage.partial) {
+			// If the message this reaction belongs to was removed the fetching might result in an API error, which we need to handle
+      oldMessage = await oldMessage.fetch();
+      newMessage = await newMessage.fetch();
+		}
+	} catch (error) {
+		console.error('Something went wrong when fetching the message: ', error);
+		// Return as `reaction.message.author` may be undefined/null
+		return;
   }
+  
+  messageUpdateActions.sendMessageToModeration(client, oldMessage, newMessage);
 };
