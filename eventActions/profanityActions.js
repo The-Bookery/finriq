@@ -4,7 +4,7 @@ const profanityTable = require('../profanity.json');
 
 class profanityActions {
 	static async checkForProfanity(client, message) {
-		if(message.member.roles.cache.some(r => r.id === config.roles.admin) || message.member.roles.cache.some(r => r.id === config.roles.officer)) return;
+		if(message.member.roles.cache.some(r => r.id === config.roles.admin)) return;// || message.member.roles.cache.some(r => r.id === config.roles.officer)) return;
 
 		const bannedWords = await profanityTable.banned;
 
