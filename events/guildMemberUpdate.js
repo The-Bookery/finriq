@@ -18,13 +18,6 @@ module.exports = async (client, oldMember, newMember) => {
       console.log(err);
     }
 
-    const embed = new Discord.MessageEmbed()
-      .setAuthor(`${newMember.user.username}#${newMember.user.discriminator}`, newMember.user.displayAvatarURL())
-      .setTitle(`Member Joined`)
-      .setDescription(`${newMember.user.username}#${newMember.user.discriminator} joined the server.`)
-      .setColor('#ffb980');
-    client.channels.cache.get(config.channels.logs).send(embed);
-
     try {
       // Add roles and send welcome message to the welcome channel
       newMember.guild.channels.cache
