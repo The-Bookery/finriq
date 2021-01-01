@@ -3,9 +3,9 @@ const Discord = require('discord.js');
 
 module.exports = async (client, member) => {
   const embed = new Discord.MessageEmbed()
-    .setAuthor(`${newMember.user.username}#${newMember.user.discriminator}`, newMember.user.displayAvatarURL())
+    .setAuthor(`${member.user.username}#${member.user.discriminator}`, member.user.displayAvatarURL())
     .setTitle(`Member Joined`)
-    .setDescription(`${newMember.user.username}#${newMember.user.discriminator} joined the server.`)
+    .setDescription(`${member.user.username}#${member.user.discriminator} joined the server.`)
     .setColor('#ffb980');
   client.channels.cache.get(config.channels.logs).send(embed);
 
