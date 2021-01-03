@@ -7,7 +7,7 @@ module.exports = async (client, reaction, user) => {
 		// When we receive a reaction we check if the reaction is partial or not
 		if (reaction.partial) {
 			// If the message this reaction belongs to was removed the fetching might result in an API error, which we need to handle
-			await reaction.fetch();
+			reaction = await reaction.fetch();
 		}
 	} catch (error) {
 		console.error('Something went wrong when fetching the message: ', error);

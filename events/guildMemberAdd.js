@@ -2,6 +2,13 @@ const config = require('../config.json');
 const Discord = require('discord.js');
 
 module.exports = async (client, member) => {
+  const embed = new Discord.MessageEmbed()
+    .setAuthor(`${member.user.username}#${member.user.discriminator}`, member.user.displayAvatarURL())
+    .setTitle(`Member Joined`)
+    .setDescription(`${member.user.username}#${member.user.discriminator} joined the server.`)
+    .setColor('#ffb980');
+  client.channels.cache.get(config.channels.logs).send(embed);
+
   let welcomeDM = new Discord.MessageEmbed()
     .setColor('#ffb980')
     .setTitle(':books: __**Welcome to The Black Cat Reading Corner!**__ :books:')
