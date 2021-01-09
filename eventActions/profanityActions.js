@@ -22,7 +22,6 @@ class profanityActions {
 				}
 				var re = new RegExp(bannedWord,"gi");
         cleanmessage = cleanmessage.replace(re, asterisks);
-        console.log(cleanmessage.replace(re, asterisks));
 				replacedwords += 1;
 			}
     });

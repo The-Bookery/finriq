@@ -38,7 +38,7 @@ class cafeActions {
 	}
 
 	static async holidayReacts(client, message) {
-		// Handle merry Christmas
+		/* Handle merry Christmas
 		if (
 			(message.content.toLowerCase().indexOf("merry") != -1 &&
 			message.content.toLowerCase().indexOf("christmas") != -1) ||
@@ -47,7 +47,6 @@ class cafeActions {
 		) {
 			var reactions = ['🎄', '☃️', '❄️'];
 			var choice = reactions[Math.floor(Math.random() * reactions.length)];
-			console.log(choice);
 			return await message.react(choice);
 		}
 
@@ -61,7 +60,7 @@ class cafeActions {
 			var choice = reactions[Math.floor(Math.random() * reactions.length)];
 			console.log(choice);
 			return await message.react(choice);
-		}
+		}*/
 	}
 }
 

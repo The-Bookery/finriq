@@ -22,7 +22,6 @@ class bookmarkActions {
       // Add link to attachment
       if (workingMessage.attachments.array().length > 0) {
         const attchmnt = workingMessage.attachments.array()[0].url;
-        console.log(attchmnt);
         bookmarkEmbed.addField('Attachment', attchmnt).setImage(attchmnt);
       }
 

@@ -25,7 +25,6 @@ class updateMessageActions {
       }
     }
 
-    console.log(newMessage.author);
 		const isFinriqBot = newMessage.author.id === client.user.id;
 
 		const isCommand = newMessage.content.startsWith(config.prefix);
