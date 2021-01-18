@@ -22,7 +22,7 @@ module.exports = async (client, oldRole, newRole) => {
   const embed = new Discord.MessageEmbed()
     .setTitle(`Role Updated`)
     .setDescription(`The role \`${oldname}\` has been updated.`)
-    .setColor('#ffb980');
+    .setColor(config.colors.embedColor);
 
   if (oldname !== newname) embed.addField('Name', `\`${oldname}\` -> \`${newname}\``);
   if (oldcolor !== newcolor) embed.addField('Color', `\`#${oldcolor}\` -> \`#${newcolor}\``);

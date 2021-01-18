@@ -5,7 +5,7 @@ const versioninfo = fields.versioninfo;
 
 module.exports.execute = async (client, message) => {
   let infoMessage = new Discord.MessageEmbed()
-    .setColor('#ffb980')
+    .setColor(config.colors.embedColor)
     .setTitle('Finriq')
     .setThumbnail(
       'https://images-ext-1.discordapp.net/external/2soj2X2BPQkQsH-kOk_5GmgL9_KUvGcNdd2fcN1s7jo/%3Fsize%3D256/https/cdn.discordapp.com/avatars/693840044032786444/b2598077df8a48b63c9da434ba33aab2.png'

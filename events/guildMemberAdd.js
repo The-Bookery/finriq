@@ -6,11 +6,11 @@ module.exports = async (client, member) => {
     .setAuthor(`${member.user.username}#${member.user.discriminator}`, member.user.displayAvatarURL())
     .setTitle(`Member Joined`)
     .setDescription(`${member.user.username}#${member.user.discriminator} joined the server.`)
-    .setColor('#ffb980');
+    .setColor(config.colors.embedColor);
   client.channels.cache.get(config.channels.logs).send(embed);
 
   let welcomeDM = new Discord.MessageEmbed()
-    .setColor('#ffb980')
+    .setColor(config.colors.embedColor)
     .setTitle(':books: __**Welcome to The Black Cat Reading Corner!**__ :books:')
     .setDescription('**This has some important information, and we suggest reading through it. It should take less than a minute.**')
     .addField(

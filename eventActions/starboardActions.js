@@ -23,7 +23,7 @@ class starboardActions {
           if (result.length == 0) {
             if (reaction.count == 1) {
               let starBoardMessage = new Discord.MessageEmbed()
-              .setColor('#ffb980')
+              .setColor(config.colors.embedColor)
               .setAuthor(username, avatar)
               .setDescription(message + "\n\n**[Click to jump to message.](" + link + ")**")
               .setFooter('⭐ Times starred: ' + stars);

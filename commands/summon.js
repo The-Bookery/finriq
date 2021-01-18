@@ -4,7 +4,7 @@ const logschannel = require('../config.json').channels.logs;
 module.exports.execute = async (client, message, args) => {
   try {
     let logMessage = new Discord.MessageEmbed()
-      .setColor('#ffb980')
+      .setColor(config.colors.embedColor)
       .setTitle(`\`.summon\` command deleted`);
     logMessage.addField('User:', message.author.tag);
     logMessage.addField('Message:', message.content);

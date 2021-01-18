@@ -8,6 +8,6 @@ module.exports = async (client, role) => {
     .setTitle(`Role Created`)
     .setDescription(`The role \`${role.name}\` has been created.`)
     .addField('Permissions', perms)
-    .setColor('#ffb980');
+    .setColor(config.colors.embedColor);
   client.channels.cache.get(config.channels.logs).send(embed);
 };

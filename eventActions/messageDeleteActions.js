@@ -13,7 +13,7 @@ class deleteMessageActions {
 			
 			let embed = new Discord.MessageEmbed()
 				.setTitle('Message Deleted')
-        .setColor('#ffb980')
+        .setColor(config.colors.embedColor)
         .setAuthor(`${message.author.username}#${message.author.discriminator}`, message.author.displayAvatarURL())
 				.addField('Channel', message.channel, true);
 			

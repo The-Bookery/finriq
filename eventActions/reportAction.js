@@ -8,7 +8,7 @@ class backspeakCheckAction {
     if (reaction._emoji && reaction._emoji.id === config.emotes.report) {
       var channel = client.channels.cache.get(message.channel.id);
       let starBoardMessage = new Discord.MessageEmbed()
-        .setColor('#ffb980')
+        .setColor(config.colors.embedColor)
         .setAuthor(`${message.author.username}#${message.author.discriminator}`, message.author.displayAvatarURL())
         .setDescription(message.content)
         .setFooter(`Reported in #${channel.name}`)
@@ -26,7 +26,7 @@ class backspeakCheckAction {
           ':x: Error when reporting to staff. Please take a screenshot and DM a staff member.'
         );
         let errorMessage = new Discord.MessageEmbed()
-          .setColor('#ff0000')
+          .setColor(config.colors.embedColor)
           .setTitle(`Fatal Error`)
           .setDescription(`Fatal error has been found when trying to report a message. Error: \`${err}\`.`)
           .setFooter(`Action in #${channel.name}`)

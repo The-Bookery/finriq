@@ -7,7 +7,7 @@ class bookmarkActions {
 			const workingMessage = reaction.message;
 			const booksEmote = "📚";
 			const bookmarkEmbed = new Discord.MessageEmbed()
-				.setColor('#0F9BF1')
+				.setColor(config.colors.embedColor)
 				.setTitle(`${booksEmote} The Black Cat Reading Corner Bookmark ${booksEmote}`)
 				.setDescription('You asked to bookmark this post from The Black Cat Reading Corner server.')
 				.addField('From', workingMessage.author, true)

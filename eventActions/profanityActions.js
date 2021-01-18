@@ -31,7 +31,7 @@ class profanityActions {
       var check = cleanmessage;
       if(check.split("*").join("").split('\\').join('').trim().length == 0) { // Only contains curse words
         const embedMessage = new Discord.MessageEmbed()
-          .setColor('#ffb980')
+          .setColor(config.colors.embedColor)
           .setTitle(message.member.nickname
             ? message.member.nickname
             : message.author.username)
@@ -41,7 +41,7 @@ class profanityActions {
         });
       } else {
         const embedMessage = new Discord.MessageEmbed()
-          .setColor('#750384')
+          .setColor(config.colors.embedColor)
           .setTitle(message.member.nickname
             ? message.member.nickname
             : message.author.username)
@@ -50,7 +50,7 @@ class profanityActions {
       }
 
 			const logMessage = new Discord.MessageEmbed()
-				.setColor('#750384')
+				.setColor(config.colors.embedColor)
 				.setTitle("Profanity Replaced")
 				.setDescription(`Profanity detected and replaced in ${message.channel}.`)
 				.addField('User', message.author, true)

@@ -18,7 +18,7 @@ class updateMessageActions {
             'Current Content',
             newMessage.content
           )
-          .setColor('#ffb980');
+          .setColor(config.colors.embedColor);
         client.channels.cache.get(config.channels.logs).send(embed);
       } catch {
         // This will trigger if the message was empty (should be impossible) or if it was an embed, which is possible.
@@ -35,7 +35,7 @@ class updateMessageActions {
 			
 			let embed = new Discord.MessageEmbed()
 				.setTitle('Message Updated')
-        .setColor('#ffb980')
+        .setColor(config.colors.embedColor)
         .setAuthor(`${newMessage.author.username}#${newMessage.author.discriminator}`, newMessage.author.displayAvatarURL())
         .addField('Channel', newMessage.channel, true)
         .setFooter(`Updated in #${channel.name}`)

@@ -10,6 +10,6 @@ module.exports = async (client, member) => {
     .setDescription(`${member.user.username}#${member.user.discriminator} left
     
     the server.`)
-    .setColor('#ffb980');
+    .setColor(config.colors.embedColor);
   client.channels.cache.get(config.channels.logs).send(embed);
 };
