@@ -1,5 +1,5 @@
 // Get the afk Table stored in the SQLite database
-const Clubs = require('../databaseFiles/clubTable.js');
+const Clubs = require('../databaseFiles/connect.js').Clubs;
 const config = require('../config.json');
 
 module.exports.execute = async (client, message, args) => {
@@ -40,19 +40,22 @@ module.exports.execute = async (client, message, args) => {
 
   if (checkrole == undefined) return message.channel.send('Role cannot be found.');
 
-  Clubs.sync().then(() => {
-    Clubs.create({
+  let uniqueCheck = await Clubs.findOne({ clubName: name });
+
+  if (uniqueCheck === null) {
+    clubObject = {
       clubName: name,
       prettyName: cleanname,
       roleID: role,
-      description: description,
-    }).then(() => {
-      return message.channel.send('✅ Success!');
-    }).catch(err => {
-      if (err.name == 'SequelizeUniqueConstraintError') return message.channel.send('❌ A club with that name already exists.');
-      return message.channel.send('❌ An error occured.');
-    });
-  });
+      description: description
+    }
+    
+    await Clubs.insertOne(clubObject);
+
+    return message.channel.send('✅ Success!');
+  } else {
+    return message.channel.send('❌ A club with that name already exists.');
+  }
 };
 
 module.exports.config = {

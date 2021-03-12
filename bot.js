@@ -62,7 +62,4 @@ fs.readdir('./commands/', (err, files) => {
   });
 });
 
-// Connect to given database
-connect.instantiateConnection();
-
 client.login(config.botToken);

@@ -22,11 +22,11 @@
     "discord.js": "^12.5.1",
     "eslint-plugin-jest": "^22.17.0",
     "moment": "^2.26.0",
+    "mongodb": "^3.6.4",
     "mysql2": "^2.0.2",
     "prettier": "^2.0.5",
     "rss-parser": "^3.7.2",
-    "sequelize": "^5.21.3",
-    "sqlite3": "^4.2.0"
+    "sequelize": "^5.21.3"
   },
   "devDependencies": {
     "eslint": "^7.2.0",

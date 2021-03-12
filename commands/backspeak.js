@@ -1,5 +1,5 @@
 // Get the game Table stored in the SQLite database
-const Backspeak = require('../databaseFiles/gameTable.js');
+const Backspeak = require('../databaseFiles/connect.js').Games;
 const config = require('../config.json');
 
 var words = config.backspeak;
@@ -18,30 +18,29 @@ async function shuffle(array) {
 async function gameStart(message) {
   shuffle(words);
 
-  Backspeak.create({
+
+  gameObject = {
     gameName: 'backspeak',
     content: words.slice(0, 10).reverse().join(' '),
-    started: Date.now(),
-  })
-    .then(() => {
-      try {
-        message.channel.send('**3...**');
+    started: Date.now()
+  }
+
+  await Backspeak.insertOne(gameObject);
+
+  try {
+    message.channel.send('**3...**');
+    setTimeout(function () {
+      message.channel.send('**2...**');
+      setTimeout(function () {
+        message.channel.send('**1...**');
         setTimeout(function () {
-          message.channel.send('**2...**');
-          setTimeout(function () {
-            message.channel.send('**1...**');
-            setTimeout(function () {
-              message.channel.send(words.slice(0, 10).join(' '));
-            }, 1000);
-          }, 1000);
+          message.channel.send(words.slice(0, 10).join(' '));
         }, 1000);
-      } catch (err) {
-        console.log(err);
-      }
-    })
-    .catch((err) => {
-      console.error('Backspeak error: ', err);
-    });
+      }, 1000);
+    }, 1000);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 function timedifference(timestamp1, timestamp2) {
@@ -56,31 +55,21 @@ function timedifference(timestamp1, timestamp2) {
 }
 
 module.exports.execute = async (client, message) => {
-  Backspeak.sync().then(() =>
-    Backspeak.findAll({
-      where: {
-        gameName: 'backspeak',
-      },
-    }).then((result) => {
-      if (result.length < 1) {
-        gameStart(message);
-      } else {
-        if (timedifference(result[0].started, Date.now()) >= 1) {
-          Backspeak.destroy({
-            where: {
-              gameName: 'backspeak',
-            },
-          }).then(() => {
-            gameStart(message);
-          });
-        } else {
-          message.channel.send(
-            'A game is already going on! Wait a minute for it to time out before starting a new one.'
-          );
-        }
-      }
-    })
-  );
+  let result = await Backspeak.findOne({ gameName: 'backspeak' });
+
+  if (result === null) {
+    gameStart(message);
+  } else {
+    if (timedifference(result.started, Date.now()) >= 1) {
+      await Backspeak.deleteOne({gameName: 'backspeak'});
+      
+      gameStart(message);
+    } else {
+      message.channel.send(
+        'A game is already going on! Wait a minute for it to time out before starting a new one.'
+      );
+    }
+  }
 };
 
 module.exports.config = {

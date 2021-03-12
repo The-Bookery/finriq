@@ -1,5 +1,5 @@
-// Get the afk Table stored in the SQLite database
-const Afks = require('../databaseFiles/afkTable.js');
+// Get the afk Table stored in the MongoDB database
+const Afks = require('../databaseFiles/connect.js').Afks;
 const Discord = require('discord.js');
 const config = require('../config.json');
 
@@ -28,23 +28,19 @@ class afkMessageCheckAction {
       message.content.toLowerCase().indexOf('morning') != -1
     ) {
       const sender = message.author;
-      Afks.destroy({
-        where: {
-          user: sender.id,
-        },
-      }).then((result) => {
-        // User successfully removed from table
-        if (result == 1) {
-          message.channel.send(
-            `Welcome back, ${
-              message.member.nickname
-                ? message.member.nickname
-                : message.author.username
-            }!`
-          );
-          return;
-        }
-      });
+
+      await Afks.deleteOne({user: sender.id});
+
+      await message.channel
+        .send(
+          `Welcome back, ${
+            message.member.nickname
+              ? message.member.nickname
+              : message.author.username
+          }!`
+        )
+        .then((delmessage) => delmessage.delete({ timeout: 5000 }))
+        .catch('Error sending message.');
     }
 
 		const noLongerAFKMessage = new Discord.MessageEmbed()
@@ -54,32 +50,28 @@ class afkMessageCheckAction {
 			.setColor(config.colors.embedColor);
 		const user = message.author;
 
-		await Afks.sync().then(() => {
-			Afks.findAll({
-				where: {
-					user: user.id
-				}
-			}).then(result => {
-				if (result.length == 1 && timedifference(result[0].cooldown, Date.now()) >= 3) {
-					message.author.send(noLongerAFKMessage)
-          .catch((err) => {
-            if (err.name == "DiscordAPIError" && timedifference(result[0].cooldown, Date.now()) >= 3) {
-              return message.channel.send('Looks like you\'ve disabled private messages! You\'re currently marked as AFK. If you want to turn off AFK, just use `.afk` again!').then(msg => msg.delete({ timeout: 5000 }).catch());
-            }
+    let result = await Afks.findOne({'user': user.id});
 
-            console.log("Message error: " + err);
-          });
-
-          // Reset cooldown
-          Afks.update(
-            { cooldown: Date.now() },
-            { where: { user: user.id } }
-          ).catch((error) => {
-            'Update error: ' + error;
-          });
+    if (result !== null && timedifference(result.cooldown, Date.now()) >= 3) {
+      message.author.send(noLongerAFKMessage)
+      .catch((err) => {
+        if (err.name == "DiscordAPIError" && timedifference(result.cooldown, Date.now()) >= 3) {
+          return message.channel.send('Looks like you\'ve disabled private messages! You\'re currently marked as AFK. If you want to turn off AFK, just use `.afk` again!').then(msg => msg.delete({ timeout: 5000 }).catch());
         }
+
+        console.log("Message error: " + err);
       });
-    });
+
+      // Reset cooldown
+      Afks.updateOne(
+        { 'user': user.id },
+        { $set: { 'cooldown': Date.now() } },
+        { upset: true }
+      )
+      .catch((error) => {
+        'Update error: ' + error;
+      });
+    }
   }
 
   static async checkForMention(message) {
@@ -123,25 +115,20 @@ class afkMessageCheckAction {
     // Make sure the message is meant for the one person only. This also means the bot will not trigger on tag spams.
     if (message.mentions.members.size == 1) {
       let id = message.mentions.members.firstKey();
-      Afks.sync().then(() => {
-        Afks.findAll({
-          where: {
-            user: id,
-          },
-        }).then((result) => {
-          if (result.length == 1 && message.author.id != id) {
-            message.guild.members.fetch(result[0].user).then((user) => {
-              let name = user.nickname ? user.nickname : user.user.username;
-              const embed = new Discord.MessageEmbed()
-                .setTitle(`${name} is not here`)
-                .addField('AFK Message:', result[0].message)
-                .addField('Went AFK:', timeSince(result[0].date) + ' ago')
-                .setColor(config.colors.embedColor);
-              message.channel.send(embed);
-            });
-          }
+
+      let result = await Afks.findOne({'user': id});
+
+      if (result !== null && message.author.id != id) {
+        message.guild.members.fetch(result.user).then((user) => {
+          let name = user.nickname ? user.nickname : user.user.username;
+          const embed = new Discord.MessageEmbed()
+            .setTitle(`${name} is not here`)
+            .addField('AFK Message:', result.message)
+            .addField('Went AFK:', timeSince(result.date) + ' ago')
+            .setColor(config.colors.embedColor);
+          message.channel.send(embed);
         });
-      });
+      }
     }
   }
 }

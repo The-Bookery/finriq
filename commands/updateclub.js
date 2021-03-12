@@ -1,6 +1,9 @@
 // Get the afk Table stored in the SQLite database
-const Clubs = require('../databaseFiles/clubTable.js');
+const Clubs = require('../databaseFiles/connect.js').Clubs;
 const config = require('../config.json');
+const mongodb = require("mongodb");
+
+const ObjectID = mongodb.ObjectID;
 
 module.exports.execute = async (client, message, args) => {
   if(!message.member.roles.cache.some(r => r.id === config.roles.admin)) return message.channel.send('❌ This is an admin-only command.');
@@ -25,7 +28,7 @@ module.exports.execute = async (client, message, args) => {
     i++;
   });
 
-  var id = parseInt(cleanargs[0]);
+  const id = new ObjectID(cleanargs[0]);
   var field = cleanargs[1].toLowerCase();
   var value = cleanargs[2];
 
@@ -41,36 +44,34 @@ module.exports.execute = async (client, message, args) => {
     if (checkrole == undefined) return message.channel.send('Role cannot be found.');
   }
 
-  Clubs.sync().then(() => {
+  try {
     if (field == 'name') {
       var cleanname = cleanargs[0].split(' ').join('');
-      Clubs.update(
-        { clubName: value,
-          prettyName: cleanname },
-        { where: { id: id } }
-      ).catch(() => {
-        return message.channel.send('❌ An error occured.');
-      });
+      await Clubs.updateOne(
+        { _id: id },
+        { $set: { clubName: value,
+          prettyName: cleanname } },
+        { upsert: false }
+      );
     } else if (field == 'description') {
-      Clubs.update(
-        { description: value },
-        { where: { id: id } }
-      ).catch(() => {
-        return message.channel.send('❌ An error occured.');
-      });
+      await Clubs.updateOne(
+        { _id: id },
+        { $set: { description: value } }
+      );
     } else if (field == 'role') {
-      Clubs.update(
-        { roleID: value },
-        { where: { id: id } }
-      ).catch(() => {
-        return message.channel.send('❌ An error occured.');
-      });
+      await Clubs.updateOne(
+        { _id: id },
+        { $set: { roleID: value } }
+      );
     }
     else {
       return message.channel.send('❌ Something went wrong. Are you sure that club / value exists?');
     }
-    return message.channel.send('✅ Success!');
-  });
+  } catch {
+    return message.channel.send('❌ There was an error.');
+  }
+
+  return message.channel.send('✅ Success!');
 };
 
 module.exports.config = {
