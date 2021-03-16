@@ -38,7 +38,7 @@ class updateMessageActions {
         .setColor(config.colors.embedColor)
         .setAuthor(`${newMessage.author.username}#${newMessage.author.discriminator}`, newMessage.author.displayAvatarURL())
         .addField('Channel', newMessage.channel, true)
-        .setFooter(`Updated in #${channel.name}`)
+        .setFooter(`Updated in #${newMessage.channel.name}`)
         .setTimestamp(message.createdAt);
         
       let first = true;

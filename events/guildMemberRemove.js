@@ -28,8 +28,6 @@ module.exports = async (client, member) => {
       // We will also run a check to make sure the log we got was for the same kicked member
       if (target.id === member.id) {
         embed.setDescription(`${member.user.username}#${member.user.discriminator} was kicked by ${executor.tag}.`);
-      } else {
-        embed.setDescription(`${member.user.username}#${member.user.discriminator} left the server; audit log fetch was inconclusive.`);
       }
     }
   } catch(err) {
