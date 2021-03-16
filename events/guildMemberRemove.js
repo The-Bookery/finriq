@@ -10,29 +10,41 @@ module.exports = async (client, member) => {
   .setDescription(`${member.user.username}#${member.user.discriminator} left the server.`)
   .setColor(config.colors.embedColor);
 
-  try {
-    const fetchedLogs = await member.guild.fetchAuditLogs({
+  const fetchedKicks = await member.guild.fetchAuditLogs({ // get audit log entry for kicks
       limit: 1,
       type: 'MEMBER_KICK',
-    });
-    // Since we only have 1 audit log entry in this collection, we can simply grab the first one
-    const kickLog = fetchedLogs.entries.first();
-  
-    // Let's perform a coherence check here and make sure we got *something*
-    if (kickLog) {
-      // We now grab the user object of the person who kicked our member
-      // Let us also grab the target of this action to double check things
-      const { executor, target } = kickLog;
+  });
 
-      // And now we can update our output with a bit more information
-      // We will also run a check to make sure the log we got was for the same kicked member
-      if (target.id === member.id) {
-        embed.setDescription(`${member.user.username}#${member.user.discriminator} was kicked by ${executor.tag}.`);
-      }
+  const fetchedBans = await member.guild.fetchAuditLogs({ // get audit log entry for bans
+    limit: 1,
+    type: 'MEMBER_BAN_ADD',
+  });
+
+  const kickLog = fetchedKicks.entries.first() // get the first kick log
+  const banLog = fetchedBans.entries.first() // get the first ban log
+
+  if (kickLog.target.id === member.user.id && kickLog.createdAt > member.joinedAt) { // is the kick log valid?
+    
+    var reason = kickLog.reason ? kickLog.reason : "*No reason provided.*";
+
+    embed.setDescription(`${member.user.username}#${member.user.discriminator} was kicked by ${kickLog.executor.tag}.`);
+    embed.addField(
+      'Reason',
+      reason
+    )
+
+  } else { // kick log is not valid
+    if(banLog.target.id === member.user.id && banLog.createdAt > member.joinedAt) { // is ban log valid?
+
+      var reason = banLog.reason ? banLog.reason : "*No reason provided.*";
+
+      embed.setDescription(`${member.user.username}#${member.user.discriminator} was banned by ${banLog.executor.tag}.`);
+      embed.addField(
+        'Reason',
+        reason
+      )
     }
-  } catch(err) {
-    console.log(err);
   }
-
+  
   return await client.channels.cache.get(config.channels.logs).send(embed);
 };
