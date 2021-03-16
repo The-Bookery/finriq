@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
-const config = require('../config.json');
-const version = config.version;
-const versioninfo = config.versioninfo;
+const fields = require('../config.json');
+const version = fields.version;
+const versioninfo = fields.versioninfo;
 
 module.exports.execute = async (client, message) => {
   let infoMessage = new Discord.MessageEmbed()
