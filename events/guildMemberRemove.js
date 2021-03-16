@@ -32,7 +32,7 @@ module.exports = async (client, member) => {
     }
   } catch(err) {
     console.log(err);
-  } finally {
-    return await client.channels.cache.get(config.channels.logs).send(embed);
   }
+
+  return await client.channels.cache.get(config.channels.logs).send(embed);
 };
