@@ -7,6 +7,7 @@ module.exports = async (client, member) => {
   const embed = new Discord.MessageEmbed()
   .setAuthor(`${member.user.username}#${member.user.discriminator}`, member.user.displayAvatarURL())
   .setTitle(`Member Left`)
+  .setDescription(`${member.user.username}#${member.user.discriminator} left the server.`)
   .setColor(config.colors.embedColor);
 
   try {
@@ -16,48 +17,23 @@ module.exports = async (client, member) => {
     });
     // Since we only have 1 audit log entry in this collection, we can simply grab the first one
     const kickLog = fetchedLogs.entries.first();
-
+  
     // Let's perform a coherence check here and make sure we got *something*
-    if (!kickLog) {
-      const fetchedLogs = await member.guild.fetchAuditLogs({
-        limit: 1,
-        type: 'MEMBER_BAN_ADD',
-      });
+    if (kickLog) {
+      // We now grab the user object of the person who kicked our member
+      // Let us also grab the target of this action to double check things
+      const { executor, target } = kickLog;
 
-      // Since we only have 1 audit log entry in this collection, we can simply grab the first one
-      const banLog = fetchedLogs.entries.first();
-
-      // Let's perform a coherence check here and make sure we got *something*
-      if (!banLog) embed.setDescription(`${member.user.username}#${member.user.discriminator} left the server.`);
-      else {
-        // We now grab the user object of the person who banned the user
-        // Let us also grab the target of this action to double check things
-        const { executor, target } = banLog;
-
-        // And now we can update our output with a bit more information
-        // We will also run a check to make sure the log we got was for the same kicked member
-        if (target.id === user.id) {
-          embed.setDescription(`${member.user.username}#${member.user.discriminator} was banned by ${executor.tag}.`)
-        } else {
-          embed.setDescription(`${member.user.username}#${member.user.discriminator} was banned. Could not tell who banned.`)
-        }
+      // And now we can update our output with a bit more information
+      // We will also run a check to make sure the log we got was for the same kicked member
+      if (target.id === member.id) {
+        embed.setDescription(`${member.user.username}#${member.user.discriminator} was kicked by ${executor.tag}.`);
+      } else {
+        embed.setDescription(`${member.user.username}#${member.user.discriminator} left the server; audit log fetch was inconclusive.`);
       }
     }
-    
-
-    // We now grab the user object of the person who kicked our member
-    // Let us also grab the target of this action to double check things
-    const { executor, target } = kickLog;
-
-    // And now we can update our output with a bit more information
-    // We will also run a check to make sure the log we got was for the same kicked member
-    if (target.id === member.id) {
-      embed.setDescription(`${member.user.username}#${member.user.discriminator} was kicked by ${executor.tag}.`);
-    } else {
-      embed.setDescription(`${member.user.username}#${member.user.discriminator} left the server; audit log fetch was inconclusive.`);
-    }
-  } catch {
-    embed.setDescription(`${member.user.username}#${member.user.discriminator} left the server.`);
+  } catch(err) {
+    console.log(err);
   } finally {
     return await client.channels.cache.get(config.channels.logs).send(embed);
   }
