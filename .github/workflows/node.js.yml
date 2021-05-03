@@ -5,7 +5,7 @@ name: Node.js CD
 
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   lint:
@@ -31,14 +31,14 @@ jobs:
         uses: docker://github/super-linter:v2.1.1
         env:
           VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: main
+          DEFAULT_BRANCH: master
           VALIDATE_ANSIBLE: false
   deploy:
     needs: [lint]
     
     name: Deploy to VPS
     
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v1
@@ -49,4 +49,5 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
-          script: cd ${{ secrets.PROJECT_PATH }} && git fetch --all && git reset --hard origin/main && pm2 restart ${{ secrets.PROJECT_PM2 }}
+          script: cd ${{ secrets.PROJECT_PATH }} && git fetch --all && git reset --hard origin/master && pm2 restart ${{ secrets.PROJECT_PM2 }}
+    
