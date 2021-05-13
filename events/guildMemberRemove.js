@@ -23,7 +23,7 @@ module.exports = async (client, member) => {
   const kickLog = fetchedKicks.entries.first() // get the first kick log
   const banLog = fetchedBans.entries.first() // get the first ban log
 
-  if (kickLog.target.id === member.user.id && kickLog.createdAt > member.joinedAt) { // is the kick log valid?
+  if (kickLog && kickLog.target.id === member.user.id && kickLog.createdAt > member.joinedAt) { // is the kick log valid?
     
     var reason = kickLog.reason ? kickLog.reason : "*No reason provided.*";
 
@@ -34,7 +34,7 @@ module.exports = async (client, member) => {
     )
 
   } else { // kick log is not valid
-    if(banLog.target.id === member.user.id && banLog.createdAt > member.joinedAt) { // is ban log valid?
+    if(banLog && banLog.target.id === member.user.id && banLog.createdAt > member.joinedAt) { // is ban log valid?
 
       var reason = banLog.reason ? banLog.reason : "*No reason provided.*";
 
