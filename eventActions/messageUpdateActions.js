@@ -39,7 +39,7 @@ class updateMessageActions {
         .setAuthor(`${newMessage.author.username}#${newMessage.author.discriminator}`, newMessage.author.displayAvatarURL())
         .addField('Channel', newMessage.channel, true)
         .setFooter(`Updated in #${newMessage.channel.name}`)
-        .setTimestamp(message.createdAt);
+        .setTimestamp(oldMessage.createdAt);
         
       let first = true;
       
