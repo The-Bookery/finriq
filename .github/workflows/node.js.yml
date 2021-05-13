@@ -1,28 +1,53 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Node.js CD
 
 on:
   push:
     branches: [master]
-  pull_request:
-    branches: [master]
 
 jobs:
-  build:
+  lint:
+    # Name the Job
+    name: Lint Code Base
+    # Set the agent to run on
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x, 14.x]
-
+    ##################
+    # Load all steps #
+    ##################
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      ##########################
+      # Checkout the code base #
+      ##########################
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      ################################
+      # Run Linter against code base #
+      ################################
+      - name: Lint Code Base
+        uses: docker://github/super-linter:v2.1.1
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: master
+          VALIDATE_ANSIBLE: false
+  deploy:
+    needs: [lint]
+    
+    name: Deploy to VPS
+    
+    if: github.ref == 'refs/heads/master'
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Push to server
+        uses: appleboy/ssh-action@master
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: cd ${{ secrets.PROJECT_PATH }} && git fetch --all && git reset --hard origin/master && pm2 restart ${{ secrets.PROJECT_PM2 }}
+    
