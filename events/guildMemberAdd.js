@@ -13,7 +13,7 @@ module.exports = async (client, member) => {
 
   let welcomeDM = new Discord.MessageEmbed()
     .setColor(config.colors.embedColor)
-    .setTitle(':books: __**Welcome to The Black Cat Reading Corner!**__ :books:')
+    .setTitle(':books: __**Welcome to The Old Black Cats!**__ :books:')
     .setDescription('**This has some important information, and we suggest reading through it. It should take less than a minute.**')
     .addField(
       'Gain Access',

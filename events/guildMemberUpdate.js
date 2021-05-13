@@ -23,7 +23,11 @@ module.exports = async (client, oldMember, newMember) => {
       newMember.guild.channels.cache
         .get(config.channels.welcome)
         .send(
-          `🎉 **A new member has arrived!** 🎉\nPlease welcome <@${newMember.id}> to the **Black Cat Reading Corner** <@&${config.roles.welcome}> team!\nWe're so glad you've joined. :blush: **Introduce yourself here!** Please include what you'd like to be called, your preferred pronouns, your age (or whether you're below 18 years old or not), and a little about yourself.`
+          `**Welcome {mention} to The Old Black Cats, a light-hearted reading-oriented server.** <:frogheart:841861484204130325> 
+
+          Go ahead and introduce yourself in <#842107914160046131>. We look forward to chatting with you!
+          
+          <@&841744471326720060> team come say hello~`
         )
         .then((message) => {
           message.react(config.emotes.wave);
