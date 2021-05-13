@@ -19,27 +19,23 @@ module.exports = async (client, member) => {
     )
     .addField(
       'Handy Dandy Channels',
-      `• You can grab some roles in <#719674992618504353>.
-  • Say hey in <#719657894718472225>.
-  • To learn more about the server, check out <#719661839843197000>.`
+      `• You can grab some roles in <#841723422605967381>.
+  • Say hey in <#841698453524054016>.
+  • To learn more about the server, check out <#841714003440697354>.`
     )
     .addField(
-      'About The Black Cat Reading Corner',
-      `The Black Cat Reading Corner is a a book club that caters to busy lifestyles as well as is a place for readers to enjoy community.`,
+      'About The Old Black Cats',
+      `The Old Black Cats is a a book club that caters to busy lifestyles as well as is a place for readers to enjoy community.`,
       true
     )
     .addField(
       'Safe Space',
-      `The Black Cat Reading Corner is a safe space. We do not allow prejudice or hatred for anyone, explicit discussions, or offensive speech. We understand that some books may contain content that is more adult or offensive, and we ask you refrain from discussing them here.`,
+      `The Old Black Cats server is a safe space. We do not allow prejudice or hatred for anyone, explicit discussions, or offensive speech. We understand that some books may contain content that is more adult or offensive, and we ask you refrain from discussing them here.`,
       true
     )
     .addField(
-      'About Me',
-      `I'm Finriq, a custom bot made for The Black Cat Reading Corner! I am always growing. Use \`.help\` in <#791373058615148584> for more on what I can do.`
-    )
-    .addField(
       'Spread the Word',
-      `If you like The Black Cat Reading Corner and want to share us with your friends, here's a permanent invite link: https://discord.gg/b64HukvTVR.`,
+      `If you like The Old Black Cats and want to share us with your friends, here's a permanent invite link: https://discord.gg/xWnfKfCEEQ.`,
       true
     );
   member.send(welcomeDM).catch((err) => {

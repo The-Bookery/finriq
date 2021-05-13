@@ -8,8 +8,8 @@ class bookmarkActions {
 			const booksEmote = "📚";
 			const bookmarkEmbed = new Discord.MessageEmbed()
 				.setColor(config.colors.embedColor)
-				.setTitle(`${booksEmote} The Black Cat Reading Corner Bookmark ${booksEmote}`)
-				.setDescription('You asked to bookmark this post from The Black Cat Reading Corner server.')
+				.setTitle(`${booksEmote} The Old Black Cats Bookmark ${booksEmote}`)
+				.setDescription('You asked to bookmark this post from The Old Black Cats server.')
 				.addField('From', workingMessage.author, true)
 				.addField('Link to Message', `[Jump to Message](${workingMessage.url})`, true)
 				.addField('Channel', workingMessage.channel);
