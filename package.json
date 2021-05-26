@@ -1,7 +1,7 @@
 {
   "name": "finriq",
   "version": "2.0.0",
-  "description": "Bot designed for the Old Black Cats.",
+  "description": "Bot designed for the Black Cat Inn.",
   "main": "node bot.js",
   "engines": {
     "node": "14.15.3"

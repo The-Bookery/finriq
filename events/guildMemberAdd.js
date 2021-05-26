@@ -13,7 +13,7 @@ module.exports = async (client, member) => {
 
   let welcomeDM = new Discord.MessageEmbed()
     .setColor(config.colors.embedColor)
-    .setTitle(':books: __**Welcome to The Old Black Cats!**__ :books:')
+    .setTitle(':books: __**Welcome to The Black Cat Inn!**__ :books:')
     .setDescription('**This has some important information, and we suggest reading through it. It should take less than a minute.**')
     .addField(
       'Gain Access',
@@ -26,18 +26,18 @@ module.exports = async (client, member) => {
   • To learn more about the server, check out <#841714003440697354>.`
     )
     .addField(
-      'About The Old Black Cats',
-      `The Old Black Cats is a a book club that caters to busy lifestyles as well as is a place for readers to enjoy community.`,
+      'About The Black Cat Inn',
+      `The Black Cat Inn is a a book club that caters to busy lifestyles as well as is a place for readers to enjoy community.`,
       true
     )
     .addField(
       'Safe Space',
-      `The Old Black Cats server is a safe space. We do not allow prejudice or hatred for anyone, explicit discussions, or offensive speech. We understand that some books may contain content that is more adult or offensive, and we ask you refrain from discussing them here.`,
+      `The Black Cat Inn server is a safe space. We do not allow prejudice or hatred for anyone, explicit discussions, or offensive speech. We understand that some books may contain content that is more adult or offensive, and we ask you refrain from discussing them here.`,
       true
     )
     .addField(
       'Spread the Word',
-      `If you like The Old Black Cats and want to share us with your friends, here's a permanent invite link: https://discord.gg/xWnfKfCEEQ.`,
+      `If you like The Black Cat Inn and want to share us with your friends, here's a permanent invite link: https://discord.gg/xWnfKfCEEQ.`,
       true
     );
   member.send(welcomeDM).catch((err) => {

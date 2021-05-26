@@ -23,7 +23,7 @@ module.exports = async (client, oldMember, newMember) => {
       newMember.guild.channels.cache
         .get(config.channels.welcome)
         .send(
-          `**Welcome <@${newMember.id}> to The Old Black Cats, a light-hearted reading-oriented server.** <:frogheart:841861484204130325> 
+          `**Welcome <@${newMember.id}> to The Black Cat Inn, a light-hearted reading-oriented server.** <:frogheart:841861484204130325> 
 
 Go ahead and introduce yourself in <#842107914160046131>. We look forward to chatting with you!
 
