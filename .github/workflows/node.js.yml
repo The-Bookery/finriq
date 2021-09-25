@@ -49,5 +49,5 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
-          script: cd ${{ secrets.PROJECT_PATH }} && git fetch --all && git reset --hard origin/master && pm2 restart ${{ secrets.PROJECT_PM2 }}
+          script: cd ${{ secrets.PROJECT_PATH }} && git fetch --all && git reset --hard origin/master && yarn build && pm2 restart ${{ secrets.PROJECT_PM2 }}
     

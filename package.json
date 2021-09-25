@@ -4,7 +4,13 @@
   "description": "Bot designed for the Black Cat Inn.",
   "main": "node bot.js",
   "engines": {
-    "node": "14.15.3"
+    "node": "^16.9.1"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "start": "tsc && node dist/bot.js",
+    "watch": "tsc-watch --noClear -p tsconfig.json --onSuccess 'node dist/bot.js'",
+    "prettier": "prettier --write package.json tsconfig.json src/**/*.ts"
   },
   "author": {
     "name": "Benjamin Hollon",
@@ -19,8 +25,9 @@
   "dependencies": {
     "cron": "^1.8.2",
     "data-store": "^4.0.3",
-    "discord.js": "^12.5.1",
+    "discord.js": "^13.1.0",
     "eslint-plugin-jest": "^22.17.0",
+    "fastest-levenshtein": "^1.0.12",
     "moment": "^2.26.0",
     "mongodb": "^3.6.4",
     "mysql2": "^2.0.2",
@@ -34,6 +41,9 @@
     "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.1",
+    "tsc": "^2.0.3",
+    "tsc-watch": "^4.5.0",
+    "typescript": "^4.4.3"
   }
 }
