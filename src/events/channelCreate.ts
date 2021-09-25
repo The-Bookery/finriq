@@ -8,5 +8,5 @@ export = async (client, channel) => {
   embed.description = `The channel \`#${channel.name}\` has been created.`;
   embed.color = config.colors.embedColor;
   
-  client.channels.cache.get(config.channels.logs).send(embed);
+  client.channels.cache.get(config.channels.logs).send({embeds: [embed]});
 };

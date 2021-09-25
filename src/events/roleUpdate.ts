@@ -54,5 +54,5 @@ export = async (client, oldRole, newRole) => {
       inline: false
     });
 
-  client.channels.cache.get(config.channels.logs).send(embed);
+  client.channels.cache.get(config.channels.logs).send({embeds: [embed]});
 };

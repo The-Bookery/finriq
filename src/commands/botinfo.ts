@@ -21,7 +21,7 @@ export const execute = async (client, message) => {
       "Want to help us develop Finriq? Check out the repo on GitHub! https://github.com/The-Bookery/finriq"
     );
   infoMessage.color = config.colors.embedColor;
-  return await message.channel.send(infoMessage);
+  return await message.channel.send({embeds: [infoMessage]});
 };
 
 export const architecture = {

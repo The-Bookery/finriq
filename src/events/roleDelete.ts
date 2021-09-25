@@ -6,5 +6,5 @@ export = async (client, role) => {
   embed.title = `Role Deleted`;
   embed.description = `The role \`${role.name}\` has been deleted.`;
   embed.color = config.colors.embedColor;
-  client.channels.cache.get(config.channels.logs).send(embed);
+  client.channels.cache.get(config.channels.logs).send({embeds: [embed]});
 };

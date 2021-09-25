@@ -15,7 +15,7 @@ export = async (client, member) => {
       `${member.user.username}#${member.user.discriminator} joined the server.`;
   embed.color = config.colors.embedColor;
 
-  client.channels.cache.get(config.channels.logs).send(embed);
+  client.channels.cache.get(config.channels.logs).send({embeds: [embed]});
 
   let welcomeDM = new Discord.MessageEmbed();
   welcomeDM.color = config.colors.embedColor;
@@ -52,7 +52,7 @@ export = async (client, member) => {
     }
   ];
 
-  member.send(welcomeDM).catch((err) => {
+  member.send({embeds: [welcomeDM]}).catch((err) => {
     if (err.name == "DiscordAPIError") {
       welcomeDM.fields.push({
         name: "Note",
@@ -62,7 +62,7 @@ export = async (client, member) => {
 
       return member.guild.channels.cache
         .get(config.channels.welcome)
-        .send(welcomeDM)
+        .send({embeds: [welcomeDM]})
         .then((msg) => {
           msg.delete({ timeout: 600000 });
         })

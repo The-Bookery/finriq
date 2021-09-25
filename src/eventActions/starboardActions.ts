@@ -42,7 +42,7 @@ export class starboardActions {
             config.channels.starchannel
           );
 
-          channel.send(starBoardMessage).then((sentmessage) => {
+          channel.send({embeds: [starBoardMessage]}).then((sentmessage) => {
             let starObject = {
               messageID: reaction.message.id,
               embedID: sentmessage.id,

@@ -21,7 +21,7 @@ export class reportActions {
         starBoardMessage.color = config.colors.embedColor;
         client.channels.cache
           .get(config.channels.reportchannel)
-          .send(starBoardMessage)
+          .send({embeds: [starBoardMessage]})
           .then(() => {
             user.send(":white_check_mark: Reported to staff.");
           });
@@ -38,7 +38,7 @@ export class reportActions {
         .setFooter(`Action in #${channel.name}`)
         .setTimestamp(message.createdAt);
       errorMessage.color = config.colors.embedColor;
-      message.guild.channels.cache.get(config.channels.logs).send(errorMessage);
+      message.guild.channels.cache.get(config.channels.logs).send({embeds: [errorMessage]});
     }
   }
 }

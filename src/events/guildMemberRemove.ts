@@ -58,5 +58,5 @@ export = async (client, member) => {
     }
   }
 
-  return await client.channels.cache.get(config.channels.logs).send(embed);
+  return await client.channels.cache.get(config.channels.logs).send({embeds: [embed]});
 };

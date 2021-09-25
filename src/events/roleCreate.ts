@@ -9,5 +9,5 @@ export = async (client, role) => {
   embed.description = `The role \`${role.name}\` has been created.`;
   embed.fields = [{name: "Permissions", value: perms, inline: false}];
   embed.color = config.colors.embedColor;
-  client.channels.cache.get(config.channels.logs).send(embed);
+  client.channels.cache.get(config.channels.logs).send({embeds: [embed]});
 };

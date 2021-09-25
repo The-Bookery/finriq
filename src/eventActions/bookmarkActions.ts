@@ -31,7 +31,7 @@ export class bookmarkActions {
         bookmarkEmbed.addField("Attachment", attchmnt).setImage(attchmnt);
       }
 
-      user.send(bookmarkEmbed);
+      user.send({embeds: [bookmarkEmbed]});
     }
   }
 }
