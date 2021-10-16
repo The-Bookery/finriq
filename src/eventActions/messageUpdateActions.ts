@@ -33,7 +33,7 @@ export class updateMessageActions {
           `${newMessage.author.username}#${newMessage.author.discriminator}`,
           newMessage.author.displayAvatarURL()
         )
-        .addField("Channel", newMessage.channel, true)
+        .addField("Channel", newMessage.channel.name, true)
         .setFooter(`Updated in #${newMessage.channel.name}`)
         .setTimestamp(oldMessage.createdAt);
       embed.color = config.colors.embedColor;

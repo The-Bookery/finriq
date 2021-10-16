@@ -14,3 +14,4 @@ export const Games = client.db(config.mongodbDatabase).collection("Games");
 export const Stars = client.db(config.mongodbDatabase).collection("Stars");
 export const Prefixes = client.db(config.mongodbDatabase).collection("Prefixes");
 export const Backspeak = client.db(config.mongodbDatabase).collection("Backspeak");
+export const Reminder = client.db(config.mongodbDatabase).collection("Reminder");

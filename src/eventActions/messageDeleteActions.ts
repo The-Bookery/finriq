@@ -14,7 +14,7 @@ export class deleteMessageActions {
           `${message.author.username}#${message.author.discriminator}`,
           message.author.displayAvatarURL()
         )
-        .addField("Channel", message.channel, true);
+        .addField("Channel", message.channel.name, true);
       embed.color = config.colors.embedColor;
 
       if (message.content.length > 0) {
@@ -27,7 +27,7 @@ export class deleteMessageActions {
           message.attachments.values().next().value.filename
         );
       }
-
+      console.log(client.channels.cache.get(config.channels.logs));
       client.channels.cache.get(config.channels.logs).send({embeds: [embed]});
     }
   }
