@@ -1,4 +1,4 @@
-import { config } from '../config';
+import { config } from "../config";
 import Discord from "discord.js";
 
 export class updateMessageActions {
@@ -16,7 +16,9 @@ export class updateMessageActions {
           .addField("Previous Content", oldMessage.content)
           .addField("Current Content", newMessage.content);
         embed.color = config.colors.embedColor;
-        client.channels.cache.get(config.channels.logs).send({embeds: [embed]});
+        client.channels.cache
+          .get(config.channels.logs)
+          .send({ embeds: [embed] });
       } catch {
         // This will trigger if the message was empty (should be impossible) or if it was an embed, which is possible.
       }
@@ -74,7 +76,7 @@ export class updateMessageActions {
         }
       }
 
-      client.channels.cache.get(config.channels.logs).send({embeds: [embed]});
+      client.channels.cache.get(config.channels.logs).send({ embeds: [embed] });
     }
   }
 }

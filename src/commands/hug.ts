@@ -1,12 +1,13 @@
 import Discord from "discord.js";
-import { config } from '../config';
+import { config } from "../config";
 
 const logschannel = config.channels.logs;
 
 export const execute = async (client, message, args) => {
   try {
-    let logMessage = new Discord.MessageEmbed()
-      .setTitle(`\`.hug\` command deleted`);
+    let logMessage = new Discord.MessageEmbed().setTitle(
+      `\`.hug\` command deleted`
+    );
     logMessage.addField("User:", message.author.tag);
     logMessage.addField("Message:", message.content);
     logMessage.addField("Channel:", message.channel);
@@ -15,7 +16,9 @@ export const execute = async (client, message, args) => {
     message.delete();
 
     try {
-      message.guild.channels.cache.get(logschannel).send({embeds: [logMessage]});
+      message.guild.channels.cache
+        .get(logschannel)
+        .send({ embeds: [logMessage] });
     } catch (err) {
       console.log(err);
     }

@@ -1,17 +1,16 @@
-import { config } from '../config';
+import { config } from "../config";
 import Discord from "discord.js";
 
 export = async (client, member) => {
   if (member.user.bot) return;
 
-  const embed = new Discord.MessageEmbed()
+  const embed = new Discord.MessageEmbed();
   embed.author = {
     name: `${member.user.username}#${member.user.discriminator}`,
-    iconURL: member.user.displayAvatarURL()
+    iconURL: member.user.displayAvatarURL(),
   };
   embed.title = `Member Left`;
-  embed.description =
-      `${member.user.username}#${member.user.discriminator} left the server.`;
+  embed.description = `${member.user.username}#${member.user.discriminator} left the server.`;
   embed.color = config.colors.embedColor;
 
   const fetchedKicks = await member.guild.fetchAuditLogs({
@@ -38,9 +37,8 @@ export = async (client, member) => {
 
     var reason = kickLog.reason ? kickLog.reason : "*No reason provided.*";
 
-    embed.description = 
-      `${member.user.username}#${member.user.discriminator} was kicked by ${kickLog.executor.tag}.`;
-    embed.fields.push({name: "Reason", value: reason, inline: false});
+    embed.description = `${member.user.username}#${member.user.discriminator} was kicked by ${kickLog.executor.tag}.`;
+    embed.fields.push({ name: "Reason", value: reason, inline: false });
   } else {
     // kick log is not valid
     if (
@@ -52,11 +50,12 @@ export = async (client, member) => {
 
       var reason = banLog.reason ? banLog.reason : "*No reason provided.*";
 
-      embed.description = 
-        `${member.user.username}#${member.user.discriminator} was banned by ${banLog.executor.tag}.`;
-      embed.fields.push({name: "Reason", value: reason, inline: false});
+      embed.description = `${member.user.username}#${member.user.discriminator} was banned by ${banLog.executor.tag}.`;
+      embed.fields.push({ name: "Reason", value: reason, inline: false });
     }
   }
 
-  return await client.channels.cache.get(config.channels.logs).send({embeds: [embed]});
+  return await client.channels.cache
+    .get(config.channels.logs)
+    .send({ embeds: [embed] });
 };

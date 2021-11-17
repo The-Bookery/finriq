@@ -1,5 +1,5 @@
 import Discord from "discord.js";
-import { config } from '../config';
+import { config } from "../config";
 
 export = async (client, oldMember, newMember) => {
   if (oldMember.pending && !newMember.pending) {

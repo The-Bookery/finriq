@@ -15,7 +15,7 @@ export = async (client, message) => {
     prefix = await Prefixes.findOne({ guild: message.guild.id });
     prefix = prefix.prefix; // Get the 'prefix' string from the JSON object if found. If not will return error for trying to get null
   } catch {
-    prefix = '.';
+    prefix = ".";
   }
 
   if (

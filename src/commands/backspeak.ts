@@ -1,6 +1,6 @@
 // Get the game Table stored in the SQLite database
 import { Backspeak } from "../databaseFiles/connect.js";
-import { config } from '../config';
+import { config } from "../config";
 
 var words = config.backspeak;
 

@@ -1,4 +1,4 @@
-import { config } from '../config';
+import { config } from "../config";
 import Discord from "discord.js";
 
 export class bookmarkActions {
@@ -31,7 +31,7 @@ export class bookmarkActions {
         bookmarkEmbed.addField("Attachment", attchmnt).setImage(attchmnt);
       }
 
-      user.send({embeds: [bookmarkEmbed]});
+      user.send({ embeds: [bookmarkEmbed] });
     }
   }
 }

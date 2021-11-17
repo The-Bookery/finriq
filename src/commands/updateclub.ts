@@ -1,6 +1,6 @@
 // Get the afk Table stored in the SQLite database
 import { Clubs } from "../databaseFiles/connect.js";
-import { config } from '../config';
+import { config } from "../config";
 import mongodb from "mongodb";
 
 const ObjectID = mongodb.ObjectID;

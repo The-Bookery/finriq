@@ -1,5 +1,5 @@
 // Get the afk Table stored in the MongoDB database
-import { config } from '../config';
+import { config } from "../config";
 import Discord from "discord.js";
 
 export class reportActions {
@@ -21,12 +21,12 @@ export class reportActions {
         starBoardMessage.color = config.colors.embedColor;
         client.channels.cache
           .get(config.channels.reportchannel)
-          .send({embeds: [starBoardMessage]})
+          .send({ embeds: [starBoardMessage] })
           .then(() => {
             user.send(":white_check_mark: Reported to staff.");
           });
       }
-    } catch(err) {
+    } catch (err) {
       user.send(
         ":x: Error when reporting to staff. Please take a screenshot of the message and DM a staff member."
       );
@@ -38,7 +38,9 @@ export class reportActions {
         .setFooter(`Action in #${channel.name}`)
         .setTimestamp(message.createdAt);
       errorMessage.color = config.colors.embedColor;
-      message.guild.channels.cache.get(config.channels.logs).send({embeds: [errorMessage]});
+      message.guild.channels.cache
+        .get(config.channels.logs)
+        .send({ embeds: [errorMessage] });
     }
   }
 }

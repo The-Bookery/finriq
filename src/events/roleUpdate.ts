@@ -1,4 +1,4 @@
-import { config } from '../config';
+import { config } from "../config";
 import Discord from "discord.js";
 
 export = async (client, oldRole, newRole) => {
@@ -32,18 +32,30 @@ export = async (client, oldRole, newRole) => {
   embed.color = config.colors.embedColor;
 
   if (oldname !== newname)
-    embed.fields.push({name: "Name", value:`\`${oldname}\` -> \`${newname}\``,inline: false});
+    embed.fields.push({
+      name: "Name",
+      value: `\`${oldname}\` -> \`${newname}\``,
+      inline: false,
+    });
   if (oldcolor !== newcolor)
-  embed.fields.push({name: "Color", value: `\`#${oldcolor}\` -> \`#${newcolor}\``, inline: false});
+    embed.fields.push({
+      name: "Color",
+      value: `\`#${oldcolor}\` -> \`#${newcolor}\``,
+      inline: false,
+    });
   if (oldperms !== newperms)
-  embed.fields.push({name: "Permissions", value: `\`\`\`${newperms}\`\`\``, inline: false});
+    embed.fields.push({
+      name: "Permissions",
+      value: `\`\`\`${newperms}\`\`\``,
+      inline: false,
+    });
   if (oldhoisted !== newhoisted)
     embed.fields.push({
       name: "Hoisted",
       value: `\`${oldhoisted == true ? "Yes" : "No"}\` -> \`${
         newhoisted == true ? "Yes" : "No"
       }\``,
-      inline: false
+      inline: false,
     });
   if (oldmention !== newmention)
     embed.fields.push({
@@ -51,8 +63,8 @@ export = async (client, oldRole, newRole) => {
       value: `\`${oldmention == true ? "Yes" : "No"}\` -> \`${
         newmention == true ? "Yes" : "No"
       }\``,
-      inline: false
+      inline: false,
     });
 
-  client.channels.cache.get(config.channels.logs).send({embeds: [embed]});
+  client.channels.cache.get(config.channels.logs).send({ embeds: [embed] });
 };

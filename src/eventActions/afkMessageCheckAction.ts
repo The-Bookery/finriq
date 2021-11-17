@@ -1,7 +1,7 @@
 // Get the afk Table stored in the MongoDB database
 import { Afks } from "../databaseFiles/connect.js";
 import Discord from "discord.js";
-import { config } from '../config';
+import { config } from "../config";
 
 // call function with variables timestamp1 and timestamp2 in call
 function timedifference(timestamp1, timestamp2) {
@@ -44,21 +44,28 @@ export class afkMessageCheckAction {
     }
 
     const noLongerAFKMessage = new Discord.MessageEmbed();
-    noLongerAFKMessage.title =
-      `You are currently AFK, ${
-        message.member.nickname
-          ? message.member.nickname
-          : message.author.username
-      }`;
-    noLongerAFKMessage.fields = [{ name: "Are you back?", value: "Run the `.afk` command again in the server.", inline: false}];
-    noLongerAFKMessage.footer = {text: "This message will delete itself after 15 seconds."};
+    noLongerAFKMessage.title = `You are currently AFK, ${
+      message.member.nickname
+        ? message.member.nickname
+        : message.author.username
+    }`;
+    noLongerAFKMessage.fields = [
+      {
+        name: "Are you back?",
+        value: "Run the `.afk` command again in the server.",
+        inline: false,
+      },
+    ];
+    noLongerAFKMessage.footer = {
+      text: "This message will delete itself after 15 seconds.",
+    };
     noLongerAFKMessage.color = config.colors.embedColor;
     const user = message.author;
 
     let result = await Afks.findOne({ user: user.id });
 
     if (result !== null && timedifference(result.cooldown, Date.now()) >= 3) {
-      message.author.send({embeds: [noLongerAFKMessage]}).catch((err) => {
+      message.author.send({ embeds: [noLongerAFKMessage] }).catch((err) => {
         if (
           err.name == "DiscordAPIError" &&
           timedifference(result.cooldown, Date.now()) >= 3
@@ -137,17 +144,17 @@ export class afkMessageCheckAction {
             {
               name: "AFK Message:",
               value: result.message,
-              inline: false
+              inline: false,
             },
             {
               name: "Went AFK:",
               value: timeSince(result.date) + " ago",
-              inline: false
-            }
+              inline: false,
+            },
           ];
           embed.color = config.colors.embedColor;
 
-          message.channel.send({embeds: [embed]});
+          message.channel.send({ embeds: [embed] });
         });
       }
     }

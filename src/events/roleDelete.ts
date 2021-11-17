@@ -1,4 +1,4 @@
-import { config } from '../config';
+import { config } from "../config";
 import Discord from "discord.js";
 
 export = async (client, role) => {
@@ -6,5 +6,5 @@ export = async (client, role) => {
   embed.title = `Role Deleted`;
   embed.description = `The role \`${role.name}\` has been deleted.`;
   embed.color = config.colors.embedColor;
-  client.channels.cache.get(config.channels.logs).send({embeds: [embed]});
+  client.channels.cache.get(config.channels.logs).send({ embeds: [embed] });
 };

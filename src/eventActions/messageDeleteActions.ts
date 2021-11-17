@@ -1,4 +1,4 @@
-import { config } from '../config';
+import { config } from "../config";
 import Discord from "discord.js";
 
 export class deleteMessageActions {
@@ -28,7 +28,7 @@ export class deleteMessageActions {
         );
       }
       console.log(client.channels.cache.get(config.channels.logs));
-      client.channels.cache.get(config.channels.logs).send({embeds: [embed]});
+      client.channels.cache.get(config.channels.logs).send({ embeds: [embed] });
     }
   }
 }

@@ -1,5 +1,5 @@
 import Discord from "discord.js";
-import { config } from '../config';
+import { config } from "../config";
 
 const version = config.version;
 const versioninfo = config.versioninfo;
@@ -21,7 +21,7 @@ export const execute = async (client, message) => {
       "Want to help us develop Finriq? Check out the repo on GitHub! https://github.com/The-Bookery/finriq"
     );
   infoMessage.color = config.colors.embedColor;
-  return await message.channel.send({embeds: [infoMessage]});
+  return await message.channel.send({ embeds: [infoMessage] });
 };
 
 export const architecture = {

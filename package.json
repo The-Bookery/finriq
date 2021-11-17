@@ -31,7 +31,7 @@
     "moment": "^2.26.0",
     "mongodb": "^3.6.4",
     "mysql2": "^2.0.2",
-    "prettier": "^2.0.5",
+    "prettier": "^2.4.1",
     "rss-parser": "^3.7.2",
     "sequelize": "^5.21.3"
   },

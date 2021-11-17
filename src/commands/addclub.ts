@@ -1,6 +1,6 @@
 // Get the afk Table stored in the SQLite database
 import { Clubs } from "../databaseFiles/connect.js";
-import { config } from '../config';
+import { config } from "../config";
 
 export const execute = async (client, message, args) => {
   if (!message.member.roles.cache.some((r) => r.id === config.roles.admin))

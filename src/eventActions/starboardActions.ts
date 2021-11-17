@@ -1,5 +1,5 @@
 import Discord from "discord.js";
-import { config } from '../config';
+import { config } from "../config";
 const Starboard = require("../databaseFiles/connect.js").Stars;
 
 export class starboardActions {
@@ -42,7 +42,7 @@ export class starboardActions {
             config.channels.starchannel
           );
 
-          channel.send({embeds: [starBoardMessage]}).then((sentmessage) => {
+          channel.send({ embeds: [starBoardMessage] }).then((sentmessage) => {
             let starObject = {
               messageID: reaction.message.id,
               embedID: sentmessage.id,

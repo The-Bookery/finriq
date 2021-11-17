@@ -8,7 +8,7 @@ export const execute = async (client, message) => {
     )
     .addField("Buy Me a Coffee", "https://www.buymeacoffee.com/zmontgo");
 
-  return await message.channel.send({embeds: [donateEmbed]});
+  return await message.channel.send({ embeds: [donateEmbed] });
 };
 
 export const architecture = {

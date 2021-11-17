@@ -1,4 +1,4 @@
-import { config } from '../config';
+import { config } from "../config";
 import Discord from "discord.js";
 import { profanityTable } from "../profanity";
 
@@ -40,7 +40,7 @@ export class profanityActions {
           )
           .setDescription("Watch your language.");
         embedMessage.color = config.colors.embedColor;
-        await message.channel.send({embeds: [embedMessage]}).then((msg) => {
+        await message.channel.send({ embeds: [embedMessage] }).then((msg) => {
           msg.delete({ timeout: 5000 });
         });
       } else {
@@ -52,7 +52,7 @@ export class profanityActions {
           )
           .setDescription(cleanmessage);
         embedMessage.color = config.colors.embedColor;
-        await message.channel.send({embeds: [embedMessage]});
+        await message.channel.send({ embeds: [embedMessage] });
       }
 
       const logMessage = new Discord.MessageEmbed()
@@ -68,7 +68,7 @@ export class profanityActions {
           message.author.avatarURL
         );
       logMessage.color = config.colors.embedColor;
-      return await logchannel.send({embeds: [logMessage]});
+      return await logchannel.send({ embeds: [logMessage] });
     } else return;
   }
 }

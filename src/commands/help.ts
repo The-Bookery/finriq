@@ -1,7 +1,7 @@
-import Discord from 'discord.js';
-import { config } from '../config';
-import { Prefixes } from '../databaseFiles/connect';
-import { closest } from 'fastest-levenshtein';
+import Discord from "discord.js";
+import { config } from "../config";
+import { Prefixes } from "../databaseFiles/connect";
+import { closest } from "fastest-levenshtein";
 
 function capitalizeFLetter(input) {
   return input[0].toUpperCase() + input.slice(1);
@@ -18,15 +18,15 @@ export const execute = async (client, message, args) => {
     prefix = await Prefixes.findOne({ guild: message.guild.id });
     prefix = prefix.prefix;
   } catch {
-    prefix = '.';
+    prefix = ".";
   }
 
   if (!args || args.length === 0) {
-    var modulelist = '';
+    var modulelist = "";
 
     let helpMessage = new Discord.MessageEmbed();
     helpMessage.color = config.colors.embedColor;
-    helpMessage.title = 'List of available modules';
+    helpMessage.title = "List of available modules";
     helpMessage.description = `Modules available in ${message.guild.name}. Use \`${prefix}help [module]\` for more about a specific module.`;
     modules.forEach((module) => {
       modulelist = modulelist.concat(`${module}\n`);
@@ -37,9 +37,11 @@ export const execute = async (client, message, args) => {
         value: `${modulelist}`,
         inline: false,
       });
-      return await message.channel.send({embeds: [ helpMessage ]}).then((bot_msg) => {
-        deleteMessages(message, bot_msg);
-      });
+      return await message.channel
+        .send({ embeds: [helpMessage] })
+        .then((bot_msg) => {
+          deleteMessages(message, bot_msg);
+        });
     } catch (err) {
       console.log(err);
     }
@@ -60,18 +62,20 @@ export const execute = async (client, message, args) => {
 
       const fields = [
         {
-          name: 'Description:',
+          name: "Description:",
           value: command.architecture.description,
           inline: false,
         },
         {
-          name: 'Aliases:',
+          name: "Aliases:",
           value:
-            command.architecture.aliases.length > 0 ? command.architecture.aliases.join(', ') : 'None',
+            command.architecture.aliases.length > 0
+              ? command.architecture.aliases.join(", ")
+              : "None",
           inline: false,
         },
         {
-          name: 'Usage:',
+          name: "Usage:",
           value: `${command.architecture.usage}`,
           inline: false,
         },
@@ -80,7 +84,7 @@ export const execute = async (client, message, args) => {
       helpMessage.fields.push(...fields);
 
       try {
-        message.channel.send({embeds: [ helpMessage ]}).then((bot_msg) => {
+        message.channel.send({ embeds: [helpMessage] }).then((bot_msg) => {
           deleteMessages(message, bot_msg);
         });
       } catch (err) {
@@ -108,7 +112,7 @@ export const execute = async (client, message, args) => {
           }
         });
         try {
-          message.channel.send({embeds: [ helpMessage ]}).then((bot_msg) => {
+          message.channel.send({ embeds: [helpMessage] }).then((bot_msg) => {
             deleteMessages(message, bot_msg);
           });
         } catch (err) {
@@ -151,10 +155,10 @@ function deleteMessages(usr, bot) {
 }
 
 export const architecture = {
-  name: 'help',
-  aliases: ['help'],
-  module: 'Utility',
+  name: "help",
+  aliases: ["help"],
+  module: "Utility",
   description:
-    'I will send you this message, or the usage of a specific command.',
-  usage: ['help', 'help command'],
+    "I will send you this message, or the usage of a specific command.",
+  usage: ["help", "help command"],
 };
