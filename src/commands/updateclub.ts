@@ -1,9 +1,7 @@
 // Get the afk Table stored in the SQLite database
 import { Clubs } from "../databaseFiles/connect.js";
 import { config } from "../config";
-import mongodb from "mongodb";
-
-const ObjectID = mongodb.ObjectID;
+import { ObjectId } from 'mongodb';
 
 export const execute = async (client, message, args) => {
   if (!message.member.roles.cache.some((r) => r.id === config.roles.admin))
@@ -39,7 +37,7 @@ export const execute = async (client, message, args) => {
     i++;
   });
 
-  const id = new ObjectID(cleanargs[0]);
+  const id = new ObjectId(cleanargs[0]);
   var field = cleanargs[1].toLowerCase();
   var value = cleanargs[2];
 

@@ -62,9 +62,11 @@ export class afkMessageCheckAction {
     noLongerAFKMessage.color = config.colors.embedColor;
     const user = message.author;
 
-    let result = await Afks.findOne({ user: user.id });
+    const result = await Afks.findOne({ user: user.id });
 
-    if (result !== null && timedifference(result.cooldown, Date.now()) >= 3) {
+    if (!result) return;
+
+    if (timedifference(result.cooldown, Date.now()) >= 3) {
       message.author.send({ embeds: [noLongerAFKMessage] }).catch((err) => {
         if (
           err.name == "DiscordAPIError" &&
@@ -84,7 +86,7 @@ export class afkMessageCheckAction {
       Afks.updateOne(
         { user: user.id },
         { $set: { cooldown: Date.now() } },
-        { upset: true }
+        { upsert: true }
       ).catch((error) => {
         "Update error: " + error;
       });
@@ -133,9 +135,11 @@ export class afkMessageCheckAction {
     if (message.mentions.members.size == 1) {
       let id = message.mentions.members.firstKey();
 
-      let result = await Afks.findOne({ user: id });
+      const result = await Afks.findOne({ user: id });
 
-      if (result !== null && message.author.id != id) {
+      if (!result) return;
+
+      if (message.author.id !== id) {
         message.guild.members.fetch(result.user).then((user) => {
           let name = user.nickname ? user.nickname : user.user.username;
           const embed = new Discord.MessageEmbed();

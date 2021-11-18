@@ -1,9 +1,7 @@
 // Get the afk Table stored in the SQLite database
 import { Clubs } from "../databaseFiles/connect.js";
 import { config } from "../config";
-import mongodb from "mongodb";
-
-const ObjectID = mongodb.ObjectID;
+import { ObjectId } from 'mongodb';
 
 export const execute = async (client, message, args) => {
   if (!message.member.roles.cache.some((r) => r.id === config.roles.admin))
@@ -18,7 +16,7 @@ export const execute = async (client, message, args) => {
       "You must include the ID of the club you wish to delete. (You can find this by using `.club <club name>`.)"
     );
 
-  const id = new ObjectID(args[0]);
+  const id = new ObjectId(args[0]);
 
   let result = await Clubs.deleteOne({ _id: id });
 

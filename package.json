@@ -29,7 +29,7 @@
     "eslint-plugin-jest": "^22.17.0",
     "fastest-levenshtein": "^1.0.12",
     "moment": "^2.26.0",
-    "mongodb": "^3.6.4",
+    "mongodb": "4.1.2",
     "mysql2": "^2.0.2",
     "prettier": "^2.4.1",
     "rss-parser": "^3.7.2",
