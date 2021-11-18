@@ -1,4 +1,4 @@
-import Discord from "discord.js";
+/*import Discord from "discord.js";
 import { Reminder } from "../databaseFiles/connect";
 import { config } from "../config";
 
@@ -69,3 +69,4 @@ export async function catchUp(client) {
     });
   }
 }
+*/

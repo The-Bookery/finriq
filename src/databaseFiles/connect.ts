@@ -2,8 +2,7 @@
 import { MongoClient } from "mongodb";
 import { config } from "../config";
 
-// Create connection
-const client = new MongoClient(config.mongodbURI);
+const client = new MongoClient(config.mongodbURI, { useUnifiedTopology: true });
 
 client.connect();
 
