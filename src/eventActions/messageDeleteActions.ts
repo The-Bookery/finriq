@@ -1,5 +1,5 @@
 import { config } from "../config";
-import Discord from "discord.js";
+import Discord, { EmbedAuthorData } from "discord.js";
 
 export class deleteMessageActions {
   static async sendMessageToModeration(client, message) {
@@ -8,12 +8,14 @@ export class deleteMessageActions {
     const isCommand = message.content.startsWith(config.prefix);
 
     if (!(isFinriqBot || isCommand)) {
+      const author: EmbedAuthorData = {
+        name: `${message.author.username}#${message.author.discriminator}`,
+        iconURL: message.author.displayAvatarURL()
+      };
+      
       let embed = new Discord.MessageEmbed()
         .setTitle("Message Deleted")
-        .setAuthor(
-          `${message.author.username}#${message.author.discriminator}`,
-          message.author.displayAvatarURL()
-        )
+        .setAuthor(author)
         .addField("Channel", message.channel.name, true);
       embed.color = config.colors.embedColor;
 

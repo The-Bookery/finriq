@@ -1,4 +1,4 @@
-import Discord from "discord.js";
+import Discord, { EmbedAuthorData } from "discord.js";
 import { config } from "../config";
 const Starboard = require("../databaseFiles/connect.js").Stars;
 
@@ -25,8 +25,14 @@ export class starboardActions {
             return await reaction.message.channel.send(
               ":x: You cannot star your own message until someone else stars it."
             );
+          
+          const author: EmbedAuthorData = {
+            name: username,
+            iconURL: avatar
+          };
+
           let starBoardMessage = new Discord.MessageEmbed()
-            .setAuthor(username, avatar)
+            .setAuthor(author)
             .setDescription(
               message + "\n\n**[Click to jump to message.](" + link + ")**"
             )
