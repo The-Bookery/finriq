@@ -1,8 +1,8 @@
-// Get the afk Table stored in the MongoDB database
-import { config } from "../config";
-import Discord from "discord.js";
+// Get the afk Table stored in the SQLite database
+import { config } from '../config';
+import Discord from 'discord.js';
 
-export class reportActions {
+export class reportCheckAction {
   static async checkReport(client, user, reaction) {
     var message = reaction.message;
 
@@ -10,34 +10,39 @@ export class reportActions {
       if (reaction._emoji && reaction._emoji.id === config.emotes.report) {
         await reaction.users.remove(user.id);
         var channel = client.channels.cache.get(message.channel.id);
-        let starBoardMessage = new Discord.MessageEmbed()
-          .setAuthor(
-            `${message.author.username}#${message.author.discriminator}`,
-            message.author.displayAvatarURL()
-          )
-          .setDescription(message.content)
-          .setFooter(`Reported in #${channel.name}`)
-          .setTimestamp(message.createdAt);
-        starBoardMessage.color = config.colors.embedColor;
+        let reportMessage = new Discord.MessageEmbed();
+        reportMessage.color = config.colors.embedColor;
+        reportMessage.author = {
+          name: `${message.author.username}#${message.author.discriminator}`,
+          url: message.author.displayAvatarURL(),
+        };
+        reportMessage.description = message.content;
+        reportMessage.fields.push({
+          name: 'Link',
+          value: `[Go to message](${message.url})`,
+          inline: true,
+        });
+        reportMessage.footer = {
+          text: `Reported in #${channel.name} by ${user.username}#${user.discriminator}`,
+        };
+        reportMessage.timestamp = message.createdAt;
         client.channels.cache
           .get(config.channels.reportchannel)
-          .send({ embeds: [starBoardMessage] })
+          .send({ content: '<@&788760128010059786>', embeds: [reportMessage] })
           .then(() => {
-            user.send(":white_check_mark: Reported to staff.");
+            user.send(':white_check_mark: Reported to staff.');
           });
       }
     } catch (err) {
       user.send(
-        ":x: Error when reporting to staff. Please take a screenshot of the message and DM a staff member."
+        ':x: Error when reporting to staff. Please take a screenshot of the message and DM a staff member.'
       );
-      let errorMessage = new Discord.MessageEmbed()
-        .setTitle(`Fatal Error`)
-        .setDescription(
-          `Fatal error has been found when trying to report a message. Error: \`${err}\`.`
-        )
-        .setFooter(`Action in #${channel.name}`)
-        .setTimestamp(message.createdAt);
+      let errorMessage = new Discord.MessageEmbed();
       errorMessage.color = config.colors.embedColor;
+      errorMessage.title = `Fatal Error`;
+      errorMessage.description = `Fatal error has been found when trying to report a message. Error: \`${err}\`.`;
+      errorMessage.footer = { text: `Action in #${channel.name}` };
+      errorMessage.timestamp = message.createdAt;
       message.guild.channels.cache
         .get(config.channels.logs)
         .send({ embeds: [errorMessage] });
