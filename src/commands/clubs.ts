@@ -18,7 +18,6 @@ export const execute = async (client, message, args) => {
     let club = await Clubs.findOne({ prettyName: args.join("").toLowerCase() });
 
     if (!club || club.length == 0) return message.channel.send("Cannot find that club.");
-    console.log(typeof club._id);
     return message.channel.send(
       `📚 Info about this book club 📚\n**ID**: ${club._id}\n**Name**: ${club.clubName}\n**Description**: ${club.description}`
     );
