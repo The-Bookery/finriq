@@ -28,7 +28,7 @@ export class reportCheckAction {
         reportMessage.timestamp = message.createdAt;
         client.channels.cache
           .get(config.channels.reportchannel)
-          .send({ content: '<@&788760128010059786>', embeds: [reportMessage] })
+          .send({ content: `<@&${config.roles.admin}>`, embeds: [reportMessage] })
           .then(() => {
             user.send(':white_check_mark: Reported to staff.');
           });
