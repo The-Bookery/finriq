@@ -1,6 +1,6 @@
 import { bookmarkActions } from "../eventActions/bookmarkActions";
 import { starboardActions } from "../eventActions/starboardActions";
-import { reportActions } from "../eventActions/reportAction";
+import { reportCheckAction } from "../eventActions/reportAction";
 
 export = async (client, reaction, user) => {
   try {
@@ -20,5 +20,5 @@ export = async (client, reaction, user) => {
   // Check if message should be added to starboard or if starboard message should be updated
   starboardActions.addStar(client, user, reaction);
   // Check if user is reporting a message
-  reportActions.checkReport(client, user, reaction);
+  reportCheckAction.checkReport(client, user, reaction);
 };
