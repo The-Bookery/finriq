@@ -4,6 +4,7 @@ const Starboard = require("../databaseFiles/connect.js").Stars;
 
 export class starboardActions {
   static async addStar(client, user, reaction) {
+    console.log(reaction);
     if (
       reaction._emoji &&
       reaction._emoji.name === config.emotes.star &&
