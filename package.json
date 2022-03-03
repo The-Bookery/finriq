@@ -34,7 +34,7 @@
     "prettier": "^2.4.1",
     "rss-parser": "^3.7.2",
     "sequelize": "^6.9.0",
-    "set-value": "^3.0.1"
+    "set-value": "^4.0.1"
   },
   "devDependencies": {
     "eslint": "^8.2.0",
