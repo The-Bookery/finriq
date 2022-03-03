@@ -1,4 +1,4 @@
-import Discord, { EmbedAuthorData } from "discord.js";
+import Discord, { EmbedAuthorData, EmbedFooterData } from "discord.js";
 import { config } from "../config";
 const Starboard = require("../databaseFiles/connect.js").Stars;
 
@@ -31,15 +31,19 @@ export class starboardActions {
             iconURL: avatar
           };
 
+          const footer: EmbedFooterData = {
+            text: "⭐ Times starred: " + stars
+          }
+
           let starBoardMessage = new Discord.MessageEmbed()
             .setAuthor(author)
             .setDescription(
               message + "\n\n**[Click to jump to message.](" + link + ")**"
             )
-            .setFooter("⭐ Times starred: " + stars);
+            .setFooter(footer);
           starBoardMessage.color = config.colors.embedColor;
 
-          if (att.array()[0]) {
+          if (att && att.array()[0]) {
             att = att.array()[0].url;
             starBoardMessage.setImage(att);
           }
