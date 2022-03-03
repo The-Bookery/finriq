@@ -15,7 +15,7 @@ export class starboardActions {
       var avatar = reaction.message.author.displayAvatarURL();
       var link = `https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id}`;
 
-      var att = reaction.message.attachments;
+      var att = (reaction.message.attachments);
 
       let result = await Starboard.findOne({ messageID: reaction.message.id });
 
@@ -45,7 +45,7 @@ export class starboardActions {
 
           console.log(att)
 
-          if (att && att.array()[0]) {
+          if (att && typeof att.array !== "undefined" && att.array()[0]) {
             att = att.array()[0].url;
             starBoardMessage.setImage(att);
           }
