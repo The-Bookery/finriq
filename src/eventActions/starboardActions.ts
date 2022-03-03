@@ -43,6 +43,8 @@ export class starboardActions {
             .setFooter(footer);
           starBoardMessage.color = config.colors.embedColor;
 
+          console.log(att)
+
           if (att && att.array()[0]) {
             att = att.array()[0].url;
             starBoardMessage.setImage(att);
