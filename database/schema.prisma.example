@@ -5,43 +5,43 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "DATABASE_CONNECTION_STRING"
+  url      = "DATABASE_STRING"
 }
 
 model Afks {
-  id Int @id @default(autoincrement())
-  message String
-  user String
-  cooldown String
-  date String
+  id       Int    @id @default(autoincrement())
+  message  String
+  user     String @unique
+  cooldown Int
+  date     Int
 }
 
 model Clubs {
-  id Int @id @default(autoincrement())
-  clubName String
-  prettyName String
-  roleid Int
+  id          Int    @id @default(autoincrement())
+  clubName    String @unique
+  prettyName  String @unique
+  roleid      Int
   description String
 }
 
 model Stars {
-  id Int @id @default(autoincrement())
-  messageid Int
-  embedid Int
+  id               Int @id @default(autoincrement())
+  messageid        Int @unique
+  embedid          Int @unique
   messageChannelid Int
 }
 
 model Prefixes {
-  id Int @id @default(autoincrement())
-  guild String
+  id     Int    @id @default(autoincrement())
+  guild  String @unique
   prefix String
 }
 
 model Backspeak {
-  id Int @id @default(autoincrement())
-  gameName String
-  content String
-  started String
+  id       Int    @id @default(autoincrement())
+  gameName String @unique
+  content  String
+  started  Int
 }
 
 // model Reminder {
