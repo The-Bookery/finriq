@@ -138,7 +138,9 @@ export class starboardActions {
         });
     }
 
-    result = await prisma.stars.findUnique({ where: { embedid: parseInt(message.id) } });
+    result = await prisma.stars.findUnique({
+      where: { embedid: parseInt(message.id) },
+    });
 
     if (result !== null) {
       prisma.stars.delete({ where: { embedid: message.id } }).then(

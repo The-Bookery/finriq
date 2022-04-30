@@ -12,7 +12,9 @@ export = async (client, message) => {
   var prefix;
 
   try {
-    prefix = await prisma.prefixes.findUnique({ where: {guild: message.guild.id }});
+    prefix = await prisma.prefixes.findUnique({
+      where: { guild: message.guild.id },
+    });
     prefix = prefix.prefix; // Get the 'prefix' string from the JSON object if found. If not will return error for trying to get null
   } catch {
     prefix = ".";
