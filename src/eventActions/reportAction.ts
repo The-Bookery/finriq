@@ -1,6 +1,6 @@
 // Get the afk Table stored in the SQLite database
-import { config } from '../config';
-import Discord from 'discord.js';
+import { config } from "../config";
+import Discord from "discord.js";
 
 export class reportCheckAction {
   static async checkReport(client, user, reaction) {
@@ -18,7 +18,7 @@ export class reportCheckAction {
         };
         reportMessage.description = message.content;
         reportMessage.fields.push({
-          name: 'Link',
+          name: "Link",
           value: `[Go to message](${message.url})`,
           inline: true,
         });
@@ -28,14 +28,17 @@ export class reportCheckAction {
         reportMessage.timestamp = message.createdAt;
         client.channels.cache
           .get(config.channels.reportchannel)
-          .send({ content: `<@&${config.roles.admin}>`, embeds: [reportMessage] })
+          .send({
+            content: `<@&${config.roles.admin}>`,
+            embeds: [reportMessage],
+          })
           .then(() => {
-            user.send(':white_check_mark: Reported to staff.');
+            user.send(":white_check_mark: Reported to staff.");
           });
       }
     } catch (err) {
       user.send(
-        ':x: Error when reporting to staff. Please take a screenshot of the message and DM a staff member.'
+        ":x: Error when reporting to staff. Please take a screenshot of the message and DM a staff member."
       );
       let errorMessage = new Discord.MessageEmbed();
       errorMessage.color = config.colors.embedColor;

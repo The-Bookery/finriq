@@ -1,5 +1,5 @@
 // Get the afk Table stored in the SQLite database
-import { Clubs } from "../databaseFiles/connect.js";
+import { prisma } from "../utils/database.js";
 import { config } from "../config";
 
 export const execute = async (client, message, args) => {
@@ -60,17 +60,19 @@ export const execute = async (client, message, args) => {
   if (checkrole == undefined)
     return message.channel.send("Role cannot be found.");
 
-  let uniqueCheck = await Clubs.findOne({ clubName: name });
+  let uniqueCheck = await prisma.clubs.findUnique({
+    where: { clubName: name },
+  });
 
   if (uniqueCheck === null) {
     const clubObject = {
       clubName: name,
       prettyName: cleanname,
-      roleID: role,
+      roleid: role,
       description: description,
     };
 
-    await Clubs.insertOne(clubObject);
+    await prisma.clubs.create({ data: clubObject });
 
     return message.channel.send("✅ Success!");
   } else {

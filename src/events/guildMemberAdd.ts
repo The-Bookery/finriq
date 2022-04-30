@@ -65,7 +65,7 @@ export = async (client, member) => {
         .get(config.channels.welcome)
         .send({ embeds: [welcomeDM] })
         .then((msg) => {
-          msg.delete({ timeout: 600000 });
+          setTimeout(() => msg.delete().catch(), 600000)
         })
         .catch((err) => {
           console.log(err);

@@ -1,7 +1,7 @@
 // Get the afk Table stored in the SQLite database
-import { Clubs } from "../databaseFiles/connect.js";
+import { prisma } from "../utils/database.js";
 import { config } from "../config";
-import { ObjectId } from 'mongodb';
+import { ObjectId } from "mongodb";
 
 export const execute = async (client, message, args) => {
   if (!message.member.roles.cache.some((r) => r.id === config.roles.admin))
@@ -37,7 +37,7 @@ export const execute = async (client, message, args) => {
     i++;
   });
 
-  const id = new ObjectId(cleanargs[0]);
+  const id: number = cleanargs[0];
   var field = cleanargs[1].toLowerCase();
   var value = cleanargs[2];
 
@@ -66,15 +66,17 @@ export const execute = async (client, message, args) => {
   try {
     if (field == "name") {
       var cleanname = cleanargs[0].split(" ").join("");
-      await Clubs.updateOne(
-        { _id: id },
-        { $set: { clubName: value, prettyName: cleanname } },
-        { upsert: false }
-      );
+      await prisma.clubs.update({
+        where: { id: id },
+        data: { clubName: value, prettyName: cleanname },
+      });
     } else if (field == "description") {
-      await Clubs.updateOne({ _id: id }, { $set: { description: value } });
+      await prisma.clubs.update({
+        where: { id: id },
+        data: { description: value },
+      });
     } else if (field == "role") {
-      await Clubs.updateOne({ _id: id }, { $set: { roleID: value } });
+      await prisma.clubs.update({ where: { id: id }, data: { roleid: value } });
     } else {
       return message.channel.send(
         "❌ Something went wrong. Are you sure that club / value exists?"

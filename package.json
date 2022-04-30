@@ -4,7 +4,10 @@
   "description": "Bot designed for the Black Cat Inn.",
   "main": "node bot.js",
   "engines": {
-    "node": "^16.14.0"
+    "node": "^16.14.1"
+  },
+  "prisma": {
+    "schema": "database/schema.prisma"
   },
   "scripts": {
     "build": "rm -rf dist && tsc",
@@ -23,6 +26,7 @@
     }
   ],
   "dependencies": {
+    "@prisma/client": "^3.13.0",
     "cron": "^1.8.2",
     "data-store": "^4.0.3",
     "discord.js": "^13.1.0",
@@ -32,6 +36,7 @@
     "mongodb": "^4.2.0",
     "mysql2": "^2.0.2",
     "prettier": "^2.4.1",
+    "prisma": "^3.13.0",
     "rss-parser": "^3.7.2",
     "sequelize": "^6.9.0",
     "set-value": "^4.0.1"

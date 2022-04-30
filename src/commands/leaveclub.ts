@@ -1,5 +1,5 @@
 // Get the afk Table stored in the SQLite database
-import { Clubs } from "../databaseFiles/connect.js";
+import { prisma } from "../utils/database.js";
 
 export const execute = async (client, message, args) => {
   if (!message.guild.me.permissions.has(["MANAGE_ROLES", "ADMINISTRATOR"]))
@@ -14,13 +14,13 @@ export const execute = async (client, message, args) => {
 
   args = args.join(" ").split(" ").join("").toLowerCase();
 
-  let result = await Clubs.findOne({ prettyName: args });
+  let result = await prisma.clubs.findUnique({ where: { prettyName: args } });
 
   if (result !== null) {
-    var role = result.roleID;
+    var role = result.roleid;
 
     let checkrole;
-    if (!parseInt(role))
+    if (!role)
       checkrole = message.guild.roles.cache.find((x) => x.name === role);
     else checkrole = message.guild.roles.cache.find((x) => x.id === role);
 

@@ -1,0 +1,49 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "DATABASE_CONNECTION_STRING"
+}
+
+model Afks {
+  id Int @id @default(autoincrement())
+  message String
+  user String
+  cooldown String
+  date String
+}
+
+model Clubs {
+  id Int @id @default(autoincrement())
+  clubName String
+  prettyName String
+  roleid Int
+  description String
+}
+
+model Stars {
+  id Int @id @default(autoincrement())
+  messageid Int
+  embedid Int
+  messageChannelid Int
+}
+
+model Prefixes {
+  id Int @id @default(autoincrement())
+  guild String
+  prefix String
+}
+
+model Backspeak {
+  id Int @id @default(autoincrement())
+  gameName String
+  content String
+  started String
+}
+
+// model Reminder {
+//   id Int @id @default(autoincrement())
+// }

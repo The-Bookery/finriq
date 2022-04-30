@@ -1,5 +1,6 @@
 config.ts
 databaseFiles/storagedata.db
+schema.prisma
 
 # Logs
 logs

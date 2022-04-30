@@ -8,7 +8,7 @@ export class updateMessageActions {
       try {
         const author: EmbedAuthorData = {
           name: `${newMessage.author.username}#${newMessage.author.discriminator}`,
-          iconURL: newMessage.author.displayAvatarURL()
+          iconURL: newMessage.author.displayAvatarURL(),
         };
 
         const embed = new Discord.MessageEmbed()
@@ -33,7 +33,7 @@ export class updateMessageActions {
     if (!(isFinriqBot || isCommand)) {
       const author: EmbedAuthorData = {
         name: `${newMessage.author.username}#${newMessage.author.discriminator}`,
-        iconURL: newMessage.author.displayAvatarURL()
+        iconURL: newMessage.author.displayAvatarURL(),
       };
 
       let embed = new Discord.MessageEmbed()

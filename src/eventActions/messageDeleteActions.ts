@@ -10,9 +10,9 @@ export class deleteMessageActions {
     if (!(isFinriqBot || isCommand)) {
       const author: EmbedAuthorData = {
         name: `${message.author.username}#${message.author.discriminator}`,
-        iconURL: message.author.displayAvatarURL()
+        iconURL: message.author.displayAvatarURL(),
       };
-      
+
       let embed = new Discord.MessageEmbed()
         .setTitle("Message Deleted")
         .setAuthor(author)

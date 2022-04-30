@@ -1,5 +1,5 @@
 // Get the afk Table stored in the MongoDB database
-import { Afks } from "../databaseFiles/connect.js";
+import { prisma } from "../utils/database.js";
 import Discord from "discord.js";
 import { config } from "../config";
 
@@ -29,7 +29,7 @@ export class afkMessageCheckAction {
     ) {
       const sender = message.author;
 
-      await Afks.deleteOne({ user: sender.id });
+      await prisma.afks.delete({ where: { user: sender.id } });
 
       await message.channel
         .send(
@@ -62,7 +62,7 @@ export class afkMessageCheckAction {
     noLongerAFKMessage.color = config.colors.embedColor;
     const user = message.author;
 
-    const result = await Afks.findOne({ user: user.id });
+    const result = await prisma.afks.findUnique({ where: { user: user.id } });
 
     if (!result) return;
 
@@ -76,20 +76,21 @@ export class afkMessageCheckAction {
             .send(
               "Looks like you've disabled private messages! You're currently marked as AFK. If you want to turn off AFK, just use `.afk` again!"
             )
-            .then((msg) => msg.delete({ timeout: 5000 }).catch());
+            .then((msg) => setTimeout(() => msg.delete().catch(), 5000));
         }
 
         console.log("Message error: " + err);
       });
 
       // Reset cooldown
-      Afks.updateOne(
-        { user: user.id },
-        { $set: { cooldown: Date.now() } },
-        { upsert: true }
-      ).catch((error) => {
-        "Update error: " + error;
-      });
+      prisma.afks
+        .update({
+          where: { user: user.id },
+          data: { cooldown: Date.now() },
+        })
+        .catch((error) => {
+          "Update error: " + error;
+        });
     }
   }
 
@@ -135,7 +136,7 @@ export class afkMessageCheckAction {
     if (message.mentions.members.size == 1) {
       let id = message.mentions.members.firstKey();
 
-      const result = await Afks.findOne({ user: id });
+      const result = await prisma.afks.findUnique({ where: { user: id } });
 
       if (!result) return;
 

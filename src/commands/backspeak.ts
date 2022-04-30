@@ -1,5 +1,5 @@
 // Get the game Table stored in the SQLite database
-import { Backspeak } from "../databaseFiles/connect.js";
+import { prisma } from "../utils/database.js";
 import { config } from "../config";
 
 var words = config.backspeak;
@@ -24,7 +24,7 @@ async function gameStart(message) {
     started: Date.now(),
   };
 
-  await Backspeak.insertOne(gameObject);
+  await prisma.backspeak.create({ data: gameObject });
 
   try {
     message.channel.send("**3...**");
@@ -54,13 +54,15 @@ function timedifference(timestamp1, timestamp2) {
 }
 
 export const execute = async (client, message) => {
-  let result = await Backspeak.findOne({ gameName: "backspeak" });
+  let result = await prisma.backspeak.findUnique({
+    where: { gameName: "backspeak" },
+  });
 
   if (result === null) {
     gameStart(message);
   } else {
     if (timedifference(result.started, Date.now()) >= 1) {
-      await Backspeak.deleteOne({ gameName: "backspeak" });
+      await prisma.backspeak.delete({ where: { gameName: "backspeak" } });
 
       gameStart(message);
     } else {

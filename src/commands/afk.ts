@@ -1,5 +1,5 @@
 // Get the afk Table stored in the MongoDB database
-import { Afks } from "../databaseFiles/connect.js";
+import { prisma } from "../utils/database.js";
 
 export const execute = async (client, message, args) => {
   try {
@@ -28,7 +28,7 @@ export const execute = async (client, message, args) => {
     afkMessage = "They didn't tell us where they went...";
   }
 
-  let result = await Afks.findOne({ user: sender.id });
+  let result = await prisma.afks.findUnique({ where: { user: sender.id } });
 
   if (result === null) {
     const afkObject = {
@@ -38,19 +38,19 @@ export const execute = async (client, message, args) => {
       date: Date.now(),
     };
 
-    await Afks.insertOne(afkObject);
+    await prisma.afks.create({ data: afkObject });
 
     try {
       message.channel
         .send(
           `I have marked you as AFK, <@${sender.id}>. Anyone who pings you will be notified you are away.\n\`\`\`AFK Message: ${afkMessage}\`\`\``
         )
-        .then((msg) => msg.delete({ timeout: 10000 }).catch());
+        .then((msg) => setTimeout(() => msg.delete().catch(), 10000));
     } catch (err) {
       console.log(err);
     }
   } else {
-    await Afks.deleteOne({ user: sender.id });
+    await prisma.afks.delete({ where: { user: sender.id } });
 
     await message.channel
       .send(
@@ -60,7 +60,7 @@ export const execute = async (client, message, args) => {
             : message.author.username
         }!`
       )
-      .then((delmessage) => delmessage.delete({ timeout: 5000 }))
+      .then((delmessage) => setTimeout(() => delmessage.delete(), 5000))
       .catch("Error sending message.");
   }
 };

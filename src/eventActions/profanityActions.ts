@@ -41,7 +41,7 @@ export class profanityActions {
           .setDescription("Watch your language.");
         embedMessage.color = config.colors.embedColor;
         await message.channel.send({ embeds: [embedMessage] }).then((msg) => {
-          msg.delete({ timeout: 5000 });
+          setTimeout(() => msg.delete().catch(), 5000)
         });
       } else {
         const embedMessage = new Discord.MessageEmbed()

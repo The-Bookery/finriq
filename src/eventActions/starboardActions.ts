@@ -1,6 +1,6 @@
 import Discord, { EmbedAuthorData, EmbedFooterData } from "discord.js";
 import { config } from "../config";
-const Starboard = require("../databaseFiles/connect.js").Stars;
+import { prisma } from "../utils/database";
 
 export class starboardActions {
   static async addStar(client, user, reaction) {
@@ -15,9 +15,11 @@ export class starboardActions {
       var avatar = reaction.message.author.displayAvatarURL();
       var link = `https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id}`;
 
-      var att = (reaction.message.attachments);
+      var att = reaction.message.attachments;
 
-      let result = await Starboard.findOne({ messageID: reaction.message.id });
+      let result = await prisma.stars.findUnique({
+        where: { messageid: parseInt(reaction.message.id) },
+      });
 
       if (result === null) {
         if (reaction.count == 1) {
@@ -25,15 +27,15 @@ export class starboardActions {
             return await reaction.message.channel.send(
               ":x: You cannot star your own message until someone else stars it."
             );
-          
+
           const author: EmbedAuthorData = {
             name: username,
-            iconURL: avatar
+            iconURL: avatar,
           };
 
           const footer: EmbedFooterData = {
-            text: "⭐ Times starred: " + stars
-          }
+            text: "⭐ Times starred: " + stars,
+          };
 
           let starBoardMessage = new Discord.MessageEmbed()
             .setAuthor(author)
@@ -43,7 +45,7 @@ export class starboardActions {
             .setFooter(footer);
           starBoardMessage.color = config.colors.embedColor;
 
-          console.log(att)
+          console.log(att);
 
           if (att && typeof att.array !== "undefined" && att.array()[0]) {
             att = att.array()[0].url;
@@ -56,12 +58,12 @@ export class starboardActions {
 
           channel.send({ embeds: [starBoardMessage] }).then((sentmessage) => {
             let starObject = {
-              messageID: reaction.message.id,
-              embedID: sentmessage.id,
-              messageChannelID: reaction.message.channel.id,
+              messageid: reaction.message.id,
+              embedid: sentmessage.id,
+              messageChannelid: reaction.message.channel.id,
             };
 
-            Starboard.insertOne(starObject).then(() => {
+            prisma.stars.create({ data: starObject }).then(() => {
               return;
             });
           });
@@ -69,7 +71,7 @@ export class starboardActions {
       } else {
         client.channels.cache
           .get(config.channels.starchannel)
-          .messages.fetch(result.embedID)
+          .messages.fetch(result.embedid)
           .then((starmessage) => {
             var starmessageEmbed = starmessage.embeds[0];
             var times = starmessageEmbed.footer.text.substring(
@@ -86,12 +88,14 @@ export class starboardActions {
 
   static async removeStar(client, user, reaction) {
     if (reaction._emoji && reaction._emoji.name === config.emotes.star) {
-      let result = await Starboard.findOne({ messageID: reaction.message.id });
+      let result = await prisma.stars.findUnique({
+        where: { messageid: parseInt(reaction.message.id) },
+      });
 
       if (result !== null) {
         client.channels.cache
           .get(config.channels.starchannel)
-          .messages.fetch(result.embedID)
+          .messages.fetch(result.embedid)
           .then((starmessage) => {
             if (reaction.count > 0) {
               var starmessageEmbed = starmessage.embeds[0];
@@ -105,11 +109,11 @@ export class starboardActions {
               );
               return starmessage.edit(starmessageEmbed);
             } else {
-              Starboard.deleteOne({ messageID: reaction.message.id }).then(
-                () => {
+              prisma.stars
+                .delete({ where: { messageid: reaction.message.id } })
+                .then(() => {
                   return starmessage.delete();
-                }
-              );
+                });
             }
           });
       }
@@ -117,26 +121,30 @@ export class starboardActions {
   }
 
   static async removeMessage(client, message) {
-    let result = await Starboard.findOne({ messageID: message.id });
+    let result = await prisma.stars.findUnique({
+      where: { messageid: parseInt(message.id) },
+    });
 
     if (result !== null) {
       client.channels.cache
         .get(config.channels.starchannel)
-        .messages.fetch(result.embedID)
+        .messages.fetch(result.embedid)
         .then((starmessage) => {
-          Starboard.deleteOne({ messageID: message.id }).then((_) => {
-            return starmessage.delete();
-          });
+          prisma.stars
+            .delete({ where: { messageid: message.id } })
+            .then((_) => {
+              return starmessage.delete();
+            });
         });
     }
 
-    result = await Starboard.findOne({ embedID: message.id });
+    result = await prisma.stars.findUnique({ where: { embedid: parseInt(message.id) } });
 
     if (result !== null) {
-      Starboard.deleteOne({ embedID: message.id }).then(
+      prisma.stars.delete({ where: { embedid: message.id } }).then(
         client.channels.cache
-          .get(result.messageChannelID)
-          .messages.fetch(result.messageID)
+          .get(result.messageChannelid)
+          .messages.fetch(result.messageid)
           .then((starmessage) => {
             starmessage.reactions.removeAll();
           })

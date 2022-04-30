@@ -1,10 +1,10 @@
 // Get the afk Table stored in the SQLite database
-import { Clubs } from "../databaseFiles/connect.js";
+import { prisma } from "../utils/database.js";
 
 export const execute = async (client, message, args) => {
   if (args.length == 0) {
     var list = "";
-    let result = await Clubs.find();
+    let result = await prisma.clubs.findMany();
 
     await result.forEach((club) => {
       list = list + `\n🔸 **${club.clubName}**: ${club.description}`;
@@ -15,11 +15,13 @@ export const execute = async (client, message, args) => {
       `📚 Here is a list of our active book clubs! 📚${list}`
     );
   } else {
-    let club = await Clubs.findOne({ prettyName: args.join("").toLowerCase() });
+    let club = await prisma.clubs.findUnique({
+      where: { prettyName: args.join("").toLowerCase() },
+    });
 
-    if (!club || club.length == 0) return message.channel.send("Cannot find that club.");
+    if (!club) return message.channel.send("Cannot find that club.");
     return message.channel.send(
-      `📚 Info about this book club 📚\n**ID**: ${club._id}\n**Name**: ${club.clubName}\n**Description**: ${club.description}`
+      `📚 Info about this book club 📚\n**ID**: ${club.id}\n**Name**: ${club.clubName}\n**Description**: ${club.description}`
     );
   }
 };

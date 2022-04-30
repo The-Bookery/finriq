@@ -1,4 +1,4 @@
-import { Prefixes } from "../databaseFiles/connect";
+import { prisma } from "../utils/database";
 
 export const execute = async (client, message, args) => {
   args = args[0];
@@ -12,7 +12,9 @@ export const execute = async (client, message, args) => {
       ":x: Your prefix must not be longer than two characters."
     );
 
-  var exists = await Prefixes.findOne({ guild: message.guild.id });
+  var exists = await prisma.prefixes.findUnique({
+    where: { guild: message.guild.id },
+  });
 
   if (!exists) {
     var prefixObject = {
@@ -20,13 +22,20 @@ export const execute = async (client, message, args) => {
       prefix: args,
     };
 
-    await Prefixes.insertOne(prefixObject);
+    await prisma.prefixes.create({ data: prefixObject });
   } else {
-    Prefixes.updateOne(
-      { guild: message.guild.id },
-      { $set: { prefix: args } },
-      { upsert: true }
-    );
+    prisma.prefixes.upsert({
+      update: {
+        prefix: args,
+      },
+      where: {
+        guild: message.guild.id,
+      },
+      create: {
+        guild: message.guild.id,
+        prefix: args,
+      },
+    });
   }
 
   return await message.channel.send(

@@ -1,7 +1,6 @@
 import { config } from "../config";
 
 export = async (client) => {
-
   client.user.setActivity(config.playing);
 
   console.log(

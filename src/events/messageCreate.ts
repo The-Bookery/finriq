@@ -1,4 +1,4 @@
-import { Prefixes } from "../databaseFiles/connect";
+import { prisma } from "../utils/database";
 import { afkMessageCheckAction } from "../eventActions/afkMessageCheckAction";
 import { reactionCheckAction } from "../eventActions/reactions";
 import { backspeakCheckAction } from "../eventActions/backspeak";
@@ -12,7 +12,7 @@ export = async (client, message) => {
   var prefix;
 
   try {
-    prefix = await Prefixes.findOne({ guild: message.guild.id });
+    prefix = await prisma.prefixes.findUnique({ where: {guild: message.guild.id }});
     prefix = prefix.prefix; // Get the 'prefix' string from the JSON object if found. If not will return error for trying to get null
   } catch {
     prefix = ".";
