@@ -4,7 +4,7 @@
   "description": "Bot designed for the Black Cat Inn.",
   "main": "node bot.js",
   "engines": {
-    "node": "^16.14.1"
+    "node": ">=18"
   },
   "prisma": {
     "schema": "database/schema.prisma"
