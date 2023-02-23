@@ -38,7 +38,7 @@
     "prettier": "^2.4.1",
     "prisma": "^3.13.0",
     "rss-parser": "^3.7.2",
-    "sequelize": "^6.9.0",
+    "sequelize": "^6.28.2",
     "set-value": "^4.0.1"
   },
   "devDependencies": {
